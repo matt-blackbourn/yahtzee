@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Yahtzee</title>
+   <style>
+      .keep{
+         background-color: #ffb2b2;
+      }
+      div{
+         margin: 20px auto;
+      }
+      .dice{
+         width: 100px;
+         height: 100px;
+         font-size: 30px;
+      }
+      h1{
+         color: red;
+         font-size: 70px;
+      }
+      .hide{display: none;}
+      .availableScoreLower{
+         background-color: royalblue;
+         color: white;
+      }
+      .availableScoreUpper{
+         background-color: green;
+         color: white;
+      }
+      .availableScoreYahtzee{
+         background-color: red;
+         color: white;
+      }
+      
+   </style>
+</head>
+<body>
+   <h3>Rolls remaining in turn: <span id="rolls">3</span></h3>
+   <div>
+      <button class="dice"  id="one"></button>
+      <button class="dice"  id="two"></button>
+      <button class="dice"  id="three"></button>
+      <button class="dice"  id="four"></button>
+      <button class="dice"  id="five"></button>
+   </div>
+   <div class="controls">
+      <button onclick="roll()" id="roll">Roll</button>
+      <button onclick="reset()">Next Player</button>
+   </div>
+   <h1 class="hide">Yahtzee!!</h1>
+   <div>
+      <button id="ones" class="scoringOptions" disabled>Ones</button>
+      <button id="twos" class="scoringOptions" disabled>Twos</button>
+      <button id="threes" class="scoringOptions" disabled>Threes</button>
+      <button id="fours" class="scoringOptions" disabled>Fours</button>
+      <button id="fives" class="scoringOptions" disabled>Fives</button>
+      <button id="sixes" class="scoringOptions" disabled>Sixes</button>
+   </div>
+   <div>
+      <button id="threeOfKind" class="scoringOptions" disabled>3 of kind</button>
+      <button id="fourOfKind" class="scoringOptions" disabled>4 of kind</button>
+      <button id="fullHouse" class="scoringOptions" disabled>Full House</button>
+      <button id="smallStraight" class="scoringOptions" disabled>Small Straight</button>
+      <button id="largeStraight" class="scoringOptions" disabled>Large Straight</button>
+      <button id="yahtzee" class="scoringOptions" disabled>Yahtzee</button>
+   </div>
+   <h3 id="total"></h3>
+  
+   <script src="yahtzee.js"></script>
+</body>
+</html>
