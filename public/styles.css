@@ -1,0 +1,28 @@
+.keep{
+   background-color: #ffb2b2;
+}
+div{
+   margin: 20px auto;
+}
+.dice{
+   width: 100px;
+   height: 100px;
+   font-size: 30px;
+}
+h1{
+   color: red;
+   font-size: 70px;
+}
+.hide{display: none;}
+.availableScoreLower{
+   background-color: royalblue;
+   color: white;
+}
+.availableScoreUpper{
+   background-color: green;
+   color: white;
+}
+.availableScoreYahtzee{
+   background-color: red;
+   color: white;
+}

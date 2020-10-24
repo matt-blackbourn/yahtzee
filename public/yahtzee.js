@@ -34,7 +34,7 @@ function roll(){
       rollsRemaining --
       rollsDisplay.innerHTML = rollsRemaining
    }
-   // total()
+  
    checkAvailableScores()
 }
 
@@ -166,8 +166,8 @@ function total(e){
    if(e.target.id === "largeStraight") score = 40
    if(e.target.id === "yahtzee") score = 50
    if(e.target.id === "threeOfKind" ||
-      e.target.id === "threeOfKind" ||
-      e.target.id === "threeOfKind"){
+      e.target.id === "fourOfKind" ||
+      e.target.id === "yahtzee"){
          for(let i = 0; i < dice.length; i++){
             score += dice[i].value
          }
