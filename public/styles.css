@@ -37,3 +37,15 @@ h1{
 .total{
    display: inline;
 }
+
+table{
+   border: 1px solid black;
+   text-align: center;
+}
+
+td{
+   border: 1px solid black;
+}
+th{
+   border: 1px solid black;
+}

@@ -17,10 +17,10 @@
    </div>
    <div class="controls">
       <button onclick="roll()" id="roll">Roll</button>
-      <button onclick="endTurn()">End turn - next player</button>
+      <button onclick="endTurn()">Submit Score</button>
       <h4 id="total" class="total"></h4>
    </div>
-   <h1 class="hide">Yahtzee!!</h1>
+   
    <div>
       <button id="ones" class="scoringButtons" disabled>Ones</button>
       <button id="twos" class="scoringButtons" disabled>Twos</button>
@@ -36,8 +36,70 @@
       <button id="smallStraight" class="scoringButtons" disabled>Small Straight</button>
       <button id="largeStraight" class="scoringButtons" disabled>Large Straight</button>
       <button id="yahtzee" class="scoringButtons" disabled>Yahtzee</button>
+      <button id="chance" class="scoringButtons" disabled>Chance</button>
    </div>
-   <h3 id="total"></h3>
+   <table>
+      <tr>
+         <td></td><th>Player 1</th><th>Player 2</th>
+      </tr>
+      <tr>
+         <td>1</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td>2</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td>3</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td>4</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td>5</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td>6</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td><strong>Total</strong></td><td></td><td></td>
+      </tr>
+      <tr>
+         <td><strong>Bonus</strong></td><td></td><td></td>
+      </tr>
+      <tr>
+         <td><strong>Upper Total</strong></td><td></td><td></td>
+      </tr>
+      <tr>
+         <td>Three of a kind</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td>Four of a kind</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td>Full House</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td>Small Straight</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td>Large Straight</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td>Yahtzee</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td>Chance</td><td class="p1"></td><td></td>
+      </tr>
+      <tr>
+         <td><strong>Bonus Yahtzee</strong></td><td></td><td></td>
+      </tr>
+      <tr>
+         <td><strong>Lower Total</strong></td><td></td><td></td>
+      </tr>
+      <tr>
+         <td><strong>Grand Total</strong></td><td></td><td></td>
+      </tr>
+   </table>
   
    <script src="yahtzee.js"></script>
 </body>

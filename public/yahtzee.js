@@ -42,6 +42,18 @@ function endTurn(){
       resetDiceArray()
       resetRollsRemaining()
       disableScoreButtons()
+      printScoreSheet()
+   }
+}
+
+const playerScores = {
+   'player1': [0,0,0,0,0,0]
+}
+
+function printScoreSheet(){
+   let p1Scores = document.querySelectorAll('.p1')
+   for(let i = 0; i < p1Scores.length; i++){
+      p1Scores[i].innerHTML = playerScores.player1[i]
    }
 }
 
@@ -50,16 +62,22 @@ function calculateTotal(e){
    let score = 0
    switch(e.target.id){
       case 'ones': score = tempHash['1']
+      playerScores.player1[0] = score
       break
       case 'twos': score = 2 * tempHash['2']
+      playerScores.player1[1] = score
       break
       case 'threes': score = 3 * tempHash['3']
+      playerScores.player1[2] = score
       break
       case 'fours': score = 4 * tempHash['4']
+      playerScores.player1[3] = score
       break
       case 'fives': score = 5 * tempHash['5']
+      playerScores.player1[4] = score
       break
       case 'sixes': score = 6 * tempHash['6']
+      playerScores.player1[5] = score
       break
       case 'threeOfKind': score = addAllDice()
       break
@@ -72,6 +90,8 @@ function calculateTotal(e){
       case 'largeStraight': score = 40
       break
       case 'yahtzee': score = 50
+      break
+      case 'chance': score = addAllDice()
       break
    }
    showScore(score)
@@ -129,9 +149,9 @@ function buildTempDiceHash(){
 }
 
 function enableScoringButton(button, section){
-   const smallStraight = document.querySelector('#' + button)
-   smallStraight.disabled = false
-   smallStraight.classList.add('availableScore' + section)
+   let scoreButton = document.querySelector('#' + button)
+   scoreButton.disabled = false
+   scoreButton.classList.add('availableScore' + section)
 }
 
 function addAllDice(){
@@ -144,7 +164,7 @@ function addAllDice(){
 
 function showScore(score){
    let totalDisplay = document.querySelector('#total')
-   totalDisplay.innerHTML = 'Score is: ' + score
+   totalDisplay.innerHTML = 'Your score will be: ' + score
 }
 
 function checkPossibleScores(){
@@ -154,6 +174,7 @@ function checkPossibleScores(){
    checkForRuns(tempHash)
    checkForSmallStraight(tempHash)
    checkForLargeStraight(tempHash)
+   enableScoringButton('chance', 'Lower')
 }
 
 //ALL SCORE-CHECKING FUNCTIONS BELOW
@@ -191,22 +212,22 @@ function checkForRuns(tempHash){
 function checkForSmallStraight(tempHash){
    let keys = Object.keys(tempHash)
    if(keys.length >= 4){
-      if((keys[0] === '1' && keys[3] === '4') || 
+      if(
+         (keys[0] === '1' && keys[3] === '4') || 
          (keys[0] === '2' && keys[3] === '5') ||
          (keys[0] === '3' && keys[3] === '6') ||
-         (keys[1] === '3' && keys[4] === '6')){
-            enableScoringButton('smallStraight', 'Lower')
-      }
+         (keys[1] === '3' && keys[4] === '6')
+      ) enableScoringButton('smallStraight', 'Lower')
    }
 }
 
 function checkForLargeStraight(tempHash){
    let keys = Object.keys(tempHash)
    if(keys.length === 5){
-      if((keys[0] === '1' && keys[4] === '5') ||
-         (keys[0] === '2' && keys[4] === '6')){
-            enableScoringButton('largeStraight', 'Lower')
-         }
+      if(
+         (keys[0] === '1' && keys[4] === '5') ||
+         (keys[0] === '2' && keys[4] === '6')
+      ) enableScoringButton('largeStraight', 'Lower')
    }
 }
 
