@@ -7,7 +7,7 @@
    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-   <h3>Rolls remaining in turn: <span id="rolls">3</span></h3>
+   <h4>Rolls remaining in turn: <span id="rolls">3</span></h4>
    <div>
       <button class="dice"  id="one"></button>
       <button class="dice"  id="two"></button>
@@ -17,8 +17,10 @@
    </div>
    <div class="controls">
       <button onclick="roll()" id="roll">Roll</button>
-      <button onclick="endTurn()">Submit Score</button>
-      <h4 id="total" class="total"></h4>
+      <button onclick="allowCutScore()">Cut Score</button>
+      <button onclick="endTurn()">Confirm</button>
+      
+      <h4 id="total"></h4>
    </div>
    
    <div>

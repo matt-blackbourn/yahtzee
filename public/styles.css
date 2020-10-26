@@ -7,9 +7,10 @@ div{
 }
 
 .dice{
-   width: 100px;
-   height: 100px;
+   width: 60px;
+   height: 60px;
    font-size: 30px;
+   text-align: center;
 }
 
 h1{
@@ -29,13 +30,9 @@ h1{
    color: white;
 }
 
-.availableScoreYahtzee{
+.cutScore{
    background-color: red;
    color: white;
-}
-
-.total{
-   display: inline;
 }
 
 table{
@@ -48,4 +45,8 @@ td{
 }
 th{
    border: 1px solid black;
+}
+
+.blackout{
+   background-color: black;
 }

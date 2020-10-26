@@ -9,6 +9,14 @@ let dice = [
 let rollsRemaining = 3
 const diceButtons = document.querySelectorAll('.dice')
 const scoringButtons = document.querySelectorAll('.scoringButtons')
+let score
+let index
+let allowCut = false
+const playerScores = {
+   'player1': []
+}
+
+buildPlayerScoresArray()
 
 
 //===== MAIN GAME FUNCTION SECTION ================
@@ -27,6 +35,7 @@ for(let i = 0; i < scoringButtons.length; i ++){
 
 function roll(){
    if(rollsRemaining > 0){
+      resetTurnScore()
       rollAvailableDice()
       checkPossibleScores()
       rollsRemaining --
@@ -36,70 +45,138 @@ function roll(){
 }
 
 function endTurn(){
-   if(rollsRemaining > 0){
-      alert('Use all your rolls first!')
-   } else {
+   if(scoreIsAvailable(index) && score >= 0){
+      if(allowCut){
+         let allCells = document.querySelectorAll('.p1')
+         allCells[index].classList.add('blackout')
+      }
       resetDiceArray()
       resetRollsRemaining()
       disableScoreButtons()
+      updatePlayerScores(index, score)
       printScoreSheet()
+   } else {
+      alert('please choose a different score')
+   }
+   allowCut = false
+}
+
+// 
+function allowCutScore(){
+   if(rollsRemaining === 3) return
+   if(!allowCut){
+      allowCut = true
+      let allButtons = document.querySelectorAll('.scoringButtons')
+      for(let i = 0; i < allButtons.length; i++){
+         if(scoreIsAvailable(i)){
+            allButtons[i].disabled = false
+            allButtons[i].classList.add('cutScore')
+         } 
+      }
+   } else {
+      resetTurnScore()
+      checkPossibleScores()
+      allowCut = false
    }
 }
 
-const playerScores = {
-   'player1': [0,0,0,0,0,0]
+//========== MAIN FUNCTION SECTION ENDS =============
+
+
+//=============HELPER FUNCTIONS=======================
+
+function calculateTotal(e){
+   const tempHash = buildTempDiceHash()
+   switch(e.target.id){
+      case 'ones': score = tempHash['1']
+      index = 0
+      break
+      case 'twos': score = 2 * tempHash['2']
+      index = 1
+      break
+      case 'threes': score = 3 * tempHash['3']
+      index = 2
+      break
+      case 'fours': score = 4 * tempHash['4']
+      index = 3
+      break
+      case 'fives': score = 5 * tempHash['5']
+      index = 4
+      break
+      case 'sixes': score = 6 * tempHash['6']
+      index = 5
+      break
+      case 'threeOfKind': score = addAllDice()
+      index = 6
+      break
+      case 'fourOfKind': score = addAllDice()
+      index = 7
+      break
+      case 'fullHouse': score = 25
+      index = 8
+      break
+      case 'smallStraight': score = 30
+      index = 9
+      break
+      case 'largeStraight': score = 40
+      index = 10
+      break
+      case 'yahtzee': score = 50
+      index = 11
+      break
+      case 'chance': score = addAllDice()
+      index = 12
+      break
+   }
+   if(allowCut){
+      score = 0
+      warnBeforeCut(index)
+   } else {
+      showScore(score)
+   }
 }
 
 function printScoreSheet(){
    let p1Scores = document.querySelectorAll('.p1')
    for(let i = 0; i < p1Scores.length; i++){
-      p1Scores[i].innerHTML = playerScores.player1[i]
+      if(playerScores.player1[i] != undefined){
+         p1Scores[i].innerHTML = playerScores.player1[i]
+      } 
    }
 }
 
-function calculateTotal(e){
-   const tempHash = buildTempDiceHash()
-   let score = 0
-   switch(e.target.id){
-      case 'ones': score = tempHash['1']
-      playerScores.player1[0] = score
-      break
-      case 'twos': score = 2 * tempHash['2']
-      playerScores.player1[1] = score
-      break
-      case 'threes': score = 3 * tempHash['3']
-      playerScores.player1[2] = score
-      break
-      case 'fours': score = 4 * tempHash['4']
-      playerScores.player1[3] = score
-      break
-      case 'fives': score = 5 * tempHash['5']
-      playerScores.player1[4] = score
-      break
-      case 'sixes': score = 6 * tempHash['6']
-      playerScores.player1[5] = score
-      break
-      case 'threeOfKind': score = addAllDice()
-      break
-      case 'fourOfKind': score = addAllDice()
-      break
-      case 'fullHouse': score = 25
-      break
-      case 'smallStraight': score = 30
-      break
-      case 'largeStraight': score = 40
-      break
-      case 'yahtzee': score = 50
-      break
-      case 'chance': score = addAllDice()
-      break
+function updatePlayerScores(index, score){
+   if(scoreIsAvailable(index)){
+      playerScores.player1[index] = score
    }
-   showScore(score)
 }
-//========== MAIN FUNCTION SECTION ENDS =============
 
+function buildPlayerScoresArray(){
+   for(let i = 0; i < 13; i++){
+      playerScores.player1[i] = undefined
+   }
+}
 
-//=============HELPER FUNCTIONS=======================
+function scoreIsAvailable(index){
+   return playerScores.player1[index] === undefined
+}
+
+function resetTurnScore(){
+   index = undefined
+   score = undefined
+   let totalDisplay = document.querySelector('#total')
+   totalDisplay.innerHTML = ''
+}
+
+function showScore(score){
+   let totalDisplay = document.querySelector('#total')
+   totalDisplay.innerHTML = 'You will score: ' + score
+}
+
+function warnBeforeCut(index){
+   let totalDisplay = document.querySelector('#total')
+   totalDisplay.innerHTML = 'Are you sure?'
+}
 
 function toggleKeepDice(i, e){
    !dice[i].keep ? dice[i].keep = true : dice[i].keep = false
@@ -135,7 +212,7 @@ function disableScoreButtons(){
    for(let i = 0; i < scoringButtons.length; i++){
       scoringButtons[i].classList.remove('availableScoreLower')
       scoringButtons[i].classList.remove('availableScoreUpper')
-      scoringButtons[i].classList.remove('availableScoreYahtzee')
+      scoringButtons[i].classList.remove('cutScore')
       scoringButtons[i].disabled = true
    }
 }
@@ -149,9 +226,11 @@ function buildTempDiceHash(){
 }
 
 function enableScoringButton(button, section){
-   let scoreButton = document.querySelector('#' + button)
-   scoreButton.disabled = false
-   scoreButton.classList.add('availableScore' + section)
+   let allButtons = document.querySelectorAll('.scoringButtons')
+   if(scoreIsAvailable(button)){
+      allButtons[button].disabled = false
+      allButtons[button].classList.add('availableScore' + section)
+   }
 }
 
 function addAllDice(){
@@ -162,10 +241,7 @@ function addAllDice(){
    return score
 }
 
-function showScore(score){
-   let totalDisplay = document.querySelector('#total')
-   totalDisplay.innerHTML = 'Your score will be: ' + score
-}
+//ALL SCORE-CHECKING FUNCTIONS BELOW
 
 function checkPossibleScores(){
    disableScoreButtons()
@@ -174,25 +250,23 @@ function checkPossibleScores(){
    checkForRuns(tempHash)
    checkForSmallStraight(tempHash)
    checkForLargeStraight(tempHash)
-   enableScoringButton('chance', 'Lower')
+   enableScoringButton(12, 'Lower')
 }
-
-//ALL SCORE-CHECKING FUNCTIONS BELOW
 
 function checkForNumbers(tempHash){
    for(let key of Object.keys(tempHash)){
       switch(key){
-         case '1': enableScoringButton('ones', 'Upper')
+         case '1': enableScoringButton(0, 'Upper')
          break
-         case '2': enableScoringButton('twos', 'Upper')
+         case '2': enableScoringButton(1, 'Upper')
          break
-         case '3': enableScoringButton('threes', 'Upper')
+         case '3': enableScoringButton(2, 'Upper')
          break
-         case '4': enableScoringButton('fours', 'Upper')
+         case '4': enableScoringButton(3, 'Upper')
          break
-         case '5': enableScoringButton('fives', 'Upper')
+         case '5': enableScoringButton(4, 'Upper')
          break
-         case '6': enableScoringButton('sixes', 'Upper')
+         case '6': enableScoringButton(5, 'Upper')
          break
       }
    }
@@ -200,11 +274,11 @@ function checkForNumbers(tempHash){
 
 function checkForRuns(tempHash){
    for(let value of Object.values(tempHash)){
-      if(value >= 3) enableScoringButton('threeOfKind', 'Lower')
-      if(value >= 4) enableScoringButton('fourOfKind', 'Lower')
-      if(value === 5) enableScoringButton('yahtzee', 'Lower')
+      if(value >= 3) enableScoringButton(6, 'Lower')
+      if(value >= 4) enableScoringButton(7, 'Lower')
+      if(value === 5) enableScoringButton(11, 'Lower')
       if(value === 3 && Object.entries(tempHash).length === 2){
-         enableScoringButton('fullHouse', 'Lower')
+         enableScoringButton(8, 'Lower')
       }
    }
 }
@@ -217,7 +291,7 @@ function checkForSmallStraight(tempHash){
          (keys[0] === '2' && keys[3] === '5') ||
          (keys[0] === '3' && keys[3] === '6') ||
          (keys[1] === '3' && keys[4] === '6')
-      ) enableScoringButton('smallStraight', 'Lower')
+      ) enableScoringButton(9, 'Lower')
    }
 }
 
@@ -227,7 +301,7 @@ function checkForLargeStraight(tempHash){
       if(
          (keys[0] === '1' && keys[4] === '5') ||
          (keys[0] === '2' && keys[4] === '6')
-      ) enableScoringButton('largeStraight', 'Lower')
+      ) enableScoringButton(10, 'Lower')
    }
 }
 
