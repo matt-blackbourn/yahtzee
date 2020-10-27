@@ -11,9 +11,14 @@ const diceButtons = document.querySelectorAll('.dice')
 const scoringButtons = document.querySelectorAll('.scoringButtons')
 let score
 let index
+let turnsRemaining = 13
 let allowCut = false
 const playerScores = {
    'player1': []
+}
+let p1Totals = []
+for(let i = 0; i < 6; i++){
+   p1Totals[i] = undefined  
 }
 
 buildPlayerScoresArray()
@@ -34,45 +39,45 @@ for(let i = 0; i < scoringButtons.length; i ++){
 }
 
 function roll(){
+   enableCutScoreButton()
    if(rollsRemaining > 0){
       resetTurnScore()
       rollAvailableDice()
       checkPossibleScores()
-      rollsRemaining --
-      let rollsDisplay = document.querySelector('#rolls')
-      rollsDisplay.innerHTML = rollsRemaining
+      adjustRollsRemaining()
    }
+}
+
+function decrementTurn(){
+   turnsRemaining --
+   if(turnsRemaining === 0){
+      alert('Game over! Refresh to start again')
+    }
 }
 
 function endTurn(){
    if(scoreIsAvailable(index) && score >= 0){
-      if(allowCut){
-         let allCells = document.querySelectorAll('.p1')
-         allCells[index].classList.add('blackout')
-      }
+      if(allowCut) cutScore(index)
       resetDiceArray()
       resetRollsRemaining()
       disableScoreButtons()
       updatePlayerScores(index, score)
+      scoreTopSection()
+      scoreBottomSection()
       printScoreSheet()
+      disableCutScoreButton()
+      enableRollButton()
+      decrementTurn()
    } else {
       alert('please choose a different score')
    }
    allowCut = false
 }
 
-// 
 function allowCutScore(){
    if(rollsRemaining === 3) return
    if(!allowCut){
-      allowCut = true
-      let allButtons = document.querySelectorAll('.scoringButtons')
-      for(let i = 0; i < allButtons.length; i++){
-         if(scoreIsAvailable(i)){
-            allButtons[i].disabled = false
-            allButtons[i].classList.add('cutScore')
-         } 
-      }
+      enableCutScore()
    } else {
       resetTurnScore()
       checkPossibleScores()
@@ -84,6 +89,82 @@ function allowCutScore(){
 
 
 //=============HELPER FUNCTIONS=======================
+
+function adjustRollsRemaining(){
+   rollsRemaining --
+   let rollsDisplay = document.querySelector('#rolls')
+   rollsDisplay.innerHTML = rollsRemaining
+   if(rollsRemaining === 0) disableRollButton()
+}
+
+function disableCutScoreButton(){
+   document.querySelector('#cutScore').disabled = true
+}
+
+function enableCutScoreButton(){
+   document.querySelector('#cutScore').disabled = false
+}
+
+function disableRollButton(){
+   document.querySelector('#roll').disabled = true
+}
+
+function enableRollButton(){
+   document.querySelector('#roll').disabled = false
+}
+
+function enableCutScore(){
+   allowCut = true
+   let allButtons = document.querySelectorAll('.scoringButtons')
+   for(let i = 0; i < allButtons.length; i++){
+      if(scoreIsAvailable(i)){
+         allButtons[i].disabled = false
+         allButtons[i].classList.add('cutScore')
+      } 
+   }
+}
+
+function cutScore(index){
+   let allCells = document.querySelectorAll('.p1')
+   allCells[index].classList.add('blackout')
+}
+
+function scoreTopSection(){
+   let p1ScoreCells = document.querySelectorAll('.p1T')
+   let total = 0
+   for(let i = 0; i < 6; i++){
+      total += playerScores.player1[i]
+   }
+   if(total){
+      p1Totals[0] = total
+      if(total >= 65){
+         p1Totals[1] = 35
+      } else {
+         p1Totals[1] = 0
+      }
+      p1Totals[2] = p1Totals[0] + p1Totals[1]
+      for(let i = 0; i < 3; i++){
+         p1ScoreCells[i].innerHTML = p1Totals[i]
+      }
+   }
+}
+
+function scoreBottomSection(){
+   let p1ScoreCells = document.querySelectorAll('.p1T')
+   let total = 0
+   for(let i = 6; i < 13; i++){
+      total += playerScores.player1[i]
+   }
+   if(total){
+      p1Totals[3] = 0 //number of bonus yahtzees goes here
+      p1Totals[4] = total + p1Totals[3]
+      p1Totals[5] = p1Totals[2] + p1Totals[4]
+      for(let i = 3; i < 5; i++){
+         p1ScoreCells[i].innerHTML = p1Totals[i]
+      }
+      if(p1Totals[2]) p1ScoreCells[5].innerHTML = p1Totals[5]
+   }
+}
 
 function calculateTotal(e){
    const tempHash = buildTempDiceHash()

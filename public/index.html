@@ -8,6 +8,7 @@
 </head>
 <body>
    <h4>Rolls remaining in turn: <span id="rolls">3</span></h4>
+   <button onclick="roll()" id="roll">Roll</button>
    <div>
       <button class="dice"  id="one"></button>
       <button class="dice"  id="two"></button>
@@ -16,9 +17,6 @@
       <button class="dice"  id="five"></button>
    </div>
    <div class="controls">
-      <button onclick="roll()" id="roll">Roll</button>
-      <button onclick="allowCutScore()">Cut Score</button>
-      <button onclick="endTurn()">Confirm</button>
       
       <h4 id="total"></h4>
    </div>
@@ -39,7 +37,9 @@
       <button id="largeStraight" class="scoringButtons" disabled>Large Straight</button>
       <button id="yahtzee" class="scoringButtons" disabled>Yahtzee</button>
       <button id="chance" class="scoringButtons" disabled>Chance</button>
+      <button onclick="allowCutScore()" disabled id="cutScore">Cut a Score</button>
    </div>
+   <button onclick="endTurn()">Confirm</button>
    <table>
       <tr>
          <td></td><th>Player 1</th><th>Player 2</th>
@@ -63,13 +63,13 @@
          <td>6</td><td class="p1"></td><td></td>
       </tr>
       <tr>
-         <td><strong>Total</strong></td><td></td><td></td>
+         <td><strong>Total</strong></td><td class="p1T"></td><td></td>
       </tr>
       <tr>
-         <td><strong>Bonus</strong></td><td></td><td></td>
+         <td><strong>Bonus</strong></td><td class="p1T"></td><td></td>
       </tr>
       <tr>
-         <td><strong>Upper Total</strong></td><td></td><td></td>
+         <td><strong>Upper Total</strong></td><td class="p1T"></td><td></td>
       </tr>
       <tr>
          <td>Three of a kind</td><td class="p1"></td><td></td>
@@ -93,13 +93,13 @@
          <td>Chance</td><td class="p1"></td><td></td>
       </tr>
       <tr>
-         <td><strong>Bonus Yahtzee</strong></td><td></td><td></td>
+         <td><strong>Bonus Yahtzee</strong></td><td class="p1T"></td><td></td>
       </tr>
       <tr>
-         <td><strong>Lower Total</strong></td><td></td><td></td>
+         <td><strong>Lower Total</strong></td><td class="p1T"></td><td></td>
       </tr>
       <tr>
-         <td><strong>Grand Total</strong></td><td></td><td></td>
+         <td><strong>Grand Total</strong></td><td class="p1T"></td><td></td>
       </tr>
    </table>
   
