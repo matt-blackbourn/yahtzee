@@ -161,7 +161,9 @@ function scoreBottomSection(){
    if(yahtzeeScored > 1){
       p1Totals[3] = 100 * (yahtzeeScored - 1)
       p1ScoreCells[3].innerHTML = p1Totals[3]
-   } 
+   } else {
+      p1Totals[3] = 0
+   }
    if(total){
       p1Totals[4] = total + p1Totals[3]
       p1Totals[5] = p1Totals[2] + p1Totals[4]
@@ -396,7 +398,6 @@ function checkForRuns(tempHash){
       }
    }
 }
-
 
 function checkForSmallStraight(tempHash){
    let keys = Object.keys(tempHash)
