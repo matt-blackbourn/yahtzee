@@ -20,6 +20,9 @@ let p1Totals = []
 for(let i = 0; i < 6; i++){
    p1Totals[i] = undefined  
 }
+let yahtzeeScored = 0
+
+//pull fullhouse logic into separate function?
 
 buildPlayerScoresArray()
 
@@ -155,8 +158,11 @@ function scoreBottomSection(){
    for(let i = 6; i < 13; i++){
       total += playerScores.player1[i]
    }
+   if(yahtzeeScored > 1){
+      p1Totals[3] = 100 * (yahtzeeScored - 1)
+      p1ScoreCells[3].innerHTML = p1Totals[3]
+   } 
    if(total){
-      p1Totals[3] = 0 //number of bonus yahtzees goes here
       p1Totals[4] = total + p1Totals[3]
       p1Totals[5] = p1Totals[2] + p1Totals[4]
       for(let i = 3; i < 5; i++){
@@ -238,10 +244,6 @@ function buildPlayerScoresArray(){
    }
 }
 
-function scoreIsAvailable(index){
-   return playerScores.player1[index] === undefined
-}
-
 function resetTurnScore(){
    index = undefined
    score = undefined
@@ -268,6 +270,7 @@ function rollAvailableDice(){
    for(let i = 0; i < dice.length; i++){
       if(!dice[i].keep){
          dice[i].value = (Math.floor(Math.random()*6)+1)
+         // dice[i].value = 1 YAHTZEE
          diceButtons[i].innerHTML = dice[i].value
       } 
    }
@@ -306,14 +309,6 @@ function buildTempDiceHash(){
    return tempDiceHash
 }
 
-function enableScoringButton(button, section){
-   let allButtons = document.querySelectorAll('.scoringButtons')
-   if(scoreIsAvailable(button)){
-      allButtons[button].disabled = false
-      allButtons[button].classList.add('availableScore' + section)
-   }
-}
-
 function addAllDice(){
    let score = 0
    for(let i = 0; i < dice.length; i++){
@@ -322,16 +317,28 @@ function addAllDice(){
    return score
 }
 
+function enableScoringButton(button, section){
+   let allButtons = document.querySelectorAll('.scoringButtons')
+   if(scoreIsAvailable(button)){
+      allButtons[button].disabled = false
+      allButtons[button].classList.add('availableScore' + section)
+   }
+}
+
+function scoreIsAvailable(index){
+   return playerScores.player1[index] === undefined
+}
+
 //ALL SCORE-CHECKING FUNCTIONS BELOW
 
 function checkPossibleScores(){
    disableScoreButtons()
    const tempHash = buildTempDiceHash()
+   enableScoringButton(12, 'Lower')
    checkForNumbers(tempHash)
-   checkForRuns(tempHash)
    checkForSmallStraight(tempHash)
    checkForLargeStraight(tempHash)
-   enableScoringButton(12, 'Lower')
+   checkForRuns(tempHash)
 }
 
 function checkForNumbers(tempHash){
@@ -353,16 +360,43 @@ function checkForNumbers(tempHash){
    }
 }
 
+function disableLowerScoreButtons(){
+   let scoringButtons = document.querySelectorAll('.scoringButtons')
+   for(let i = 6; i < 13; i++){
+      scoringButtons[i].classList.remove('availableScoreLower')
+      scoringButtons[i].classList.remove('availableScoreUpper')
+      scoringButtons[i].classList.remove('cutScore')
+      scoringButtons[i].disabled = true
+   }
+}
+
 function checkForRuns(tempHash){
    for(let value of Object.values(tempHash)){
       if(value >= 3) enableScoringButton(6, 'Lower')
       if(value >= 4) enableScoringButton(7, 'Lower')
-      if(value === 5) enableScoringButton(11, 'Lower')
+      if(value === 5){
+         yahtzeeScored ++
+         enableScoringButton(11, 'Lower')
+         if(yahtzeeScored > 1){
+            if(scoreIsAvailable(Object.keys(tempHash)[0])){
+               disableLowerScoreButtons() 
+            } else {
+               for(let i = 8; i < 11; i++){
+                  if(scoreIsAvailable(i)){
+                     let allButtons = document.querySelectorAll('.scoringButtons')
+                     allButtons[i].disabled = false
+                     allButtons[i].classList.add('availableScoreLower')
+                  }
+               }
+            }
+         }
+      }
       if(value === 3 && Object.entries(tempHash).length === 2){
          enableScoringButton(8, 'Lower')
       }
    }
 }
+
 
 function checkForSmallStraight(tempHash){
    let keys = Object.keys(tempHash)
