@@ -140,7 +140,7 @@ function scoreTopSection(){
    }
    if(total){
       p1Totals[0] = total
-      if(total >= 65){
+      if(total >= 63){
          p1Totals[1] = 35
       } else {
          p1Totals[1] = 0
