@@ -54,7 +54,7 @@ function roll(){
 function decrementTurn(){
    turnsRemaining --
    if(turnsRemaining === 0){
-      alert('Game over! Refresh to start again')
+      alert('Game over! Your score was ' + p1Totals[5] + '. Refresh to start again')
     }
 }
 
