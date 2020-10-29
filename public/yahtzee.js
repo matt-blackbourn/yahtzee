@@ -274,12 +274,17 @@ function toggleKeepDice(i, e){
    e.target.classList.toggle('keep')
 }
 
-let tempVar = true
+// let temp = true
 
 function rollAvailableDice(){
    for(let i = 0; i < dice.length; i++){
       if(!dice[i].keep){
          dice[i].value = (Math.floor(Math.random()*6)+1)
+         // if(temp){
+         //    temp = false
+         // } else {
+         //    dice[i].value = 2
+         // }
       }
       diceButtons[i].innerHTML = dice[i].value
    }
@@ -379,6 +384,16 @@ function disableLowerScoreButtons(){
    }
 }
 
+function enableAvailableLowerScoreButtons(){
+   for(let i = 6; i < 11; i++){
+      let allButtons = document.querySelectorAll('.scoringButtons')
+      if(scoreIsAvailable(i)){
+         allButtons[i].disabled = false
+         allButtons[i].classList.add('availableScoreLower')
+      }
+   }
+}
+
 function checkForRuns(tempHash){
    for(let value of Object.values(tempHash)){
       if(value >= 3) enableScoringButton(6, 'Lower')
@@ -390,13 +405,7 @@ function checkForRuns(tempHash){
             if(scoreIsAvailable(dice[0].value -1)){ 
                disableLowerScoreButtons() 
             } else {
-               for(let i = 6; i < 11; i++){
-                  let allButtons = document.querySelectorAll('.scoringButtons')
-                  if(scoreIsAvailable(i)){
-                     allButtons[i].disabled = false
-                     allButtons[i].classList.add('availableScoreLower')
-                  }
-               }
+               enableAvailableLowerScoreButtons()
             }
          }
       }
