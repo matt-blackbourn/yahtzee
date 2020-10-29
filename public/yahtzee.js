@@ -6,6 +6,7 @@ let dice = [
    {value: null, keep: false},
    {value: null, keep: false}
 ]
+
 let rollsRemaining = 3
 const diceButtons = document.querySelectorAll('.dice')
 const scoringButtons = document.querySelectorAll('.scoringButtons')
@@ -13,18 +14,11 @@ let score
 let index
 let turnsRemaining = 13
 let allowCut = false
-const playerScores = {
-   'player1': []
-}
-let p1Totals = []
-for(let i = 0; i < 6; i++){
-   p1Totals[i] = undefined  
-}
 let yahtzeeScored = 0
 
-//pull fullhouse logic into separate function?
+let playerScores = buildPlayerScoresArray()
+let p1Totals = buildInitialPlayerTotals()
 
-buildPlayerScoresArray()
 
 
 //===== MAIN GAME FUNCTION SECTION ================
@@ -49,13 +43,6 @@ function roll(){
       checkPossibleScores()
       adjustRollsRemaining()
    }
-}
-
-function decrementTurn(){
-   turnsRemaining --
-   if(turnsRemaining === 0){
-      alert('Game over! Your score was ' + p1Totals[5] + '. Refresh to start again')
-    }
 }
 
 function endTurn(){
@@ -92,6 +79,31 @@ function allowCutScore(){
 
 
 //=============HELPER FUNCTIONS=======================
+
+function decrementTurn(){
+   turnsRemaining --
+   if(turnsRemaining === 0){
+      alert('Game over! Your score was ' + p1Totals[5] + '. Refresh to start again')
+    }
+}
+
+function buildPlayerScoresArray(){
+   let obj = {}
+   obj.player1 = []
+   for(let i = 0; i < 13; i++){
+      obj.player1[i] = undefined
+   }
+   return obj
+}
+
+function buildInitialPlayerTotals(){
+   let arr = []
+   for(let i = 0; i < 6; i++){
+      arr[i] = undefined  
+   }
+   return arr
+}
+
 
 function adjustRollsRemaining(){
    rollsRemaining --
@@ -240,12 +252,6 @@ function updatePlayerScores(index, score){
    }
 }
 
-function buildPlayerScoresArray(){
-   for(let i = 0; i < 13; i++){
-      playerScores.player1[i] = undefined
-   }
-}
-
 function resetTurnScore(){
    index = undefined
    score = undefined
@@ -268,13 +274,14 @@ function toggleKeepDice(i, e){
    e.target.classList.toggle('keep')
 }
 
+let tempVar = true
+
 function rollAvailableDice(){
    for(let i = 0; i < dice.length; i++){
       if(!dice[i].keep){
          dice[i].value = (Math.floor(Math.random()*6)+1)
-         // dice[i].value = 1 YAHTZEE
-         diceButtons[i].innerHTML = dice[i].value
-      } 
+      }
+      diceButtons[i].innerHTML = dice[i].value
    }
 }
 
@@ -380,12 +387,12 @@ function checkForRuns(tempHash){
          yahtzeeScored ++
          enableScoringButton(11, 'Lower')
          if(yahtzeeScored > 1){
-            if(scoreIsAvailable(Object.keys(tempHash)[0])){
+            if(scoreIsAvailable(dice[0].value -1)){ 
                disableLowerScoreButtons() 
             } else {
-               for(let i = 8; i < 11; i++){
+               for(let i = 6; i < 11; i++){
+                  let allButtons = document.querySelectorAll('.scoringButtons')
                   if(scoreIsAvailable(i)){
-                     let allButtons = document.querySelectorAll('.scoringButtons')
                      allButtons[i].disabled = false
                      allButtons[i].classList.add('availableScoreLower')
                   }
@@ -393,6 +400,7 @@ function checkForRuns(tempHash){
             }
          }
       }
+      //full house
       if(value === 3 && Object.entries(tempHash).length === 2){
          enableScoringButton(8, 'Lower')
       }
