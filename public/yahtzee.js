@@ -1,4 +1,6 @@
 
+//GLOBALS
+
 let dice = [
    {value: null, keep: false},
    {value: null, keep: false},
@@ -20,8 +22,8 @@ let playerScores = buildPlayerScoresArray()
 let p1Totals = buildInitialPlayerTotals()
 
 
+//===== MAIN GAME FUNCTIONALITY ================
 
-//===== MAIN GAME FUNCTION SECTION ================
 
 //ADD DICE EVENT LISTENERS
 for(let i = 0; i < diceButtons.length; i++){
@@ -83,7 +85,7 @@ function allowCutScore(){
 function decrementTurn(){
    turnsRemaining --
    if(turnsRemaining === 0){
-      alert('Game over! Your score was ' + p1Totals[5] + '. Refresh to start again')
+      alert('Game over! Your score is ' + p1Totals[5] + '. Refresh to start again')
     }
 }
 
@@ -102,46 +104,6 @@ function buildInitialPlayerTotals(){
       arr[i] = undefined  
    }
    return arr
-}
-
-
-function adjustRollsRemaining(){
-   rollsRemaining --
-   let rollsDisplay = document.querySelector('#rolls')
-   rollsDisplay.innerHTML = rollsRemaining
-   if(rollsRemaining === 0) disableRollButton()
-}
-
-function disableCutScoreButton(){
-   document.querySelector('#cutScore').disabled = true
-}
-
-function enableCutScoreButton(){
-   document.querySelector('#cutScore').disabled = false
-}
-
-function disableRollButton(){
-   document.querySelector('#roll').disabled = true
-}
-
-function enableRollButton(){
-   document.querySelector('#roll').disabled = false
-}
-
-function enableCutScore(){
-   allowCut = true
-   let allButtons = document.querySelectorAll('.scoringButtons')
-   for(let i = 0; i < allButtons.length; i++){
-      if(scoreIsAvailable(i)){
-         allButtons[i].disabled = false
-         allButtons[i].classList.add('cutScore')
-      } 
-   }
-}
-
-function cutScore(index){
-   let allCells = document.querySelectorAll('.p1')
-   allCells[index].classList.add('blackout')
 }
 
 function scoreTopSection(){
@@ -182,7 +144,9 @@ function scoreBottomSection(){
       for(let i = 3; i < 5; i++){
          p1ScoreCells[i].innerHTML = p1Totals[i]
       }
-      if(p1Totals[2]) p1ScoreCells[5].innerHTML = p1Totals[5]
+      if(p1Totals[2]){
+         p1ScoreCells[5].innerHTML = p1Totals[5]
+      } 
    }
 }
 
@@ -238,36 +202,10 @@ function calculateTotal(e){
    }
 }
 
-function printScoreSheet(){
-   let p1Scores = document.querySelectorAll('.p1')
-   for(let i = 0; i < p1Scores.length; i++){
-      if(playerScores.player1[i] != undefined){
-         p1Scores[i].innerHTML = playerScores.player1[i]
-      } 
-   }
-}
-
 function updatePlayerScores(index, score){
    if(scoreIsAvailable(index)){
       playerScores.player1[index] = score
    }
-}
-
-function resetTurnScore(){
-   index = undefined
-   score = undefined
-   let totalDisplay = document.querySelector('#total')
-   totalDisplay.innerHTML = ''
-}
-
-function showScore(score){
-   let totalDisplay = document.querySelector('#total')
-   totalDisplay.innerHTML = 'You will score: ' + score
-}
-
-function warnBeforeCut(index){
-   let totalDisplay = document.querySelector('#total')
-   totalDisplay.innerHTML = 'Are you sure?'
 }
 
 function toggleKeepDice(i, e){
@@ -293,22 +231,6 @@ function resetDiceArray(){
    }
 }
 
-function resetRollsRemaining(){
-   rollsRemaining = 3
-   document.querySelector('#rolls').innerHTML = rollsRemaining
-   document.querySelector('#total').innerHTML = ''
-}
-
-function disableScoreButtons(){
-   let scoringButtons = document.querySelectorAll('.scoringButtons')
-   for(let i = 0; i < scoringButtons.length; i++){
-      scoringButtons[i].classList.remove('availableScoreLower')
-      scoringButtons[i].classList.remove('availableScoreUpper')
-      scoringButtons[i].classList.remove('cutScore')
-      scoringButtons[i].disabled = true
-   }
-}
-
 function buildTempDiceHash(){
    const tempDiceHash = {}
    for(let i = 0; i < dice.length; i++){
@@ -325,46 +247,98 @@ function addAllDice(){
    return score
 }
 
+function scoreIsAvailable(index){
+   return playerScores.player1[index] === undefined
+}
+
+//========DOM MANIPULATION FUNCTIONS============================
+
+function adjustRollsRemaining(){
+   rollsRemaining --
+   let rollsDisplay = document.querySelector('#rolls')
+   rollsDisplay.innerHTML = rollsRemaining
+   if(rollsRemaining === 0) disableRollButton()
+}
+
+function enableCutScore(){
+   allowCut = true
+   let allButtons = document.querySelectorAll('.scoringButtons')
+   for(let i = 0; i < allButtons.length; i++){
+      if(scoreIsAvailable(i)){
+         allButtons[i].disabled = false
+         allButtons[i].classList.add('cutScore')
+      } 
+   }
+}
+
+function resetRollsRemaining(){
+   rollsRemaining = 3
+   document.querySelector('#rolls').innerHTML = rollsRemaining
+   document.querySelector('#total').innerHTML = ''
+}
+
+function disableCutScoreButton(){
+   document.querySelector('#cutScore').disabled = true
+}
+
+function enableCutScoreButton(){
+   document.querySelector('#cutScore').disabled = false
+}
+
+function disableRollButton(){
+   document.querySelector('#roll').disabled = true
+}
+
+function enableRollButton(){
+   document.querySelector('#roll').disabled = false
+}
+
+function cutScore(index){
+   let allCells = document.querySelectorAll('.p1')
+   allCells[index].classList.add('blackout')
+}
+
+function printScoreSheet(){
+   let p1Scores = document.querySelectorAll('.p1')
+   for(let i = 0; i < p1Scores.length; i++){
+      if(playerScores.player1[i] != undefined){
+         p1Scores[i].innerHTML = playerScores.player1[i]
+      } 
+   }
+}
+
+function resetTurnScore(){
+   index = undefined
+   score = undefined
+   let totalDisplay = document.querySelector('#total')
+   totalDisplay.innerHTML = ''
+}
+
+function showScore(score){
+   let totalDisplay = document.querySelector('#total')
+   totalDisplay.innerHTML = 'You will score: ' + score
+}
+
+function warnBeforeCut(index){
+   let totalDisplay = document.querySelector('#total')
+   totalDisplay.innerHTML = 'Are you sure?'
+}
+
+function disableScoreButtons(){
+   let scoringButtons = document.querySelectorAll('.scoringButtons')
+   for(let i = 0; i < scoringButtons.length; i++){
+      scoringButtons[i].classList.remove('availableScoreLower')
+      scoringButtons[i].classList.remove('availableScoreUpper')
+      scoringButtons[i].classList.remove('cutScore')
+      scoringButtons[i].disabled = true
+   }
+}
+
 function enableScoringButton(button, section){
    let allButtons = document.querySelectorAll('.scoringButtons')
    if(scoreIsAvailable(button)){
       allButtons[button].disabled = false
       allButtons[button].classList.add('availableScore' + section)
-   }
-}
-
-function scoreIsAvailable(index){
-   return playerScores.player1[index] === undefined
-}
-
-//ALL SCORE-CHECKING FUNCTIONS BELOW
-
-function checkPossibleScores(){
-   disableScoreButtons()
-   const tempHash = buildTempDiceHash()
-   enableScoringButton(12, 'Lower')
-   checkForNumbers(tempHash)
-   checkForSmallStraight(tempHash)
-   checkForLargeStraight(tempHash)
-   checkForRuns(tempHash)
-}
-
-function checkForNumbers(tempHash){
-   for(let key of Object.keys(tempHash)){
-      switch(key){
-         case '1': enableScoringButton(0, 'Upper')
-         break
-         case '2': enableScoringButton(1, 'Upper')
-         break
-         case '3': enableScoringButton(2, 'Upper')
-         break
-         case '4': enableScoringButton(3, 'Upper')
-         break
-         case '5': enableScoringButton(4, 'Upper')
-         break
-         case '6': enableScoringButton(5, 'Upper')
-         break
-      }
    }
 }
 
@@ -388,6 +362,38 @@ function enableAvailableLowerScoreButtons(){
    }
 }
 
+//ALL SCORE-CHECKING FUNCTIONS BELOW
+
+function checkPossibleScores(){
+   disableScoreButtons()
+   const tempHash = buildTempDiceHash()
+   enableScoringButton(12, 'Lower')
+   checkForNumbers(tempHash)
+   checkForSmallStraight(tempHash)
+   checkForLargeStraight(tempHash)
+   checkForFullHouse(tempHash)
+   checkForRuns(tempHash)
+}
+
+function checkForNumbers(tempHash){
+   for(let key of Object.keys(tempHash)){
+      switch(key){
+         case '1': enableScoringButton(0, 'Upper')
+         break
+         case '2': enableScoringButton(1, 'Upper')
+         break
+         case '3': enableScoringButton(2, 'Upper')
+         break
+         case '4': enableScoringButton(3, 'Upper')
+         break
+         case '5': enableScoringButton(4, 'Upper')
+         break
+         case '6': enableScoringButton(5, 'Upper')
+         break
+      }
+   }
+}
+
 function checkForRuns(tempHash){
    for(let value of Object.values(tempHash)){
       if(value >= 3) enableScoringButton(6, 'Lower')
@@ -403,7 +409,11 @@ function checkForRuns(tempHash){
             }
          }
       }
-      //full house
+   }
+}
+
+function checkForFullHouse(tempHash){
+   for(let value of Object.values(tempHash)){
       if(value === 3 && Object.entries(tempHash).length === 2){
          enableScoringButton(8, 'Lower')
       }
