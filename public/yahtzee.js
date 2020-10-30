@@ -224,6 +224,7 @@ function calculateTotal(e){
       break
       case 'yahtzee': score = 50
       index = 11
+      yahtzeeScored = 1
       break
       case 'chance': score = addAllDice()
       index = 12
@@ -274,17 +275,10 @@ function toggleKeepDice(i, e){
    e.target.classList.toggle('keep')
 }
 
-// let temp = true
-
 function rollAvailableDice(){
    for(let i = 0; i < dice.length; i++){
       if(!dice[i].keep){
          dice[i].value = (Math.floor(Math.random()*6)+1)
-         // if(temp){
-         //    temp = false
-         // } else {
-         //    dice[i].value = 2
-         // }
       }
       diceButtons[i].innerHTML = dice[i].value
    }
@@ -399,9 +393,9 @@ function checkForRuns(tempHash){
       if(value >= 3) enableScoringButton(6, 'Lower')
       if(value >= 4) enableScoringButton(7, 'Lower')
       if(value === 5){
-         yahtzeeScored ++
          enableScoringButton(11, 'Lower')
-         if(yahtzeeScored > 1){
+         if(yahtzeeScored > 0){
+            yahtzeeScored ++
             if(scoreIsAvailable(dice[0].value -1)){ 
                disableLowerScoreButtons() 
             } else {
