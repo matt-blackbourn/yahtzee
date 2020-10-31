@@ -14,12 +14,46 @@ const diceButtons = document.querySelectorAll('.dice')
 const scoringButtons = document.querySelectorAll('.scoringButtons')
 let score
 let index
-let turnsRemaining = 13
 let allowCut = false
-let yahtzeeScored = 0
+// let turnsRemaining = 13
+// let yahtzeeScored = 0
 
-let playerScores = buildPlayerScoresArray()
-let p1Totals = buildInitialPlayerTotals()
+// let playerScores = buildPlayerScoresArray()
+// let totals = buildInitialPlayerTotals()
+
+
+class player {
+   constructor(){
+      this.yahtzeeScored = 0
+      this.turnsRemaining = 13
+      this.scores = []
+      this.totals = []
+   }
+   buildScoresArr(){
+      for(let i = 0; i < 13; i++){
+         this.scores[i] = undefined
+      }
+   }
+   buildInitialTotalsArr(){
+      for(let i = 0; i < 6; i++){
+         this.totals[i] = undefined  
+      }
+   }
+}
+
+let p1 = new player()
+let p2 = new player()
+
+p1.buildScoresArr()
+p2.buildScoresArr()
+p1.buildInitialTotalsArr()
+p2.buildInitialTotalsArr()
+
+let activePlayer = p1
+
+function scoreIsAvailable(index){
+   return activePlayer.scores[index] === undefined
+}
 
 
 //===== MAIN GAME FUNCTIONALITY ================
@@ -64,6 +98,11 @@ function endTurn(){
       alert('please choose a different score')
    }
    allowCut = false
+   if(activePlayer === p1){
+      activePlayer = p2
+   } else {
+      activePlayer = p1
+   }
 }
 
 function allowCutScore(){
@@ -83,9 +122,9 @@ function allowCutScore(){
 //=============HELPER FUNCTIONS=======================
 
 function decrementTurn(){
-   turnsRemaining --
-   if(turnsRemaining === 0){
-      alert('Game over! Your score is ' + p1Totals[5] + '. Refresh to start again')
+   activePlayer.turnsRemaining --
+   if(p2.turnsRemaining === 0){
+      alert('Player 1 scored ' + p1.totals[5] + ' and Player 2 scored ' + p2.totals[5] + ' . Refresh to start again')
     }
 }
 
@@ -107,45 +146,55 @@ function buildInitialPlayerTotals(){
 }
 
 function scoreTopSection(){
-   let p1ScoreCells = document.querySelectorAll('.p1T')
+   let player = 'p1'
+   if(activePlayer === p2){
+      player = 'p2'
+   }
+
+   let scoreCells = document.querySelectorAll('.' + player + 'T')
    let total = 0
    for(let i = 0; i < 6; i++){
-      total += playerScores.player1[i]
+      total += activePlayer.scores[i]
    }
    if(total){
-      p1Totals[0] = total
+      activePlayer.totals[0] = total
       if(total >= 63){
-         p1Totals[1] = 35
+         activePlayer.totals[1] = 35
       } else {
-         p1Totals[1] = 0
+         activePlayer.totals[1] = 0
       }
-      p1Totals[2] = p1Totals[0] + p1Totals[1]
+      activePlayer.totals[2] = activePlayer.totals[0] + activePlayer.totals[1]
       for(let i = 0; i < 3; i++){
-         p1ScoreCells[i].innerHTML = p1Totals[i]
+         scoreCells[i].innerHTML = activePlayer.totals[i]
       }
    }
 }
 
 function scoreBottomSection(){
-   let p1ScoreCells = document.querySelectorAll('.p1T')
+   let player = 'p1'
+   if(activePlayer === p2){
+      player = 'p2'
+   }
+
+   let scoreCells = document.querySelectorAll('.' + player + 'T')
    let total = 0
    for(let i = 6; i < 13; i++){
-      total += playerScores.player1[i]
+      total += activePlayer.scores[i]
    }
-   if(yahtzeeScored > 1){
-      p1Totals[3] = 100 * (yahtzeeScored - 1)
-      p1ScoreCells[3].innerHTML = p1Totals[3]
+   if(activePlayer.yahtzeeScored > 1){
+      activePlayer.totals[3] = 100 * (activePlayer.yahtzeeScored - 1)
+      scoreCells[3].innerHTML = activePlayer.totals[3]
    } else {
-      p1Totals[3] = 0
+      activePlayer.totals[3] = 0
    }
    if(total){
-      p1Totals[4] = total + p1Totals[3]
-      p1Totals[5] = p1Totals[2] + p1Totals[4]
+      activePlayer.totals[4] = total + activePlayer.totals[3]
+      activePlayer.totals[5] = activePlayer.totals[2] + activePlayer.totals[4]
       for(let i = 3; i < 5; i++){
-         p1ScoreCells[i].innerHTML = p1Totals[i]
+         scoreCells[i].innerHTML = activePlayer.totals[i]
       }
-      if(p1Totals[2]){
-         p1ScoreCells[5].innerHTML = p1Totals[5]
+      if(activePlayer.totals[2]){
+         scoreCells[5].innerHTML = activePlayer.totals[5]
       } 
    }
 }
@@ -204,7 +253,7 @@ function calculateTotal(e){
 
 function updatePlayerScores(index, score){
    if(scoreIsAvailable(index)){
-      playerScores.player1[index] = score
+      activePlayer.scores[index] = score
    }
 }
 
@@ -247,9 +296,7 @@ function addAllDice(){
    return score
 }
 
-function scoreIsAvailable(index){
-   return playerScores.player1[index] === undefined
-}
+
 
 //========DOM MANIPULATION FUNCTIONS============================
 
@@ -299,10 +346,14 @@ function cutScore(index){
 }
 
 function printScoreSheet(){
-   let p1Scores = document.querySelectorAll('.p1')
-   for(let i = 0; i < p1Scores.length; i++){
-      if(playerScores.player1[i] != undefined){
-         p1Scores[i].innerHTML = playerScores.player1[i]
+   let thisPlayer = 'p2'
+   if(p1.turnsRemaining >= p2.turnsRemaining){
+      thisPlayer = 'p1'
+   }
+   let scores = document.querySelectorAll('.' + thisPlayer)
+   for(let i = 0; i < activePlayer.scores.length; i++){
+      if(activePlayer.scores[i] != undefined){
+         scores[i].innerHTML = activePlayer.scores[i]
       } 
    }
 }
