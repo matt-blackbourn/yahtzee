@@ -124,7 +124,7 @@ function decrementTurn(){
       winner = 'Player 2'
    }
    if(p2.turnsRemaining === 0){
-      alert(winner + ' wins! Refresh to play again!')
+      alert(winner + ' wins! Refresh to start again')
     }
 }
 
