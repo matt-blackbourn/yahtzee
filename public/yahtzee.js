@@ -15,12 +15,6 @@ const scoringButtons = document.querySelectorAll('.scoringButtons')
 let score
 let index
 let allowCut = false
-// let turnsRemaining = 13
-// let yahtzeeScored = 0
-
-// let playerScores = buildPlayerScoresArray()
-// let totals = buildInitialPlayerTotals()
-
 
 class player {
    constructor(){
@@ -106,7 +100,7 @@ function endTurn(){
 }
 
 function allowCutScore(){
-   if(rollsRemaining === 3) return
+   if(activePlayer.rollsRemaining === 3) return
    if(!allowCut){
       enableCutScore()
    } else {
@@ -123,26 +117,15 @@ function allowCutScore(){
 
 function decrementTurn(){
    activePlayer.turnsRemaining --
+   let winner
+   if(p1.totals[5] > p2.totals[5]){
+      winner = 'Player 1'
+   } else {
+      winner = 'Player 2'
+   }
    if(p2.turnsRemaining === 0){
-      alert('Player 1 scored ' + p1.totals[5] + ' and Player 2 scored ' + p2.totals[5] + ' . Refresh to start again')
+      alert(winner + ' wins! Refresh to play again!')
     }
-}
-
-function buildPlayerScoresArray(){
-   let obj = {}
-   obj.player1 = []
-   for(let i = 0; i < 13; i++){
-      obj.player1[i] = undefined
-   }
-   return obj
-}
-
-function buildInitialPlayerTotals(){
-   let arr = []
-   for(let i = 0; i < 6; i++){
-      arr[i] = undefined  
-   }
-   return arr
 }
 
 function scoreTopSection(){
@@ -237,7 +220,7 @@ function calculateTotal(e){
       break
       case 'yahtzee': score = 50
       index = 11
-      yahtzeeScored = 1
+      activePlayer.yahtzeeScored = 1
       break
       case 'chance': score = addAllDice()
       index = 12
@@ -296,8 +279,6 @@ function addAllDice(){
    return score
 }
 
-
-
 //========DOM MANIPULATION FUNCTIONS============================
 
 function adjustRollsRemaining(){
@@ -341,16 +322,20 @@ function enableRollButton(){
 }
 
 function cutScore(index){
-   let allCells = document.querySelectorAll('.p1')
+   let player = 'p1'
+   if(activePlayer === p2){
+      player = 'p2'
+   }
+   let allCells = document.querySelectorAll('.' + player)
    allCells[index].classList.add('blackout')
 }
 
 function printScoreSheet(){
-   let thisPlayer = 'p2'
-   if(p1.turnsRemaining >= p2.turnsRemaining){
-      thisPlayer = 'p1'
+   let player = 'p1'
+   if(activePlayer === p2){
+      player = 'p2'
    }
-   let scores = document.querySelectorAll('.' + thisPlayer)
+   let scores = document.querySelectorAll('.' + player)
    for(let i = 0; i < activePlayer.scores.length; i++){
       if(activePlayer.scores[i] != undefined){
          scores[i].innerHTML = activePlayer.scores[i]
@@ -451,8 +436,8 @@ function checkForRuns(tempHash){
       if(value >= 4) enableScoringButton(7, 'Lower')
       if(value === 5){
          enableScoringButton(11, 'Lower')
-         if(yahtzeeScored > 0){
-            yahtzeeScored ++
+         if(activePlayer.yahtzeeScored > 0){
+            activePlayer.yahtzeeScored ++
             if(scoreIsAvailable(dice[0].value -1)){ 
                disableLowerScoreButtons() 
             } else {
