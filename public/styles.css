@@ -13,6 +13,15 @@ div{
    text-align: center;
 }
 
+.bold{
+   font-weight: bold;
+}
+
+.activePlayer{
+   background-color: yellow;
+}
+
+
 h1{
    color: red;
    font-size: 70px;
