@@ -1,6 +1,15 @@
 
 //GLOBALS
 
+class Player {
+   constructor(){
+      this.yahtzeeScored = 0
+      this.turnsRemaining = 13
+      this.scores = buildScoresArr()
+      this.totals = buildInitialTotalsArr()
+   } 
+}
+
 let dice = [
    {value: null, keep: false},
    {value: null, keep: false},
@@ -15,40 +24,41 @@ const scoringButtons = document.querySelectorAll('.scoringButtons')
 let score
 let index
 let allowCut = false
-
-class player {
-   constructor(){
-      this.yahtzeeScored = 0
-      this.turnsRemaining = 13
-      this.scores = []
-      this.totals = []
-   }
-   buildScoresArr(){
-      for(let i = 0; i < 13; i++){
-         this.scores[i] = undefined
-      }
-   }
-   buildInitialTotalsArr(){
-      for(let i = 0; i < 6; i++){
-         this.totals[i] = undefined  
-      }
-   }
-}
-
-let p1 = new player()
-
-p1.buildScoresArr()
-p1.buildInitialTotalsArr()
-
-let p2 = null
-// p2.buildScoresArr()
-// p2.buildInitialTotalsArr()
-
+let twoPlayer = false
+let p1 = new Player()
+let p2 = new Player()
 let activePlayer = p1
+
+// function resetGame(){
+//    p1 = new Player
+//    p2 = new Player
+//    rollsRemaining = 3
+//    allowCut = false
+//    resetDiceArray()
+//    resetRollsRemaining()
+//    resetTurnScore()
+//    disableOtherButtons()
+//    disableScoreButtons()
+//    enableRollButton()
+//    activePlayer = p1
+// }
+
+
+
+//ADD A PLAYER
+// let mode = document.querySelector('#two-player')
+// mode.addEventListener('change', changeMode)
+
+// function changeMode(){
+   //    resetGame()
+   //    console.log('mode changed');
+   
+   //    mode.value === '2' ? twoPlayer = true : twoPlayer = false
+   // }
+   
 
 
 //===== MAIN GAME FUNCTIONALITY ================
-
 
 //ADD DICE EVENT LISTENERS
 for(let i = 0; i < diceButtons.length; i++){
@@ -85,7 +95,7 @@ function endTurn(){
    enableRollButton()
    decrementTurn()
    allowCut = false
-   if(p2) toggleActivePlayer()
+   if(twoPlayer) toggleActivePlayer()
 }
 
 function allowCutScore(){
@@ -103,6 +113,22 @@ function allowCutScore(){
 
 
 //=============HELPER FUNCTIONS=======================
+
+function buildScoresArr(){
+   let arr = []
+   for(let i = 0; i < 13; i++){
+      arr[i] = undefined
+   }
+   return arr
+}
+
+function buildInitialTotalsArr(){
+   let arr = []
+   for(let i = 0; i < 6; i++){
+      arr[i] = undefined  
+   }
+   return arr
+}
 
 function setPlayer(){
    let player = 'p1'
@@ -129,7 +155,7 @@ function toggleActivePlayer(){
 
 function decrementTurn(){
    activePlayer.turnsRemaining --
-   if(p2){
+   if(twoPlayer){
       let winner
       if(p1.totals[5] > p2.totals[5]){
          winner = 'Player 1'
