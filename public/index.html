@@ -7,11 +7,13 @@
    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-   <select name="two-player" id="two-player">
-      <option value="1">1 Player</option>
-      <option value="2">2 Player</option>
-   </select>
-   <h4>Rolls remaining in turn: <span id="rolls">3</span></h4>
+   <div class="top-div">
+      <h4>Rolls remaining: <span id="rolls">3</span></h4>
+      <select name="two-player" id="two-player">
+         <option value="1">1 Player</option>
+         <option value="2">2 Player</option>
+      </select>
+   </div>
    <button onclick="roll()" id="roll">Roll</button>
    <div>
       <button class="dice"  id="one"></button>
@@ -46,7 +48,7 @@
    <button onclick="allowCutScore()" disabled id="cutScore">Cut a Score</button>
    <table>
       <tr>
-         <td></td><th class="activePlayer">Player 1</th><th class="hide">Player 2</th>
+         <td></td><th>Your scores</th><th class="hide">Player 2</th>
       </tr>
       <tr>
          <td>1</td><td class="p1"></td><td class="p2  hide"></td>

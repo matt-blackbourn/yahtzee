@@ -54,8 +54,11 @@ function clearScoreSheet(){
    let headers = document.querySelectorAll('th')
    if(twoPlayer){
       headers[1].classList.remove('hide')
+      headers[0].innerHTML = 'Player 1'
    } else {
       headers[1].classList.add('hide')
+      headers[0].classList.remove('activePlayer')
+      headers[0].innerHTML = 'Your Scores'
    }
    for(let i = 0; i < p1Scores.length; i++){
       p1Scores[i].innerHTML = ''
@@ -79,9 +82,8 @@ function clearScoreSheet(){
    }
 }
 
-
 function changeMode(){
-   mode.value === '2' ? twoPlayer = true : twoPlayer = false
+   playerMode.value === '2' ? twoPlayer = true : twoPlayer = false
    resetGame()
 }
 
@@ -102,8 +104,8 @@ for(let i = 0; i < scoringButtons.length; i ++){
 }
 
 //MONITOR NUMBER OF PLAYERS
-let mode = document.querySelector('#two-player')
-mode.addEventListener('change', changeMode)
+let playerMode = document.querySelector('#two-player')
+playerMode.addEventListener('change', changeMode)
 
 
 //===== MAIN GAME FUNCTIONALITY ================
