@@ -29,65 +29,6 @@ let p1 = new Player()
 let p2 = new Player()
 let activePlayer = p1
 
-function resetGame(){
-   rollsRemaining = 3
-   p1 = new Player
-   p2 = new Player
-   allowCut = false
-   score = undefined
-   index = undefined
-   activePlayer = p1
-   highlightActivePlayer()
-   resetRollsRemaining()
-   disableScoreButtons()
-   disableOtherButtons()
-   enableRollButton()
-   resetDiceArray()
-   clearScoreSheet()
-}
-
-function clearScoreSheet(){
-   let p1Scores = document.querySelectorAll('.p1')
-   let p2Scores = document.querySelectorAll('.p2')
-   let p1Totals = document.querySelectorAll('.p1T')
-   let p2Totals = document.querySelectorAll('.p2T')
-   let headers = document.querySelectorAll('th')
-   if(twoPlayer){
-      headers[1].classList.remove('hide')
-      headers[0].innerHTML = 'Player 1'
-   } else {
-      headers[1].classList.add('hide')
-      headers[0].classList.remove('activePlayer')
-      headers[0].innerHTML = 'Your Scores'
-   }
-   for(let i = 0; i < p1Scores.length; i++){
-      p1Scores[i].innerHTML = ''
-      p2Scores[i].innerHTML = ''
-      p1Scores[i].classList.remove('blackout')
-      p2Scores[i].classList.remove('blackout')
-      if(twoPlayer){
-         p2Scores[i].classList.remove('hide')
-      } else {
-         p2Scores[i].classList.add('hide')
-      }
-   }
-   for(let i = 0; i < p1Totals.length; i++){
-      p1Totals[i].innerHTML = ''
-      p2Totals[i].innerHTML = ''
-      if(twoPlayer){
-         p2Totals[i].classList.remove('hide')
-      } else {
-         p2Totals[i].classList.add('hide')
-      }
-   }
-}
-
-function changeMode(){
-   playerMode.value === '2' ? twoPlayer = true : twoPlayer = false
-   resetGame()
-}
-
-
 //=========EVENT LISTENERS=============
 
 
@@ -129,8 +70,8 @@ function endTurn(){
    scoreTopSection()
    scoreBottomSection()
    printScoreSheet()
-   disableOtherButtons()
    disableScoreButtons()
+   disableOtherButtons()
    enableRollButton()
    decrementTurn()
    allowCut = false
@@ -148,10 +89,35 @@ function allowCutScore(){
    }
 }
 
+function changeMode(){
+   playerMode.value === '2' ? twoPlayer = true : twoPlayer = false
+   resetGame()
+}
+
+
 //========== MAIN FUNCTION SECTION ENDS =============
 
 
 //=============HELPER FUNCTIONS=======================
+
+function resetGame(){
+   rollsRemaining = 3
+   p1 = new Player
+   p2 = new Player
+   allowCut = false
+   score = undefined
+   index = undefined
+   activePlayer = p1
+   highlightActivePlayer()
+   resetRollsRemaining()
+   disableScoreButtons()
+   disableOtherButtons()
+   enableRollButton()
+   resetDiceArray()
+   clearScores()
+   clearTotals()
+   switchHeaders()
+}
 
 function buildScoresArr(){
    let arr = []
@@ -448,6 +414,52 @@ function checkForLargeStraight(tempHash){
 }
 
 //========DOM MANIPULATION FUNCTIONS============================
+
+//=================2 PLAYER STUFF==========================
+
+function switchHeaders(){
+   let headers = document.querySelectorAll('th')
+   if(twoPlayer){
+      headers[1].classList.remove('hide')
+      headers[0].innerHTML = 'Player 1'
+   } else {
+      headers[1].classList.add('hide')
+      headers[0].classList.remove('activePlayer')
+      headers[0].innerHTML = 'Your Scores'
+   }
+}
+
+function clearTotals(){
+   let p1Totals = document.querySelectorAll('.p1T')
+   let p2Totals = document.querySelectorAll('.p2T')
+   for(let i = 0; i < p1Totals.length; i++){
+      p1Totals[i].innerHTML = ''
+      p2Totals[i].innerHTML = ''
+      if(twoPlayer){
+         p2Totals[i].classList.remove('hide')
+      } else {
+         p2Totals[i].classList.add('hide')
+      }
+   }
+}
+
+function clearScores(){
+   let p1Scores = document.querySelectorAll('.p1')
+   let p2Scores = document.querySelectorAll('.p2')
+   for(let i = 0; i < p1Scores.length; i++){
+      p1Scores[i].innerHTML = ''
+      p2Scores[i].innerHTML = ''
+      p1Scores[i].classList.remove('blackout')
+      p2Scores[i].classList.remove('blackout')
+      if(twoPlayer){
+         p2Scores[i].classList.remove('hide')
+      } else {
+         p2Scores[i].classList.add('hide')
+      }
+   }
+}
+
+//===============2 PLAYER ENDS===========================
 
 function adjustRollsRemaining(){
    rollsRemaining --
