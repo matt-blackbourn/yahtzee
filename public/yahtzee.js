@@ -29,17 +29,18 @@ let p1 = new Player()
 let p2 = new Player()
 let activePlayer = p1
 
+
 //=========EVENT LISTENERS=============
 
 
-//ADD DICE EVENT LISTENERS
+//DICE
 for(let i = 0; i < diceButtons.length; i++){
    diceButtons[i].addEventListener('click', function(e){
       if(rollsRemaining > 0 && rollsRemaining < 3) toggleKeepDice(i, e)
    })
 }
 
-//ADD SCORING BUTTON EVENT LISTENERS
+//SCORING BUTTONS
 for(let i = 0; i < scoringButtons.length; i ++){
    scoringButtons[i].addEventListener('click', calculateTotal)
 }
@@ -169,6 +170,8 @@ function highlightActivePlayer(){
 
 function decrementTurn(){
    activePlayer.turnsRemaining --
+   console.log(activePlayer.totals[5]);
+   
    if(twoPlayer){
       let winner
       if(p1.totals[5] > p2.totals[5]){
@@ -179,7 +182,7 @@ function decrementTurn(){
       if(p2.turnsRemaining === 0){
          alert(winner + ' wins! Refresh to start again')
       } 
-   } else if(activePlayer.turnsRemaining === 0){
+   } else if(activePlayer.totals[5]){
       alert('Game over! Your score was ' + activePlayer.totals[5] + '. Refresh to play again!' )
    }
 }
