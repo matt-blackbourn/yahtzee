@@ -31,7 +31,6 @@
     "knex": "^0.21.12",
     "pg": "^8.5.0",
     "superagent": "^5.2.2"
-    
   },
   "devDependencies": {
     "sqlite3": "^5.0.0",
