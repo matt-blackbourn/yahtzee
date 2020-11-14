@@ -1,12 +1,13 @@
 {
-  "name": "talk-naughty-to-me",
+  "name": "Yahtzee",
   "version": "0.2.2",
-  "description": "A really cool website made by Olivia Alex Blackie Corian & Jesse",
-  "repository": "https://github.com/dev-academy-challenges/boilerplate-react-webpack.git",
+  "description": "Yahtzee",
+  "repository": "https://github.com/matt-blackbourn/yahtzee",
   "main": "server/index.js",
-  "author": "EDA",
+  "author": "Matt Blackbourn",
   "license": "ISC",
   "scripts": {
+    "knex": "knex --knexfile ./server/db/knexfile.js",
     "client": "webpack-dev-server --hot --inline",
     "dev": "run-p dev:client dev:server",
     "dev:client": "webpack --watch",
@@ -30,6 +31,7 @@
     "express": "^4.17.1",
     "knex": "^0.21.12",
     "pg": "^8.5.0",
+    "react-router-dom": "^5.2.0",
     "superagent": "^5.2.2"
   },
   "devDependencies": {

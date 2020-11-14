@@ -1,0 +1,67 @@
+.keep{
+   background-color: #ffb2b2;
+}
+
+.nav {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ 
+}
+
+.container {
+   max-width: 450px;
+}
+
+div{
+   margin: 20px auto;
+}
+
+.dice{
+   width: 60px;
+   height: 60px;
+   font-size: 30px;
+   text-align: center;
+}
+
+.bold{
+   font-weight: bold;
+}
+
+.activePlayer{
+   background-color: yellow;
+}
+
+
+.hide{display: none}
+
+.availableScoreLower{
+   background-color: royalblue;
+   color: white;
+}
+
+.availableScoreUpper{
+   background-color: green;
+   color: white;
+}
+
+.cutScore{
+   background-color: red;
+   color: white;
+}
+
+table{
+   border: 1px solid black;
+   text-align: center;
+}
+
+td{
+   border: 1px solid black;
+}
+th{
+   border: 1px solid black;
+}
+
+.blackout{
+   background-color: black;
+}
