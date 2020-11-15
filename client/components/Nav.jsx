@@ -2,16 +2,13 @@ import React from 'react'
 
 function Nav(props) {
    return (
-      <div className="nav">
-      <button onClick={props.roll} id="roll">Roll</button>
-      <h4>Rolls remaining: <span id="rolls">3</span></h4>
-      <select name="two-player" id="two-player">
-         <option value="1">1 Player</option>
-         <option value="2">2 Player</option>
-      </select>
-   </div>
+      <div className="container">
+         <button onClick={props.roll} id="roll">Roll</button>
+         <h4>You will score: <span>X</span></h4>
+         <h4>Rolls remaining: <span>{props.rollsRemaining}</span></h4>
+         <a href=''><h4>High Scores!</h4></a>
+      </div>
    )
 }
-
 
 export default Nav

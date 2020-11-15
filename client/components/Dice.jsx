@@ -1,11 +1,17 @@
 import React from 'react'
 
 function Dice(props) {
+
    return (
-      <div>
+      <div className='container'>
          {props.values.map((dice, key) => {
             return (
-               <button className="dice" key={key}>{dice.value}</button>
+               <button 
+                  className={dice.class}
+                  key={key} id={key} 
+                  onClick={props.keepDice}
+                  >{dice.value}
+               </button>
             )
          })}
       </div>

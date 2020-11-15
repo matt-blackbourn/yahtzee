@@ -10,21 +10,21 @@ class Player {
    } 
 }
 
-let dice = [
-   {value: null, keep: false},
-   {value: null, keep: false},
-   {value: null, keep: false},
-   {value: null, keep: false},
-   {value: null, keep: false}
-]
+// let dice = [
+//    {value: null, keep: false},
+//    {value: null, keep: false},
+//    {value: null, keep: false},
+//    {value: null, keep: false},
+//    {value: null, keep: false}
+// ]
 
-let rollsRemaining = 3
-const diceButtons = document.querySelectorAll('.dice')
+// let rollsRemaining = 3
+// const diceButtons = document.querySelectorAll('.dice')
 const scoringButtons = document.querySelectorAll('.scoringButtons')
 let score
 let index
 let allowCut = false
-let twoPlayer = false
+// let twoPlayer = false
 let p1 = new Player()
 let p2 = new Player()
 let activePlayer = p1
@@ -34,11 +34,11 @@ let activePlayer = p1
 
 
 //DICE
-for(let i = 0; i < diceButtons.length; i++){
-   diceButtons[i].addEventListener('click', function(e){
-      if(rollsRemaining > 0 && rollsRemaining < 3) toggleKeepDice(i, e)
-   })
-}
+// for(let i = 0; i < diceButtons.length; i++){
+//    diceButtons[i].addEventListener('click', function(e){
+//       if(rollsRemaining > 0 && rollsRemaining < 3) toggleKeepDice(i, e)
+//    })
+// }
 
 //SCORING BUTTONS
 for(let i = 0; i < scoringButtons.length; i ++){
@@ -157,21 +157,8 @@ function toggleActivePlayer(){
    highlightActivePlayer()
 }
 
-function highlightActivePlayer(){
-   let headers = document.querySelectorAll('th')
-   if(activePlayer == p1){
-      headers[0].classList.add('activePlayer')
-      headers[1].classList.remove('activePlayer')
-   } else {
-      headers[1].classList.add('activePlayer')
-      headers[0].classList.remove('activePlayer')
-   }
-}
-
 function decrementTurn(){
    activePlayer.turnsRemaining --
-   console.log(activePlayer.totals[5]);
-   
    if(twoPlayer){
       let winner
       if(p1.totals[5] > p2.totals[5]){
@@ -293,10 +280,10 @@ function updatePlayerScores(index, score){
    }
 }
 
-function toggleKeepDice(i, e){
-   !dice[i].keep ? dice[i].keep = true : dice[i].keep = false
-   e.target.classList.toggle('keep')
-}
+// function toggleKeepDice(i, e){
+//    !dice[i].keep ? dice[i].keep = true : dice[i].keep = false
+//    e.target.classList.toggle('keep')
+// }
 
 // function rollAvailableDice(){
 //    for(let i = 0; i < dice.length; i++){
@@ -462,14 +449,25 @@ function clearScores(){
    }
 }
 
+function highlightActivePlayer(){
+   let headers = document.querySelectorAll('th')
+   if(activePlayer == p1){
+      headers[0].classList.add('activePlayer')
+      headers[1].classList.remove('activePlayer')
+   } else {
+      headers[1].classList.add('activePlayer')
+      headers[0].classList.remove('activePlayer')
+   }
+}
+
 //===============2 PLAYER ENDS===========================
 
-function adjustRollsRemaining(){
-   rollsRemaining --
-   let rollsDisplay = document.querySelector('#rolls')
-   rollsDisplay.innerHTML = rollsRemaining
-   if(rollsRemaining === 0) disableRollButton()
-}
+// function adjustRollsRemaining(){
+//    rollsRemaining --
+//    let rollsDisplay = document.querySelector('#rolls')
+//    rollsDisplay.innerHTML = rollsRemaining
+//    if(rollsRemaining === 0) disableRollButton()
+// }
 
 function enableCutScore(){
    allowCut = true

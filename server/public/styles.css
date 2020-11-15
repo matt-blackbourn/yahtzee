@@ -2,15 +2,10 @@
    background-color: #ffb2b2;
 }
 
-.nav {
+.container{
    display: flex;
-   justify-content: space-between;
+   justify-content: space-evenly;
    align-items: center;
- 
-}
-
-.container {
-   max-width: 450px;
 }
 
 div{
