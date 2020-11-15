@@ -298,14 +298,14 @@ function toggleKeepDice(i, e){
    e.target.classList.toggle('keep')
 }
 
-function rollAvailableDice(){
-   for(let i = 0; i < dice.length; i++){
-      if(!dice[i].keep){
-         dice[i].value = (Math.floor(Math.random()*6)+1)
-      }
-      diceButtons[i].innerHTML = dice[i].value
-   }
-}
+// function rollAvailableDice(){
+//    for(let i = 0; i < dice.length; i++){
+//       if(!dice[i].keep){
+//          dice[i].value = (Math.floor(Math.random()*6)+1)
+//       }
+//       diceButtons[i].innerHTML = dice[i].value
+//    }
+// }
 
 function resetDiceArray(){
    for(let i = 0; i < dice.length; i++){

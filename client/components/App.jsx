@@ -23,24 +23,20 @@ class App extends React.Component {
       ],
    }
 
-   rollAvailableDice = () => {
-      this.setState({
-         dice: [
-            {value: 1, keep: false},
-            {value: 2, keep: false},
-            {value: 3, keep: false},
-            {value: 4, keep: false},
-            {value: 5, keep: false}
-         ],
-      })
+   roll = () => {
+      this.rollAvailableDice()
+   }
 
-      // this.state.dice.forEach((dice, index) => {
-      //    if(!dice.keep){
-      //       this.setState({
-      //          dice.value: (Math.floor(Math.random()*6)+1)
-      //       })
-      //    }
-      // })
+   rollAvailableDice = () => {
+      for(let i = 0; i < this.state.dice.length; i++){
+         if(!this.state.dice[i].keep){
+            let newDice = [...this.state.dice]
+            newDice[i].value = (Math.floor(Math.random()*6)+1)
+            this.setState({
+               dice: newDice
+            })
+         }
+      }
    }
 
    componentDidMount = () => {
@@ -59,7 +55,7 @@ class App extends React.Component {
    render() {
       return (
          <div className='container'>
-            <Nav roll={this.rollAvailableDice}/>
+            <Nav roll={this.roll}/>
             <Dice values={this.state.dice}/>
             <UpperButtons />
             <LowerButtons />
