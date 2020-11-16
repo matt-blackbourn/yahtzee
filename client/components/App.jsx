@@ -15,7 +15,7 @@ import ScorecardSingle from './ScorecardSingle'
 //better way of managing classnames on state change?
 //how best to store scores data in database?
 //where to refactor App functions to/how best to separate them?
-//can i add classes to element with jsx? ie, dice keep
+
 //where does webpack.config.js come from?
 
 class App extends React.Component {
@@ -23,7 +23,7 @@ class App extends React.Component {
    generateDiceArray = () => {
       let arr = []
       for(let i = 0; i < 5; i++){
-         arr[i] = {value: null, keep: false, class: 'dice'}
+         arr[i] = {value: null, keep: false, class: ''}
       }
       return arr
    }
@@ -60,10 +60,10 @@ class App extends React.Component {
          let newDice = [...this.state.dice]
          if(!newDice[num].keep){
             newDice[num].keep = true
-            newDice[num].class = 'dice keep'
+            newDice[num].class = 'keep'
          } else {
             newDice[num].keep = false
-            newDice[num].class = 'dice'
+            newDice[num].class = ''
          }
          this.setState({
             dice: newDice

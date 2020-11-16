@@ -4,8 +4,8 @@ exports.up = function(knex) {
    table.increments('id')
    table.number('ones')
   })
-};
+}
 
 exports.down = function(knex) {
   return knex.schema.dropTable('scores')
-};
+}

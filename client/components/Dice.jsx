@@ -7,7 +7,7 @@ function Dice(props) {
          {props.values.map((dice, key) => {
             return (
                <button 
-                  className={dice.class}
+                  className={`dice ${dice.class}`}
                   key={key} id={key} 
                   onClick={props.keepDice}
                   >{dice.value}
