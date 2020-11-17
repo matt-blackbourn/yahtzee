@@ -1,11 +1,8 @@
 import { combineReducers } from 'redux'
 
-const initialState = []
+import currentPage from './currentPage'
 
-function something(state = initialState, action){
-   return state
-}
 
 export default combineReducers({
-   something,
+   currentPage,
 })

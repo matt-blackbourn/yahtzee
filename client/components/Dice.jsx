@@ -3,7 +3,16 @@ import React from 'react'
 function Dice(props) {
 
    return (
-      <div className='container'>
+      <div>
+         <h3>Dice</h3>
+      </div>
+   )
+}
+
+export default Dice
+
+
+{/* <div className='container'>
          {props.values.map((dice, key) => {
             return (
                <button 
@@ -13,9 +22,4 @@ function Dice(props) {
                   >{dice.value}
                </button>
             )
-         })}
-      </div>
-   )
-}
-
-export default Dice
+         })} */}
