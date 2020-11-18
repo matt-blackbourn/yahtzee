@@ -4,7 +4,7 @@ const env = process.env.NODE_ENV || 'development'
 const connection = knex(config[env])
 
 function getScores(db = connection) {
-   return db('scores').select()
+   return db('scores').select().orderBy('grandTotal', 'desc')
 }
 
 function getOneScore(id, db = connection) {

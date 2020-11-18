@@ -5,7 +5,29 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('scores').insert([
-        {
+         {
+            name: 'Smitty', 
+            ones: 5,
+            twos: 10,
+            threes: 9,
+            fours: 4,
+            fives: 10,
+            sixes: 18,
+            total: 56,
+            bonus: 0,
+            upperTotal: 56,
+            threeOfKind: 25,
+            fourOfKind: 25,
+            fullHouse: 25,
+            smStraight: 30,
+            lgStraight: 40,
+            yahtzee: 50,
+            chance: 21,
+            bonusYahtzee: 300,
+            lowerTotal: 516,
+            grandTotal: 572
+         },
+         {
             name: 'Ash', 
             ones: 3,
             twos: 8,
@@ -27,27 +49,27 @@ exports.seed = function(knex) {
             lowerTotal: 520,
             grandTotal: 619
          },
-        {
-            name: 'Smitty', 
-            ones: 5,
+         {
+            name: 'Linde', 
+            ones: 4,
             twos: 10,
             threes: 9,
-            fours: 4,
-            fives: 10,
-            sixes: 18,
-            total: 56,
-            bonus: 0,
-            upperTotal: 56,
-            threeOfKind: 25,
+            fours: 12,
+            fives: 15,
+            sixes: 24,
+            total: 74,
+            bonus: 35,
+            upperTotal: 109,
+            threeOfKind: 16,
             fourOfKind: 25,
-            fullHouse: 25,
+            fullHouse: 0,
             smStraight: 30,
             lgStraight: 40,
             yahtzee: 50,
-            chance: 21,
-            bonusYahtzee: 300,
-            lowerTotal: 516,
-            grandTotal: 572
+            chance: 23,
+            bonusYahtzee: 200,
+            lowerTotal: 385,
+            grandTotal: 494
          },
         {
             name: 'Blackie', 
