@@ -1,20 +1,28 @@
 
 import React from 'react'
-import { connect } from 'react-redux'
 import Game from './Game'
 import Highscores from './Highscores'
+import { connect } from 'react-redux'
+import { fetchScores } from '../actions'
 
-function App(props) {
-   return (
-      <div>
-         {props.currentPage ? <Game /> : <Highscores />}
-      </div>
-   )
+class App extends React.Component {
+   
+   componentDidMount(){
+      this.props.dispatch(fetchScores())
+   }
+
+   render() {
+      return (
+         <div>
+            {this.props.gamePage ? <Game /> : <Highscores />}
+         </div>
+      )
+   }
 }
 
 function mapState2Props(globalState){
    return {
-      currentPage: globalState.currentPage
+      gamePage: globalState.gamePage
    }
 }
 

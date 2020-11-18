@@ -1,6 +1,6 @@
 import { CHANGE_PAGE } from '../actions'
 
-function currentPage(state = true, action){
+function reducer(state = true, action){
    switch(action.type){
       case CHANGE_PAGE:
          return action.gamePageShowing
@@ -9,4 +9,4 @@ function currentPage(state = true, action){
    }
 }
 
-export default currentPage
+export default reducer

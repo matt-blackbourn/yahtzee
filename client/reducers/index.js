@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 
-import currentPage from './currentPage'
+import gamePage from './gamePage'
+import highScores from './highScores'
 
 
 export default combineReducers({
-   currentPage,
+   gamePage,
+   highScores
 })
