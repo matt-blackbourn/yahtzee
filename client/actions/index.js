@@ -16,7 +16,7 @@ export const getHighScores = (scores) => {
    }
 }
 
-export const fetchScores = () => {
+export const fetchHighScores = () => {
    return dispatch => {
       return request
          .get('/api/scores')

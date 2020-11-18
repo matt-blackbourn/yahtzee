@@ -1,23 +1,21 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Game from './Game'
 import Highscores from './Highscores'
 import { connect } from 'react-redux'
-import { fetchScores } from '../actions'
+import { fetchHighScores } from '../actions'
 
-class App extends React.Component {
+function App(props) {
+   useEffect(() => {
+      props.dispatch(fetchHighScores())
+   }, [])
+
+   return (
+      <div>
+         {props.gamePage ? <Game /> : <Highscores />}
+      </div>
+   )
    
-   componentDidMount(){
-      this.props.dispatch(fetchScores())
-   }
-
-   render() {
-      return (
-         <div>
-            {this.props.gamePage ? <Game /> : <Highscores />}
-         </div>
-      )
-   }
 }
 
 function mapState2Props(globalState){
@@ -30,18 +28,10 @@ export default connect(mapState2Props)(App)
 
 
 
-// generateDiceArray = () => {
-//    let arr = []
-//    for(let i = 0; i < 5; i++){
-//       arr[i] = {value: null, keep: false, class: ''}
-//    }
-//    return arr
-// }
-
 // state = {
 //    twoPlayer: false,
 //    rollsRemaining: 3,
-//    dice: this.generateDiceArray()
+
 // }
 
 // roll = () => {

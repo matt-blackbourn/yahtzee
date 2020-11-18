@@ -1,25 +1,31 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 function Dice(props) {
-
    return (
-      <div>
-         <h3>Dice</h3>
+      <div className='container'>
+         {props.diceArray.map((dice, key) => {
+            return (
+               <button 
+                  className={`dice ${dice.class}`}
+                  key={key} 
+                  id={key} 
+                
+                  >{dice.value}
+               </button>
+            )
+         })} 
       </div>
    )
 }
 
-export default Dice
+function mapStateToProps(globalState){
+   return {
+      diceArray: globalState.diceArray
+   }
+}
+
+export default connect(mapStateToProps)(Dice)
 
 
-{/* <div className='container'>
-         {props.values.map((dice, key) => {
-            return (
-               <button 
-                  className={`dice ${dice.class}`}
-                  key={key} id={key} 
-                  onClick={props.keepDice}
-                  >{dice.value}
-               </button>
-            )
-         })} */}
+ 
