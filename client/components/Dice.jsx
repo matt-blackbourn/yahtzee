@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+
 function Dice(props) {
+
    return (
       <div className='container'>
          {props.diceArray.map((dice, key) => {
@@ -10,7 +12,7 @@ function Dice(props) {
                   className={`dice ${dice.class}`}
                   key={key} 
                   id={key} 
-                
+                 
                   >{dice.value}
                </button>
             )

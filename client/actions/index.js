@@ -16,6 +16,13 @@ export const getHighScores = (scores) => {
    }
 }
 
+export const rollDice = (newDice) => {
+   return {
+      type: 'ROLL_DICE',
+      newDice
+   }
+}
+
 export const fetchHighScores = () => {
    return dispatch => {
       return request

@@ -11,9 +11,12 @@ const initialState = generateDiceArray()
 
 function reducer(state = initialState, action){
    switch(action.type){
+      case 'ROLL_DICE':
+      return action.newDice
       default:
          return state
    }
 }
 
 export default reducer
+
