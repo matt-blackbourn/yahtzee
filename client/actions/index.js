@@ -1,10 +1,10 @@
-import request from 'superagent'
 
 export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const GET_HIGHSCORES = 'GET_HIGHSCORES'
 export const KEEP_DICE = 'KEEP_DICE'
 export const ROLL_DICE = 'ROLL_DICE'
 export const REDUCE_ROLLS = 'REDUCE_ROLLS'
+export const BUILD_HASH = 'BUILD_HASH'
 
 //dice actions
 
@@ -19,6 +19,13 @@ export const roll = dice => {
    return {
       type: ROLL_DICE,
       dice
+   }
+}
+
+export const buildHash = hash => {
+   return {
+      type: BUILD_HASH,
+      hash
    }
 }
 
@@ -43,11 +50,4 @@ export const getHighScores = scores => {
    }
 }
 
-export const fetchHighScores = () => {
-   return dispatch => {
-      return request
-         .get('/api/scores')
-         .then(response => dispatch(getHighScores(response.body)))
-         .catch(err => console.log(err))
-   }
-}
+

@@ -20,6 +20,7 @@ function Dice(props) {
    )
 }
 
+
 function keepDice(index, props){
    let newState = [...props.dice]
    if(props.dice[index].keep){

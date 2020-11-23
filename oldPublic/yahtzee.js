@@ -303,13 +303,13 @@ function resetDiceArray(){
    }
 }
 
-function buildTempDiceHash(){
-   const tempDiceHash = {}
-   for(let i = 0; i < dice.length; i++){
-      tempDiceHash[dice[i].value] = (tempDiceHash[dice[i].value] || 0) + 1  
-   }
-   return tempDiceHash
-}
+// function buildTempDiceHash(){
+//    const tempDiceHash = {}
+//    for(let i = 0; i < dice.length; i++){
+//       tempDiceHash[dice[i].value] = (tempDiceHash[dice[i].value] || 0) + 1  
+//    }
+//    return tempDiceHash
+// }
 
 function addAllDice(){
    let score = 0

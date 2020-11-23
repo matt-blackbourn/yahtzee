@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changePage, roll, reduceRollsRemaining } from '../actions'
+import { changePage, roll, reduceRollsRemaining, buildHash } from '../actions'
 
 function linkClick(props, event){
    event.preventDefault()
@@ -17,10 +17,20 @@ const rollAvailableDice = (props) => {
    props.dispatch(roll(newDice))
 }
 
+
+function buildTempDiceHash(props){
+   const tempDiceHash = {}
+   for(let i = 0; i < 5; i++){
+      tempDiceHash[props.dice[i].value] = (tempDiceHash[props.dice[i].value] || 0) + 1  
+   }
+   props.dispatch(buildHash(tempDiceHash)) 
+}
+
 function rollDice(props){
    if(props.rollsRemaining > 0){
       props.dispatch(reduceRollsRemaining(props.rollsRemaining))
       rollAvailableDice(props)
+      buildTempDiceHash(props)
    }
 }
 
