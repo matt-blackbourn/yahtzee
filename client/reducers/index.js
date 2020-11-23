@@ -2,11 +2,14 @@ import { combineReducers } from 'redux'
 
 import gamePage from './gamePage'
 import highScores from './highScores'
-import diceArray from './diceArray'
+import dice from './dice'
+import rollsRemaining from './rollsRemaining'
 
 
 export default combineReducers({
    gamePage,
    highScores,
-   diceArray,
+   dice,
+   rollsRemaining,
+   
 })

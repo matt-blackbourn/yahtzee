@@ -59,7 +59,7 @@ function roll(){
       resetTurnScore()
       rollAvailableDice()
       checkPossibleScores()
-      adjustRollsRemaining()
+      // adjustRollsRemaining()
    }
 }
 

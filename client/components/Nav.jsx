@@ -1,36 +1,45 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changePage, rollDice } from '../actions'
+import { changePage, roll, reduceRollsRemaining } from '../actions'
 
-function handleClick(props, event){
+function linkClick(props, event){
    event.preventDefault()
    props.dispatch(changePage(false))
 }
 
 const rollAvailableDice = (props) => {
-   let newDice = [...props.diceArray]
-   for(let i = 0; i < props.diceArray.length; i++){
-      if(!props.diceArray[i].keep){
+   let newDice = [...props.dice]
+   for(let i = 0; i < props.dice.length; i++){
+      if(!props.dice[i].keep){
          newDice[i].value = (Math.floor(Math.random()*6)+1)
       }
    }
-   props.dispatch(rollDice(newDice))
+   props.dispatch(roll(newDice))
 }
+
+function rollDice(props){
+   if(props.rollsRemaining > 0){
+      props.dispatch(reduceRollsRemaining(props.rollsRemaining))
+      rollAvailableDice(props)
+   }
+}
+
 
 function Nav(props) {
    return (
       <div className="container">
-         <button id="roll" onClick={() => rollAvailableDice(props)}>Roll</button>
+         <button id="roll" onClick={() => rollDice(props)}>Roll</button>
          <h4>You will score: <span>X</span></h4>
          <h4>Rolls remaining: <span>{props.rollsRemaining}</span></h4>
-         <a href='' onClick={(event) => handleClick(props, event)}><h4>High Scores!</h4></a>
+         <a href='' onClick={(event) => linkClick(props, event)}><h4>High Scores!</h4></a>
       </div>
    )
 }
 
 function mapState2Props(globalState){
    return {
-      diceArray: globalState.diceArray
+      dice: globalState.dice,
+      rollsRemaining: globalState.rollsRemaining
    }
 }
 

@@ -1,19 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { keep } from '../actions'
 
 function Dice(props) {
-
    return (
       <div className='container'>
-         {props.diceArray.map((dice, key) => {
+         {props.dice.map((dice, index) => {
             return (
                <button 
-                  className={`dice ${dice.class}`}
-                  key={key} 
-                  id={key} 
-                 
-                  >{dice.value}
+               className={`dice ${dice.class}`}
+               key={index} 
+               id={index} 
+               onClick={() => keepDice(index, props)}
+               >{dice.value}
                </button>
             )
          })} 
@@ -21,9 +20,21 @@ function Dice(props) {
    )
 }
 
+function keepDice(index, props){
+   let newState = [...props.dice]
+   if(props.dice[index].keep){
+      newState[index].keep = false
+      newState[index].class = ''
+   } else {
+      newState[index].keep = true
+      newState[index].class = 'keep'
+   }
+   props.dispatch(keep(newState))
+}
+
 function mapStateToProps(globalState){
    return {
-      diceArray: globalState.diceArray
+      dice: globalState.dice
    }
 }
 
