@@ -25,6 +25,7 @@ export const buildTempDiceHash = props => {
 
 export const checkPossibleScores = (props, tempHash) => {
    let availableScores = []
+   //check for numbers
    for(let key of Object.keys(tempHash)){
       switch(key){
          case '1': availableScores.push('ones')
@@ -43,5 +44,36 @@ export const checkPossibleScores = (props, tempHash) => {
             break
       }
    }
+
+   //check for runs and fullhouse
+   for(let value of Object.values(tempHash)){
+      if(value >= 3) availableScores.push('3 of kind')
+      if(value >= 4) availableScores.push('4 of kind')
+      if(value === 5){
+         availableScores.push('yahtzee')
+         // handleBonusYahtzee()
+      }
+      if(value === 3 && Object.entries(tempHash).length === 2){
+         availableScores.push('full house')
+      }
+   }
+
+   //check for straights
+   let keys = Object.keys(tempHash)
+   if(keys.length >= 4){
+      if(
+         (keys[0] === '1' && keys[3] === '4') || 
+         (keys[0] === '2' && keys[3] === '5') ||
+         (keys[0] === '3' && keys[3] === '6') ||
+         (keys[1] === '3' && keys[4] === '6')
+      ) availableScores.push('small straight')
+   }
+   if(keys.length === 5){
+      if(
+         (keys[0] === '1' && keys[4] === '5') ||
+         (keys[0] === '2' && keys[4] === '6')
+      ) availableScores.push('large straight')
+   }
+
    props.dispatch(scoringButtonsEnabled(availableScores))
 }

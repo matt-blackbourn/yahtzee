@@ -332,76 +332,76 @@ function handleBonusYahtzee(){
 
 //ALL SCORE-CHECKING FUNCTIONS BELOW
 
-function checkPossibleScores(){
-   disableScoreButtons()
-   const tempHash = buildTempDiceHash()
-   enableScoringButton(12, 'Lower')
-   checkForNumbers(tempHash)
-   checkForSmallStraight(tempHash)
-   checkForLargeStraight(tempHash)
-   checkForFullHouse(tempHash)
-   checkForRuns(tempHash)
-}
+// function checkPossibleScores(){
+//    disableScoreButtons()
+//    const tempHash = buildTempDiceHash()
+//    enableScoringButton(12, 'Lower')
+//    checkForNumbers(tempHash)
+//    checkForSmallStraight(tempHash)
+//    checkForLargeStraight(tempHash)
+//    checkForFullHouse(tempHash)
+//    checkForRuns(tempHash)
+// }
 
-function checkForNumbers(tempHash){
-   for(let key of Object.keys(tempHash)){
-      switch(key){
-         case '1': enableScoringButton(0, 'Upper')
-         break
-         case '2': enableScoringButton(1, 'Upper')
-         break
-         case '3': enableScoringButton(2, 'Upper')
-         break
-         case '4': enableScoringButton(3, 'Upper')
-         break
-         case '5': enableScoringButton(4, 'Upper')
-         break
-         case '6': enableScoringButton(5, 'Upper')
-         break
-      }
-   }
-}
+// function checkForNumbers(tempHash){
+//    for(let key of Object.keys(tempHash)){
+//       switch(key){
+//          case '1': enableScoringButton(0, 'Upper')
+//          break
+//          case '2': enableScoringButton(1, 'Upper')
+//          break
+//          case '3': enableScoringButton(2, 'Upper')
+//          break
+//          case '4': enableScoringButton(3, 'Upper')
+//          break
+//          case '5': enableScoringButton(4, 'Upper')
+//          break
+//          case '6': enableScoringButton(5, 'Upper')
+//          break
+//       }
+//    }
+// }
 
-function checkForRuns(tempHash){
-   for(let value of Object.values(tempHash)){
-      if(value >= 3) enableScoringButton(6, 'Lower')
-      if(value >= 4) enableScoringButton(7, 'Lower')
-      if(value === 5){
-         enableScoringButton(11, 'Lower')
-         handleBonusYahtzee()
-      }
-   }
-}
+// function checkForRuns(tempHash){
+//    for(let value of Object.values(tempHash)){
+//       if(value >= 3) enableScoringButton(6, 'Lower')
+//       if(value >= 4) enableScoringButton(7, 'Lower')
+//       if(value === 5){
+//          enableScoringButton(11, 'Lower')
+//          handleBonusYahtzee()
+//       }
+//    }
+// }
 
-function checkForFullHouse(tempHash){
-   for(let value of Object.values(tempHash)){
-      if(value === 3 && Object.entries(tempHash).length === 2){
-         enableScoringButton(8, 'Lower')
-      }
-   }
-}
+// function checkForFullHouse(tempHash){
+//    for(let value of Object.values(tempHash)){
+//       if(value === 3 && Object.entries(tempHash).length === 2){
+//          enableScoringButton(8, 'Lower')
+//       }
+//    }
+// }
 
-function checkForSmallStraight(tempHash){
-   let keys = Object.keys(tempHash)
-   if(keys.length >= 4){
-      if(
-         (keys[0] === '1' && keys[3] === '4') || 
-         (keys[0] === '2' && keys[3] === '5') ||
-         (keys[0] === '3' && keys[3] === '6') ||
-         (keys[1] === '3' && keys[4] === '6')
-      ) enableScoringButton(9, 'Lower')
-   }
-}
+// function checkForSmallStraight(tempHash){
+//    let keys = Object.keys(tempHash)
+//    if(keys.length >= 4){
+//       if(
+//          (keys[0] === '1' && keys[3] === '4') || 
+//          (keys[0] === '2' && keys[3] === '5') ||
+//          (keys[0] === '3' && keys[3] === '6') ||
+//          (keys[1] === '3' && keys[4] === '6')
+//       ) enableScoringButton(9, 'Lower')
+//    }
+// }
 
-function checkForLargeStraight(tempHash){
-   let keys = Object.keys(tempHash)
-   if(keys.length === 5){
-      if(
-         (keys[0] === '1' && keys[4] === '5') ||
-         (keys[0] === '2' && keys[4] === '6')
-      ) enableScoringButton(10, 'Lower')
-   }
-}
+// function checkForLargeStraight(tempHash){
+//    let keys = Object.keys(tempHash)
+//    if(keys.length === 5){
+//       if(
+//          (keys[0] === '1' && keys[4] === '5') ||
+//          (keys[0] === '2' && keys[4] === '6')
+//       ) enableScoringButton(10, 'Lower')
+//    }
+// }
 
 //========DOM MANIPULATION FUNCTIONS============================
 
