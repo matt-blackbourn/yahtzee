@@ -10,16 +10,6 @@ class Player {
    } 
 }
 
-// let dice = [
-//    {value: null, keep: false},
-//    {value: null, keep: false},
-//    {value: null, keep: false},
-//    {value: null, keep: false},
-//    {value: null, keep: false}
-// ]
-
-// let rollsRemaining = 3
-// const diceButtons = document.querySelectorAll('.dice')
 const scoringButtons = document.querySelectorAll('.scoringButtons')
 let score
 let index
@@ -32,13 +22,6 @@ let activePlayer = p1
 
 //=========EVENT LISTENERS=============
 
-
-//DICE
-// for(let i = 0; i < diceButtons.length; i++){
-//    diceButtons[i].addEventListener('click', function(e){
-//       if(rollsRemaining > 0 && rollsRemaining < 3) toggleKeepDice(i, e)
-//    })
-// }
 
 //SCORING BUTTONS
 for(let i = 0; i < scoringButtons.length; i ++){
@@ -225,44 +208,45 @@ function calculateTotal(e){
    const tempHash = buildTempDiceHash()
    switch(e.target.id){
       case 'ones': score = tempHash['1']
-      index = 0
-      break
+         index = 0
+         break
       case 'twos': score = 2 * tempHash['2']
-      index = 1
-      break
+         index = 1
+         break
       case 'threes': score = 3 * tempHash['3']
-      index = 2
-      break
+         index = 2
+         break
       case 'fours': score = 4 * tempHash['4']
-      index = 3
-      break
+         index = 3
+         break
       case 'fives': score = 5 * tempHash['5']
-      index = 4
-      break
+         index = 4
+         break
       case 'sixes': score = 6 * tempHash['6']
-      index = 5
-      break
+         index = 5
+         break
       case 'threeOfKind': score = addAllDice()
-      index = 6
-      break
+         index = 6
+         break
       case 'fourOfKind': score = addAllDice()
-      index = 7
-      break
+         index = 7
+         break
       case 'fullHouse': score = 25
-      index = 8
-      break
+         index = 8
+         break
       case 'smallStraight': score = 30
-      index = 9
-      break
+         index = 9
+         break
       case 'largeStraight': score = 40
-      index = 10
-      break
+         index = 10
+         break
       case 'yahtzee': score = 50
-      index = 11
-      break
-      case 'chance': score = addAllDice()
-      index = 12
-      break
+         index = 11
+         break
+      case 'chance': 
+      default:
+         score = addAllDice()
+         index = 12
    }
    if(allowCut){
       score = 0
@@ -280,19 +264,6 @@ function updatePlayerScores(index, score){
    }
 }
 
-// function toggleKeepDice(i, e){
-//    !dice[i].keep ? dice[i].keep = true : dice[i].keep = false
-//    e.target.classList.toggle('keep')
-// }
-
-// function rollAvailableDice(){
-//    for(let i = 0; i < dice.length; i++){
-//       if(!dice[i].keep){
-//          dice[i].value = (Math.floor(Math.random()*6)+1)
-//       }
-//       diceButtons[i].innerHTML = dice[i].value
-//    }
-// }
 
 function resetDiceArray(){
    for(let i = 0; i < dice.length; i++){
@@ -303,13 +274,6 @@ function resetDiceArray(){
    }
 }
 
-// function buildTempDiceHash(){
-//    const tempDiceHash = {}
-//    for(let i = 0; i < dice.length; i++){
-//       tempDiceHash[dice[i].value] = (tempDiceHash[dice[i].value] || 0) + 1  
-//    }
-//    return tempDiceHash
-// }
 
 function addAllDice(){
    let score = 0
@@ -330,78 +294,6 @@ function handleBonusYahtzee(){
    }
 }
 
-//ALL SCORE-CHECKING FUNCTIONS BELOW
-
-// function checkPossibleScores(){
-//    disableScoreButtons()
-//    const tempHash = buildTempDiceHash()
-//    enableScoringButton(12, 'Lower')
-//    checkForNumbers(tempHash)
-//    checkForSmallStraight(tempHash)
-//    checkForLargeStraight(tempHash)
-//    checkForFullHouse(tempHash)
-//    checkForRuns(tempHash)
-// }
-
-// function checkForNumbers(tempHash){
-//    for(let key of Object.keys(tempHash)){
-//       switch(key){
-//          case '1': enableScoringButton(0, 'Upper')
-//          break
-//          case '2': enableScoringButton(1, 'Upper')
-//          break
-//          case '3': enableScoringButton(2, 'Upper')
-//          break
-//          case '4': enableScoringButton(3, 'Upper')
-//          break
-//          case '5': enableScoringButton(4, 'Upper')
-//          break
-//          case '6': enableScoringButton(5, 'Upper')
-//          break
-//       }
-//    }
-// }
-
-// function checkForRuns(tempHash){
-//    for(let value of Object.values(tempHash)){
-//       if(value >= 3) enableScoringButton(6, 'Lower')
-//       if(value >= 4) enableScoringButton(7, 'Lower')
-//       if(value === 5){
-//          enableScoringButton(11, 'Lower')
-//          handleBonusYahtzee()
-//       }
-//    }
-// }
-
-// function checkForFullHouse(tempHash){
-//    for(let value of Object.values(tempHash)){
-//       if(value === 3 && Object.entries(tempHash).length === 2){
-//          enableScoringButton(8, 'Lower')
-//       }
-//    }
-// }
-
-// function checkForSmallStraight(tempHash){
-//    let keys = Object.keys(tempHash)
-//    if(keys.length >= 4){
-//       if(
-//          (keys[0] === '1' && keys[3] === '4') || 
-//          (keys[0] === '2' && keys[3] === '5') ||
-//          (keys[0] === '3' && keys[3] === '6') ||
-//          (keys[1] === '3' && keys[4] === '6')
-//       ) enableScoringButton(9, 'Lower')
-//    }
-// }
-
-// function checkForLargeStraight(tempHash){
-//    let keys = Object.keys(tempHash)
-//    if(keys.length === 5){
-//       if(
-//          (keys[0] === '1' && keys[4] === '5') ||
-//          (keys[0] === '2' && keys[4] === '6')
-//       ) enableScoringButton(10, 'Lower')
-//    }
-// }
 
 //========DOM MANIPULATION FUNCTIONS============================
 
@@ -462,12 +354,6 @@ function highlightActivePlayer(){
 
 //===============2 PLAYER ENDS===========================
 
-// function adjustRollsRemaining(){
-//    rollsRemaining --
-//    let rollsDisplay = document.querySelector('#rolls')
-//    rollsDisplay.innerHTML = rollsRemaining
-//    if(rollsRemaining === 0) disableRollButton()
-// }
 
 function enableCutScore(){
    allowCut = true
@@ -580,12 +466,3 @@ function enableAvailableLowerScoreButtons(){
    }
 }
 
-// function sum(a, b) {
-//    return a + b;
-//  }
-
-// module.exports = {
-//    testForSmallStraight,
-//    testForLargeStraight,
-//    sum
-// }

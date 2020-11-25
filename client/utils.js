@@ -28,19 +28,19 @@ export const checkPossibleScores = (props, tempHash) => {
    //check for numbers
    for(let key of Object.keys(tempHash)){
       switch(key){
-         case '1': availableScores.push('ones')
+         case '1': availableScores.push('Ones')
             break
-         case '2': availableScores.push('twos')
+         case '2': availableScores.push('Twos')
             break
-         case '3': availableScores.push('threes')
+         case '3': availableScores.push('Threes')
             break
-         case '4': availableScores.push('fours')
+         case '4': availableScores.push('Fours')
             break
-         case '5': availableScores.push('fives')
+         case '5': availableScores.push('Fives')
             break
          case '6': 
          default:
-            availableScores.push('sixes')
+            availableScores.push('Sixes')
             break
       }
    }
@@ -50,11 +50,11 @@ export const checkPossibleScores = (props, tempHash) => {
       if(value >= 3) availableScores.push('3 of kind')
       if(value >= 4) availableScores.push('4 of kind')
       if(value === 5){
-         availableScores.push('yahtzee')
+         availableScores.push('Yahtzee')
          // handleBonusYahtzee()
       }
       if(value === 3 && Object.entries(tempHash).length === 2){
-         availableScores.push('full house')
+         availableScores.push('Full House')
       }
    }
 
@@ -66,13 +66,13 @@ export const checkPossibleScores = (props, tempHash) => {
          (keys[0] === '2' && keys[3] === '5') ||
          (keys[0] === '3' && keys[3] === '6') ||
          (keys[1] === '3' && keys[4] === '6')
-      ) availableScores.push('small straight')
+      ) availableScores.push('Small Straight')
    }
    if(keys.length === 5){
       if(
          (keys[0] === '1' && keys[4] === '5') ||
          (keys[0] === '2' && keys[4] === '6')
-      ) availableScores.push('large straight')
+      ) availableScores.push('Large Straight')
    }
 
    props.dispatch(scoringButtonsEnabled(availableScores))
