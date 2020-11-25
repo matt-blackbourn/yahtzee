@@ -1,4 +1,4 @@
-import { BUILD_HASH } from "../actions"
+import { TEMP_DICE_HASH_BUILT } from "../actions"
 
 
 const initialState = {}
@@ -6,7 +6,7 @@ const initialState = {}
 
 function reducer(state = initialState, action){
    switch(action.type){
-      case BUILD_HASH:
+      case TEMP_DICE_HASH_BUILT:
          return action.hash
       default:
          return state
@@ -14,3 +14,4 @@ function reducer(state = initialState, action){
 }
 
 export default reducer
+

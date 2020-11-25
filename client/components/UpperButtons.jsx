@@ -1,17 +1,15 @@
 import React from 'react'
 
+const buttonNames = ['Ones', 'Twos', 'Threes', 'Fours', 'Fives', 'Sixes']
+
 function UpperButtons(props) {
    return (
       <div>
-         <button className="scoringButtons" disabled>Ones</button>
-         <button className="scoringButtons" disabled>Twos</button>
-         <button className="scoringButtons" disabled>Threes</button>
-         <button className="scoringButtons" disabled>Fours</button>
-         <button className="scoringButtons" disabled>Fives</button>
-         <button className="scoringButtons" disabled>Sixes</button>
+         {buttonNames.map((button, index) => {
+            return <button key={index} className="scoringButtons" disabled>{button}</button>
+         })}
       </div>
    )
 }
-
 
 export default UpperButtons

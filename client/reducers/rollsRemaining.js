@@ -1,9 +1,9 @@
-import { REDUCE_ROLLS } from "../actions"
+import { ROLL_COUNT_REDUCED } from "../actions"
 
 function reducer(state = 3, action){
    switch(action.type){
-      case REDUCE_ROLLS:
-         return action.rollsRemaining -1
+      case ROLL_COUNT_REDUCED:
+         return state-1
       default:
          return state
    }

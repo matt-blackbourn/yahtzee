@@ -2,8 +2,7 @@ import React from 'react'
 
 import Nav from './Nav'
 import Dice from './Dice'
-import UpperButtons from './UpperButtons'
-import LowerButtons from './LowerButtons'
+import Buttons from './Buttons'
 import OtherButtons from './OtherButtons'
 import ScorecardSingle from './ScorecardSingle'
 
@@ -12,8 +11,8 @@ function Game(props) {
       <>
          <Nav />
          <Dice />
-         <UpperButtons />
-         <LowerButtons />
+         <Buttons />
+
          <OtherButtons />
          <ScorecardSingle />
       </>
