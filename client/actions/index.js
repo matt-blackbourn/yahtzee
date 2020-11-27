@@ -6,11 +6,7 @@ export const ROLLED_DICE = 'ROLLED_DICE'
 export const ROLL_COUNT_REDUCED = 'ROLL_COUNT_REDUCED'
 export const TEMP_DICE_HASH_BUILT = 'TEMP_DICE_HASH_BUILT'
 export const SCORING_BUTTONS_ENABLED = 'SCORING_BUTTONS_ENABLED'
-export const ROLL_SCORED = 'ROLL_SCORED'
-
-
-
-
+export const SCORE_CALCULATED = 'SCORE_CALCULATED'
 
 //dice actions
 
@@ -39,7 +35,7 @@ export const buildHash = hash => {
 
 export const rollScored = score => {
   return {
-    type: ROLL_SCORED,
+    type: SCORE_CALCULATED,
     score
   }
 }

@@ -1,6 +1,5 @@
 import { buildHash, rollDice, scoringButtonsEnabled } from "../actions"
 
-
 export const rollAvailableDice = (props) => {
    let newDice = [...props.dice]
    for(let i = 0; i < props.dice.length; i++){
@@ -12,7 +11,6 @@ export const rollAvailableDice = (props) => {
    buildTempDiceHash(props)
 }
 
-
 export const buildTempDiceHash = props => {
    const tempDiceHash = {}
    for(let i = 0; i < 5; i++){
@@ -21,7 +19,6 @@ export const buildTempDiceHash = props => {
    props.dispatch(buildHash(tempDiceHash)) 
    checkPossibleScores(props, tempDiceHash)
 }
-
 
 export const checkPossibleScores = (props, tempHash) => {
    let availableScores = ['Chance']

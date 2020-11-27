@@ -1,8 +1,8 @@
-import { ROLL_SCORED } from "../actions"
+import { SCORE_CALCULATED } from "../actions"
 
 function reducer(state = 0, action){
   switch(action.type){
-    case ROLL_SCORED:
+    case SCORE_CALCULATED:
       return action.score
     default:
       return state
