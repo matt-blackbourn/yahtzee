@@ -1,20 +1,22 @@
 
 export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const GET_HIGHSCORES = 'GET_HIGHSCORES'
-export const KEEP_DICE = 'KEEP_DICE'
+export const DICE_HELD = 'DICE_HELD'
 export const ROLLED_DICE = 'ROLLED_DICE'
 export const ROLL_COUNT_REDUCED = 'ROLL_COUNT_REDUCED'
 export const TEMP_DICE_HASH_BUILT = 'TEMP_DICE_HASH_BUILT'
 export const SCORING_BUTTONS_ENABLED = 'SCORING_BUTTONS_ENABLED'
+export const ROLL_SCORED = 'ROLL_SCORED'
+
 
 
 
 
 //dice actions
 
-export const keep = dice => {
+export const holdDice = dice => {
    return {
-      type: KEEP_DICE,
+      type: DICE_HELD,
       dice
    }
 }
@@ -31,6 +33,15 @@ export const buildHash = hash => {
       type: TEMP_DICE_HASH_BUILT,
       hash
    }
+}
+
+//scoring actions
+
+export const rollScored = score => {
+  return {
+    type: ROLL_SCORED,
+    score
+  }
 }
 
 export const scoringButtonsEnabled = buttons => {

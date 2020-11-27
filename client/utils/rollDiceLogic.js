@@ -1,4 +1,4 @@
-import { buildHash, rollDice, scoringButtonsEnabled } from "./actions"
+import { buildHash, rollDice, scoringButtonsEnabled } from "../actions"
 
 
 export const rollAvailableDice = (props) => {
@@ -24,7 +24,7 @@ export const buildTempDiceHash = props => {
 
 
 export const checkPossibleScores = (props, tempHash) => {
-   let availableScores = []
+   let availableScores = ['Chance']
    //check for numbers
    for(let key of Object.keys(tempHash)){
       switch(key){

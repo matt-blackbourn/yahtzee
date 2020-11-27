@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { changePage, reduceRollsRemaining } from '../actions'
-import { rollAvailableDice } from '../utils'
+import { rollAvailableDice } from '../utils/rollDiceLogic'
+
 
 
 const toggleHighScores = (props, event) => {

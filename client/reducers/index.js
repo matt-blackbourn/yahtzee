@@ -6,6 +6,8 @@ import dice from './dice'
 import rollsRemaining from './rollsRemaining'
 import tempDiceHash from './tempDiceHash'
 import availableScores from './availableScores'
+import rollScore from './rollScore'
+
 
 
 export default combineReducers({
@@ -15,5 +17,5 @@ export default combineReducers({
    rollsRemaining,
    tempDiceHash,
    availableScores,
-   
+   rollScore,
 })

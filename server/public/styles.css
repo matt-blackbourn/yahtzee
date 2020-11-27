@@ -30,12 +30,12 @@ div{
 
 .hide{display: none}
 
-.availableScoreLower{
+.lower{
    background-color: royalblue;
    color: white;
 }
 
-.availableScoreUpper{
+.upper{
    background-color: green;
    color: white;
 }

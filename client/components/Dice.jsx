@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { keep } from '../actions'
+import { holdDice } from '../actions'
 
 function Dice(props) {
    return (
@@ -30,7 +30,7 @@ function keepDice(index, props){
       newState[index].keep = true
       newState[index].class = 'keep'
    }
-   props.dispatch(keep(newState))
+   props.dispatch(holdDice(newState))
 }
 
 function mapStateToProps(globalState){

@@ -1,4 +1,4 @@
-import { ROLLED_DICE, KEEP_DICE } from "../actions"
+import { ROLLED_DICE, DICE_HELD, ALL_DICE_ADDED } from "../actions"
 
 const generateDiceArray = () => {
    let arr = []
@@ -14,7 +14,7 @@ function reducer(state = initialState, action){
    switch(action.type){
       case ROLLED_DICE:
          return action.dice
-      case KEEP_DICE:
+      case DICE_HELD:
          return action.dice
       default:
          return state
@@ -22,4 +22,3 @@ function reducer(state = initialState, action){
 }
 
 export default reducer
-
