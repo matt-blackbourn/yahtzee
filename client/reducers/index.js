@@ -7,6 +7,7 @@ import rollsRemaining from './rollsRemaining'
 import tempDiceHash from './tempDiceHash'
 import availableScores from './availableScores'
 import rollScore from './rollScore'
+import scoreCard from './scoreCard'
 
 
 
@@ -18,4 +19,5 @@ export default combineReducers({
    tempDiceHash,
    availableScores,
    rollScore,
+   scoreCard
 })

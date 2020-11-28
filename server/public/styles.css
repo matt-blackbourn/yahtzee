@@ -6,10 +6,11 @@
    display: flex;
    justify-content: space-evenly;
    align-items: center;
+   max-width: 610px;
 }
 
 div{
-   margin: 20px auto;
+   margin: 20px;
 }
 
 .dice{

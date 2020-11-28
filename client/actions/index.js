@@ -33,9 +33,10 @@ export const buildHash = hash => {
 
 //scoring actions
 
-export const rollScored = score => {
+export const rollScored = (button, score) => {
   return {
     type: SCORE_CALCULATED,
+    button,
     score
   }
 }

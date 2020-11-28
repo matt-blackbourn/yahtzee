@@ -21,7 +21,7 @@ const Nav = props => {
    return (
       <div className="container">
          <button id="roll" onClick={() => rollDice(props)}>Roll</button>
-         <h4>You will score: <span>X</span></h4>
+        <h4>You will score: <span>{props.rollScore.score}</span></h4>
          <h4>Rolls remaining: <span>{props.rollsRemaining}</span></h4>
          <a href='' onClick={(event) => toggleHighScores(props, event)}><h4>High Scores!</h4></a>
       </div>
@@ -32,7 +32,8 @@ const mapState2Props = globalState => {
    return {
       dice: globalState.dice,
       rollsRemaining: globalState.rollsRemaining,
-      tempHash: globalState.tempDiceHash
+      tempHash: globalState.tempDiceHash,
+      rollScore: globalState.rollScore
    }
 }
 

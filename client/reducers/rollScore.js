@@ -1,9 +1,17 @@
 import { SCORE_CALCULATED } from "../actions"
 
-function reducer(state = 0, action){
+const initialState = {
+  button: '',
+  score: 0
+}
+
+function reducer(state = initialState, action){
   switch(action.type){
     case SCORE_CALCULATED:
-      return action.score
+      return {
+        button: action.button,
+        score: action.score
+      }
     default:
       return state
   }
