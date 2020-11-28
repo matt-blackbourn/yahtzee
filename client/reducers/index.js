@@ -13,6 +13,7 @@ import toggleConfirmButton from './toggleConfirmButton'
 
 
 export default combineReducers({
+  scoreCard,
    gamePage,
    highScores,
    dice,
@@ -20,6 +21,5 @@ export default combineReducers({
    tempDiceHash,
    availableScores,
    rollScore,
-   scoreCard,
    toggleConfirmButton
 })

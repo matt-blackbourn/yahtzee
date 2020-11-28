@@ -9,22 +9,22 @@ function ScoreCardSingle(props) {
           <td></td><th>Your Scores</th>
         </tr>
         <tr>
-          <td>1</td><td>{props.scoreCard.ones > 0 && props.scoreCard.ones}</td>
+          <td>1</td><td>{props.scoreCard.ones.scored && props.scoreCard.ones.value}</td>
         </tr>
         <tr>
-          <td>2</td><td>{props.scoreCard.twos > 0 && props.scoreCard.twos}</td>
+          <td>2</td><td>{props.scoreCard.twos.scored && props.scoreCard.twos.value}</td>
         </tr>
         <tr>
-          <td>3</td><td>{props.scoreCard.threes > 0 && props.scoreCard.threes}</td>
+          <td>3</td><td>{props.scoreCard.threes.scored && props.scoreCard.threes.value}</td>
         </tr>
         <tr>
-          <td>4</td><td>{props.scoreCard.fours > 0 && props.scoreCard.fours}</td>
+          <td>4</td><td>{props.scoreCard.fours.scored && props.scoreCard.fours.value}</td>
         </tr>
         <tr>
-          <td>5</td><td>{props.scoreCard.fives > 0 && props.scoreCard.fives}</td>
+          <td>5</td><td>{props.scoreCard.fives.scored && props.scoreCard.fives.value}</td>
         </tr>
         <tr>
-          <td>6</td><td>{props.scoreCard.sixes > 0 && props.scoreCard.sixes}</td>
+          <td>6</td><td>{props.scoreCard.sixes.scored && props.scoreCard.sixes.value}</td>
         </tr>
         <tr>
           <td className="bold">Total</td><td className="bold"></td>
@@ -36,25 +36,25 @@ function ScoreCardSingle(props) {
           <td className="bold">Upper Total</td><td className="bold" ></td>
         </tr>
         <tr>
-          <td>Three of a kind</td><td>{props.scoreCard.threeOfKind > 0 && props.scoreCard.threeOfKind}</td>
+          <td>Three of a kind</td><td>{props.scoreCard.threeOfKind.scored && props.scoreCard.threeOfKind.value}</td>
         </tr>
         <tr>
-          <td>Four of a kind</td><td>{props.scoreCard.fourOfKind > 0 && props.scoreCard.fourOfKind}</td>
+          <td>Four of a kind</td><td>{props.scoreCard.fourOfKind.scored && props.scoreCard.fourOfKind.value}</td>
         </tr>
         <tr>
-          <td>Full House</td><td>{props.scoreCard.fullHouse > 0 && props.scoreCard.fullHouse}</td>
+          <td>Full House</td><td>{props.scoreCard.fullHouse.scored && props.scoreCard.fullHouse.value}</td>
         </tr>
         <tr>
-          <td>Small Straight</td><td>{props.scoreCard.smStraight > 0 && props.scoreCard.smStraight}</td>
+          <td>Small Straight</td><td>{props.scoreCard.smStraight.scored && props.scoreCard.smStraight.value}</td>
         </tr>
         <tr>
-          <td>Large Straight</td><td>{props.scoreCard.lgStraight > 0 && props.scoreCard.lgStraight}</td>
+          <td>Large Straight</td><td>{props.scoreCard.lgStraight.scored && props.scoreCard.lgStraight.value}</td>
         </tr>
         <tr>
-          <td>Yahtzee</td><td>{props.scoreCard.yahtzee > 0 && props.scoreCard.yahtzee}</td>
+          <td>Yahtzee</td><td>{props.scoreCard.yahtzee.scored && props.scoreCard.yahtzee.value}</td>
         </tr>
         <tr>
-          <td>Chance</td><td>{props.scoreCard.chance > 0 && props.scoreCard.chance}</td>
+          <td>Chance</td><td>{props.scoreCard.chance.scored && props.scoreCard.chance.value}</td>
         </tr>
         <tr>
           <td className="bold">Bonus Yahtzee</td><td className="bold" ></td>
