@@ -33,7 +33,8 @@ const mapState2Props = globalState => {
       dice: globalState.dice,
       rollsRemaining: globalState.rollsRemaining,
       tempHash: globalState.tempDiceHash,
-      rollScore: globalState.rollScore
+      rollScore: globalState.rollScore,
+      scoreCard: globalState.scoreCard
    }
 }
 
