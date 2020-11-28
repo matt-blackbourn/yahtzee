@@ -1,4 +1,5 @@
 
+export const TURN_ENDED = 'TURN_ENDED'
 export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const GET_HIGHSCORES = 'GET_HIGHSCORES'
 export const DICE_HELD = 'DICE_HELD'
@@ -8,6 +9,8 @@ export const TEMP_DICE_HASH_BUILT = 'TEMP_DICE_HASH_BUILT'
 export const SCORING_BUTTONS_ENABLED = 'SCORING_BUTTONS_ENABLED'
 export const SCORE_CALCULATED = 'SCORE_CALCULATED'
 export const SCORECARD_UPDATED = 'SCORECARD_UPDATED'
+export const CONFIRM_ENABLED = 'CONFIRM_ENABLED'
+export const CONFIRM_DISABLED = 'CONFIRM_DISABLED'
 
 //dice actions
 
@@ -54,6 +57,24 @@ export const updateScoreCard = (key, value) => {
     type: SCORECARD_UPDATED,
     key,
     value
+  }
+}
+
+export const confirmEnabled = () => {
+  return {
+    type: CONFIRM_ENABLED
+  }
+}
+
+export const confirmDisabled = () => {
+  return {
+    type: CONFIRM_DISABLED
+  }
+}
+
+export const endTurn = () => {
+  return {
+    type: TURN_ENDED
   }
 }
 

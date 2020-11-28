@@ -1,13 +1,12 @@
-import { TEMP_DICE_HASH_BUILT } from "../actions"
+import { TEMP_DICE_HASH_BUILT, TURN_ENDED } from "../actions"
 
 
-const initialState = {}
-
-
-function reducer(state = initialState, action){
+function reducer(state = {}, action){
    switch(action.type){
       case TEMP_DICE_HASH_BUILT:
          return action.hash
+      case TURN_ENDED:
+        return {}
       default:
          return state
    }

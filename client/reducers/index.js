@@ -8,6 +8,7 @@ import tempDiceHash from './tempDiceHash'
 import availableScores from './availableScores'
 import rollScore from './rollScore'
 import scoreCard from './scoreCard'
+import toggleConfirmButton from './toggleConfirmButton'
 
 
 
@@ -19,5 +20,6 @@ export default combineReducers({
    tempDiceHash,
    availableScores,
    rollScore,
-   scoreCard
+   scoreCard,
+   toggleConfirmButton
 })

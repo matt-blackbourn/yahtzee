@@ -1,8 +1,9 @@
-import { rollScored } from "../actions"
+import { rollScored, confirmEnabled } from "../actions"
 
 export const calculateScore = (event, props) => {
   let score = 0
   let button = ''
+  props.dispatch(confirmEnabled())
   switch(event.target.id){
     case 'Ones':
       score = props.tempHash['1']
