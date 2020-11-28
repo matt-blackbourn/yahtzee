@@ -37,11 +37,11 @@ export const calculateScore = (event, props) => {
       button = 'fourOfKind'
       break
     case 'Full House':
-      score= 25
+      score = 25
       button = 'fullHouse'
       break
     case 'Small Straight':
-      score= 30
+      score = 30
       button = 'smStraight'
       break
     case 'Large Straight':

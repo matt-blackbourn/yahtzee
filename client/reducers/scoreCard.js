@@ -1,3 +1,5 @@
+import { SCORECARD_UPDATED } from "../actions"
+
 const initialState = {
   ones: 0,
   twos: 0,
@@ -22,6 +24,10 @@ const initialState = {
 
 function reducer(state = initialState, action){
   switch(action.type){
+    case SCORECARD_UPDATED:
+      let newState = {...state}
+      newState[action.key] = action.value
+      return newState
     default: 
       return state
   }

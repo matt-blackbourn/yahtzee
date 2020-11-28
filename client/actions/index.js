@@ -7,6 +7,7 @@ export const ROLL_COUNT_REDUCED = 'ROLL_COUNT_REDUCED'
 export const TEMP_DICE_HASH_BUILT = 'TEMP_DICE_HASH_BUILT'
 export const SCORING_BUTTONS_ENABLED = 'SCORING_BUTTONS_ENABLED'
 export const SCORE_CALCULATED = 'SCORE_CALCULATED'
+export const SCORECARD_UPDATED = 'SCORECARD_UPDATED'
 
 //dice actions
 
@@ -46,6 +47,14 @@ export const scoringButtonsEnabled = buttons => {
       type: SCORING_BUTTONS_ENABLED,
       buttons
    }
+}
+
+export const updateScoreCard = (key, value) => {
+  return {
+    type: SCORECARD_UPDATED,
+    key,
+    value
+  }
 }
 
 export const reduceRollsRemaining = () => {

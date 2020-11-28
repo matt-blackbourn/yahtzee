@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { updateScoreCard } from '../actions'
 
-function endTurn() {
-  
+function endTurn(props) {
+  props.dispatch(updateScoreCard(props.rollScore.button, props.rollScore.score))
 }
 
 function OtherButtons(props) {
@@ -10,7 +11,7 @@ function OtherButtons(props) {
       <div>
          <button 
          disabled={props.rollsRemaining == 3 && true}
-         onClick={endTurn}
+         onClick={() => endTurn(props)}
          >Confirm</button>
          <button 
          disabled
@@ -21,7 +22,9 @@ function OtherButtons(props) {
 
 function ms2p(globalState){
   return {
-    rollsRemaining: globalState.rollsRemaining
+    rollsRemaining: globalState.rollsRemaining,
+    rollScore: globalState.rollScore,
+    scoreCard: globalState.scoreCard
   }
 }
 
