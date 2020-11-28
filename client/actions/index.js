@@ -11,6 +11,8 @@ export const SCORE_CALCULATED = 'SCORE_CALCULATED'
 export const SCORECARD_UPDATED = 'SCORECARD_UPDATED'
 export const CONFIRM_ENABLED = 'CONFIRM_ENABLED'
 export const CONFIRM_DISABLED = 'CONFIRM_DISABLED'
+export const CUT_ENABLED = 'CUT_ENABLED'
+export const CUT_DISABLED = 'CUT_DISABLED'
 
 //dice actions
 
@@ -75,6 +77,18 @@ export const confirmDisabled = () => {
 export const endTurn = () => {
   return {
     type: TURN_ENDED
+  }
+}
+
+export const cutEnabled = () => {
+  return {
+    type: CUT_ENABLED
+  }
+}
+
+export const cutDisabled = () => {
+  return {
+    type: CUT_DISABLED
   }
 }
 

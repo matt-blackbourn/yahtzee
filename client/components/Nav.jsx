@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changePage, reduceRollsRemaining } from '../actions'
+import { changePage, reduceRollsRemaining, cutEnabled } from '../actions'
 import { rollAvailableDice } from '../utils/rollDiceLogic'
 
 
@@ -14,6 +14,7 @@ const rollDice = props => {
    if(props.rollsRemaining > 0){
       rollAvailableDice(props)
       props.dispatch(reduceRollsRemaining())
+      props.dispatch(cutEnabled())
    }
 }
 
