@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 function getUpperBonus(props){
-  if(props.upperTotal.print){
-    if(props.upperTotal.total >= 63){
+  if(props.scoreCard.total.print){
+    if(props.scoreCard.total.value >= 63){
       return 35
     } else {
       return 0
@@ -38,13 +38,13 @@ function ScoreCardSingle(props) {
           <td>6</td><td>{props.scoreCard.sixes.scored && props.scoreCard.sixes.value}</td>
         </tr>
         <tr>
-  <td className="bold">Total</td><td className="bold">{props.upperTotal.print && props.upperTotal.total}</td>
+  <td className="bold">Total</td><td className="bold">{props.scoreCard.total.print && props.scoreCard.total.value}</td>
         </tr>
         <tr>
   <td className="bold">Bonus</td><td className="bold" >{getUpperBonus(props)}</td>
         </tr>
         <tr>
-          <td className="bold">Upper Total</td><td className="bold" >{props.upperTotal.print && props.upperTotal.total + getUpperBonus(props)}</td>
+          <td className="bold">Upper Total</td><td className="bold" >{props.scoreCard.upperTotal.print && props.scoreCard.upperTotal.value + getUpperBonus(props)}</td>
         </tr>
         <tr>
           <td>Three of a kind</td><td>{props.scoreCard.threeOfKind.scored && props.scoreCard.threeOfKind.value}</td>
@@ -84,7 +84,7 @@ function ScoreCardSingle(props) {
 function ms2p(globalState) {
   return {
     scoreCard: globalState.scoreCard,
-    upperTotal: globalState.upperTotal
+    // upperTotal: globalState.upperTotal
   }
 }
 

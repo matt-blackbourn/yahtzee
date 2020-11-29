@@ -1,4 +1,4 @@
-import { SCORECARD_UPDATED } from "../actions"
+import { SCORECARD_UPDATED, UPPER_TOTAL_UPDATED } from "../actions"
 
 const initialState = {
   ones: {scored: false, value: 0},
@@ -7,9 +7,9 @@ const initialState = {
   fours: {scored: false, value: 0},
   fives: {scored: false, value: 0},
   sixes: {scored: false, value: 0},
-  // total: {scored: false, value: 0},
-  // bonus: {scored: false, value: 0},
-  // upperTotal: {scored: false, value: 0},
+  total: {print: false, value: 0},
+  bonus: {print: false, value: 0},
+  upperTotal: {print: false, value: 0},
   threeOfKind: {scored: false, value: 0},
   fourOfKind: {scored: false, value: 0},
   fullHouse: {scored: false, value: 0},
@@ -17,17 +17,23 @@ const initialState = {
   lgStraight: {scored: false, value: 0},
   yahtzee: {scored: false, value: 0},
   chance: {scored: false, value: 0},
-  // bonusYahtzee: {scored: false, value: 0},
-  // lowerTotal: {scored: false, value: 0},
-  // grandTotal: {scored: false, value: 0}
+  bonusYahtzee: {print: false, value: 0},
+  lowerTotal: {print: false, value: 0},
+  grandTotal: {print: false, value: 0}
 }
 
 function reducer(state = initialState, action){
+  let newState
   switch(action.type){
     case SCORECARD_UPDATED:
-      let newState = {...state}
+      newState = {...state}
       newState[action.key].value = action.value
       newState[action.key].scored = true
+      return newState
+    case UPPER_TOTAL_UPDATED:
+      newState = {...state}
+      newState.total.print = action.print
+      newState.total.value = action.value
       return newState
     default: 
       return state

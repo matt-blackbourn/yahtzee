@@ -55,10 +55,10 @@ export const scoringButtonsEnabled = buttons => {
    }
 }
 
-export const updateUpperTotal = (total, print) => {
+export const updateUpperTotal = (value, print) => {
    return {
       type: UPPER_TOTAL_UPDATED,
-      total,
+      value,
       print
    }
 }
