@@ -1,11 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updateScoreCard, endTurn, cutDisabled } from '../actions'
+import { updateScoreCard, endTurn, cutDisabled, updateUpperTotal } from '../actions'
+
+
+function scoreTopSection(props){
+  let arr = Object.values(props.scoreCard)
+  let total = 0
+  let allScoresFilled = true
+  for(let i = 0; i < 6; i++){
+    total += arr[i].value
+    if(!arr[i].scored) allScoresFilled = false
+  }
+  props.dispatch(updateUpperTotal(total))
+  if(allScoresFilled) props.dispatch(printUpperTotal(total))
+}
 
 function confirmScore(props) {
   props.dispatch(endTurn())
   props.dispatch(cutDisabled())
   props.dispatch(updateScoreCard(props.rollScore.button, props.rollScore.score))
+  scoreTopSection(props)
 }
 
 function OtherButtons(props) {

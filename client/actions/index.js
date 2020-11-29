@@ -13,6 +13,7 @@ export const CONFIRM_ENABLED = 'CONFIRM_ENABLED'
 export const CONFIRM_DISABLED = 'CONFIRM_DISABLED'
 export const CUT_ENABLED = 'CUT_ENABLED'
 export const CUT_DISABLED = 'CUT_DISABLED'
+export const UPPER_TOTAL_UPDATED = 'UPPER_TOTAL_UPDATED'
 
 //dice actions
 
@@ -51,6 +52,13 @@ export const scoringButtonsEnabled = buttons => {
    return {
       type: SCORING_BUTTONS_ENABLED,
       buttons
+   }
+}
+
+export const updateUpperTotal = total => {
+   return {
+      type: UPPER_TOTAL_UPDATED,
+      total
    }
 }
 

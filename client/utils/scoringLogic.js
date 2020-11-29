@@ -1,4 +1,4 @@
-import { rollScored, confirmEnabled, cutEnabled } from "../actions"
+import { rollScored, confirmEnabled } from "../actions"
 
 export const calculateScore = (event, props) => {
   let score = 0
