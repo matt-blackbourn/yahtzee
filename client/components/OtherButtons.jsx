@@ -25,11 +25,11 @@ function OtherButtons(props) {
    return (
       <div>
          <button 
-         disabled={props.toggleConfirmButton}
+         disabled={props.confirmButtonDisabled}
          onClick={() => confirmScore(props)}
          >Confirm</button>
          <button 
-         disabled={props.toggleCutScore}
+         disabled={props.cutScoreButtonDisabled}
          >Cut a Score</button>
       </div>
    )
@@ -40,8 +40,8 @@ function ms2p(globalState){
     rollsRemaining: globalState.rollsRemaining,
     rollScore: globalState.rollScore,
     scoreCard: globalState.scoreCard,
-    toggleConfirmButton: globalState.toggleConfirmButton,
-    toggleCutScore: globalState.toggleCutScore,
+    confirmButtonDisabled: globalState.confirmButtonDisabled,
+    cutScoreButtonDisabled: globalState.cutScoreButtonDisabled,
   }
 }
 

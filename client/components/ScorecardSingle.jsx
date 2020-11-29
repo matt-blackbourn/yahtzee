@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-function getUpperBonus(props){
-  if(props.scoreCard.total.print){
-    if(props.scoreCard.total.value >= 63){
+function getUpperBonus(props) {
+  if (props.scoreCard.total.print) {
+    if (props.scoreCard.total.value >= 63) {
       return 35
     } else {
       return 0
@@ -38,13 +38,13 @@ function ScoreCardSingle(props) {
           <td>6</td><td>{props.scoreCard.sixes.scored && props.scoreCard.sixes.value}</td>
         </tr>
         <tr>
-  <td className="bold">Total</td><td className="bold">{props.scoreCard.total.print && props.scoreCard.total.value}</td>
+          <td className="bold">Total</td><td className="bold">{props.scoreCard.total.print && props.scoreCard.total.value}</td>
         </tr>
         <tr>
-  <td className="bold">Bonus</td><td className="bold" >{getUpperBonus(props)}</td>
+          <td className="bold">Bonus</td><td className="bold" >{props.scoreCard.bonus.print && props.scoreCard.bonus.value}</td>
         </tr>
         <tr>
-          <td className="bold">Upper Total</td><td className="bold" >{props.scoreCard.upperTotal.print && props.scoreCard.upperTotal.value + getUpperBonus(props)}</td>
+          <td className="bold">Upper Total</td><td className="bold" >{props.scoreCard.upperTotal.print && props.scoreCard.upperTotal.value}</td>
         </tr>
         <tr>
           <td>Three of a kind</td><td>{props.scoreCard.threeOfKind.scored && props.scoreCard.threeOfKind.value}</td>

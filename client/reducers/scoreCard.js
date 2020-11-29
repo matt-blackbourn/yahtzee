@@ -30,11 +30,19 @@ function reducer(state = initialState, action){
       newState[action.key].value = action.value
       newState[action.key].scored = true
       return newState
+
     case UPPER_TOTAL_UPDATED:
       newState = {...state}
       newState.total.print = action.print
       newState.total.value = action.value
+      if(action.print){
+        action.value >= 63 ? newState.bonus.value = 35 : newState.bonus.value = 0
+        newState.bonus.print = true
+        newState.upperTotal.print = true
+        newState.upperTotal.value = newState.total.value + newState.bonus.value
+      }
       return newState
+
     default: 
       return state
   }
