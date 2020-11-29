@@ -1,4 +1,4 @@
-import { rollScored, confirmEnabled } from "../actions"
+import { rollScored, confirmEnabled, updateUpperTotal, updateLowerTotal } from "../actions"
 
 export const calculateScore = (event, props) => {
   let score = 0
@@ -68,4 +68,26 @@ const sumAllDice = dice => {
       total += dice[i].value
     }
     return total
+}
+
+export const scoreTopSection = props => {
+  let arr = Object.values(props.scoreCard)
+  let total = 0
+  let allScoresFilled = true
+  for(let i = 0; i < 6; i++){
+    total += arr[i].value
+    if(!arr[i].scored) allScoresFilled = false
+  }
+  props.dispatch(updateUpperTotal(total, allScoresFilled))
+}
+
+export const scoreBottomSection = props => {
+  let arr = Object.values(props.scoreCard)
+  let total = 0
+  let allScoresFilled = true
+  for(let i = 9; i <= 15; i++){
+    total += arr[i].value
+    if(!arr[i].scored) allScoresFilled = false
+  }
+  props.dispatch(updateLowerTotal(total, allScoresFilled))
 }

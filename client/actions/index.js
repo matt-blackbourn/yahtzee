@@ -15,6 +15,9 @@ export const CUT_ENABLED = 'CUT_ENABLED'
 export const CUT_DISABLED = 'CUT_DISABLED'
 export const UPPER_TOTAL_UPDATED = 'UPPER_TOTAL_UPDATED'
 export const LOWER_TOTAL_UPDATED = 'LOWER_TOTAL_UPDATED'
+export const POSSIBLE_CUT_SCORES_ADDED = 'POSSIBLE_CUT_SCORES_ADDED'
+export const CUT_SCORES_ALLOWED = 'CUT_SCORES_ALLOWED'
+export const CUT_SCORES_DISALLOWED = 'CUT_SCORES_DISALLOWED'
 
 //dice actions
 
@@ -127,6 +130,25 @@ export const getHighScores = scores => {
    return {
       type: GET_HIGHSCORES,
       scores
+   }
+}
+
+export const availableToCut = scores => {
+   return {
+      type: POSSIBLE_CUT_SCORES_ADDED,
+      scores
+   }
+}
+
+export const allowCutScores = () => {
+   return {
+      type: CUT_SCORES_ALLOWED
+   }
+}
+
+export const disallowCutScores = () => {
+   return {
+      type: CUT_SCORES_DISALLOWED
    }
 }
 
