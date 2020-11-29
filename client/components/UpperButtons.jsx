@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { calculateScore } from '../utils/scoringLogic'
+import { getClass } from '../utils/cutScore'
+
 
 const buttonNames = ['Ones', 'Twos', 'Threes', 'Fours', 'Fives', 'Sixes']
 
@@ -10,7 +12,7 @@ const UpperButtons = props => {
          {buttonNames.map((name, index) => {
             return <button 
                key={index} 
-               className={props.availableScores.includes(name) ? 'upper' : ''}
+               className={getClass(props, name, 'upper')}
                disabled={!props.availableScores.includes(name) && name}
                id={name}
                onClick={(event) => calculateScore(event, props)}>
@@ -25,7 +27,9 @@ const ms2p = globalState => {
    return {
       availableScores: globalState.availableScores,
       tempHash: globalState.tempDiceHash,
-      dice: globalState.dice
+      dice: globalState.dice,
+      cutScoresAllowed: globalState.cutScoresAllowed,
+      scoresAvailableToCut: globalState.scoresAvailableToCut
    }
 }
 

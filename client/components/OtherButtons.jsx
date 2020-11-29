@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updateScoreCard, endTurn, cutDisabled, availableToCut, allowCutScores, disallowCutScores } from '../actions'
+import { updateScoreCard, endTurn, cutDisabled, disallowCutScores } from '../actions'
 import { scoreTopSection, scoreBottomSection } from '../utils/scoringLogic'
+import { cutScore } from '../utils/cutScore'
 
 
 function confirmScore(props) {
@@ -11,39 +12,6 @@ function confirmScore(props) {
   props.dispatch(updateScoreCard(props.rollScore.button, props.rollScore.score))
   scoreTopSection(props)
   scoreBottomSection(props)
-}
-
-const map = {
-  ones: 'Ones',
-  twos: 'Twos',
-  threes: 'Threes',
-  fours: 'Fours',
-  fives: 'Fives',
-  sixes: 'Sixes',
-  threeOfKind: '3 of kind',
-  fourOfKind: '4 of kind',
-  fullHouse: 'Full House',
-  smStraight: 'Small Straight',
-  lgStraight: 'Large Straight',
-  yahtzee: 'Yahtzee',
-  chance: 'Chance',
-}
-
-function cutScore(props){
-  props.dispatch(allowCutScores())
-  let arr = Object.entries(props.scoreCard)
-  let scores = []
-  for(let i = 0; i < 6; i++){
-    if(!arr[i][1].scored){
-      scores.push(map[arr[i][0]])
-    }
-  }
-  for(let i = 9; i <= 15; i++){
-    if(!arr[i][1].scored){
-      scores.push(map[arr[i][0]])
-    }
-  }
-  props.dispatch(availableToCut(scores))
 }
 
 function OtherButtons(props) {
@@ -68,6 +36,7 @@ function ms2p(globalState){
     scoreCard: globalState.scoreCard,
     confirmButtonDisabled: globalState.confirmButtonDisabled,
     cutScoreButtonDisabled: globalState.cutScoreButtonDisabled,
+    cutScoresAllowed: globalState.cutScoresAllowed
   }
 }
 
