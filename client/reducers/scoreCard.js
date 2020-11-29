@@ -24,7 +24,9 @@ const initialState = {
 
 function reducer(state = initialState, action){
   let newState
+
   switch(action.type){
+    
     case SCORECARD_UPDATED:
       newState = {...state}
       newState[action.key].value = action.value

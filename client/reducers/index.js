@@ -13,13 +13,13 @@ import cutScoreButtonDisabled from './cutScoreButtonDisabled'
 
 export default combineReducers({
   scoreCard,
-   gamePage,
-   highScores,
-   dice,
-   rollsRemaining,
-   tempDiceHash,
-   availableScores,
-   rollScore,
-   confirmButtonDisabled,
-   cutScoreButtonDisabled,
+  rollsRemaining,
+  availableScores,
+  rollScore,
+  confirmButtonDisabled,
+  cutScoreButtonDisabled,
+  dice,
+  tempDiceHash,
+  highScores,
+  gamePage,
 })
