@@ -11,8 +11,8 @@ function scoreTopSection(props){
     total += arr[i].value
     if(!arr[i].scored) allScoresFilled = false
   }
-  props.dispatch(updateUpperTotal(total))
-  if(allScoresFilled) props.dispatch(printUpperTotal(total))
+  props.dispatch(updateUpperTotal(total, allScoresFilled))
+  // if(allScoresFilled) props.dispatch(printUpperTotal(total))
 }
 
 function confirmScore(props) {
