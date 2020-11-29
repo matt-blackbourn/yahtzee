@@ -1,4 +1,4 @@
-import { SCORECARD_UPDATED, UPPER_TOTAL_UPDATED } from "../actions"
+import { SCORECARD_UPDATED, UPPER_TOTAL_UPDATED, LOWER_TOTAL_UPDATED } from "../actions"
 
 const initialState = {
   ones: {scored: false, value: 0},
@@ -42,6 +42,16 @@ function reducer(state = initialState, action){
         newState.bonus.print = true
         newState.upperTotal.print = true
         newState.upperTotal.value = newState.total.value + newState.bonus.value
+      }
+      return newState
+
+    case LOWER_TOTAL_UPDATED:
+      newState = {...state}
+      newState.lowerTotal.print = action.print
+      newState.lowerTotal.value = action.value + state.bonusYahtzee.value
+      if(state.upperTotal.print && newState.lowerTotal.print){
+        newState.grandTotal.value = state.upperTotal.value + newState.lowerTotal.value
+        newState.grandTotal.print = true
       }
       return newState
 

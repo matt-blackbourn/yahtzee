@@ -1,17 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-function getUpperBonus(props) {
-  if (props.scoreCard.total.print) {
-    if (props.scoreCard.total.value >= 63) {
-      return 35
-    } else {
-      return 0
-    }
-  }
-  return
-}
-
 function ScoreCardSingle(props) {
   const card = props.scoreCard
   return (
@@ -87,15 +76,15 @@ function ScoreCardSingle(props) {
         </tr>
         <tr>
           <td className="bold">Bonus Yahtzee</td>
-          <td className="bold" ></td>
+          <td className="bold" >{card.bonusYahtzee.print && card.bonusYahtzee.value}</td>
         </tr>
         <tr>
           <td className="bold">Lower Total</td>
-          <td className="bold" ></td>
+          <td className="bold" >{card.lowerTotal.print && card.lowerTotal.value}</td>
         </tr>
         <tr>
           <td className="bold">Grand Total</td>
-          <td className="bold" ></td>
+          <td className="bold" >{card.grandTotal.print && card.grandTotal.value}</td>
         </tr>
       </tbody>
     </table>
