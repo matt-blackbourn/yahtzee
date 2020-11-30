@@ -21,6 +21,7 @@ const initialState = {
   lowerTotal: {print: false, value: 0},
   grandTotal: {print: false, value: 0}
 }
+const resetState = JSON.parse(JSON.stringify(initialState))
 
 function reducer(state = initialState, action){
   let newState
@@ -57,34 +58,34 @@ function reducer(state = initialState, action){
     case BONUS_YAHTZEE_SCORED:
       newState = {...state}
       let bonusYahtzeeCount = state.bonusYahtzee.value / 100
-      bonusYahtzeeCount ++
+      bonusYahtzeeCount++
       newState.bonusYahtzee.value = bonusYahtzeeCount * 100
       newState.bonusYahtzee.print = true
       return newState
 
     case GAME_RESTARTED:
-      return {
-        ones: {scored: false, value: 0},
-        twos: {scored: false, value: 0},
-        threes: {scored: false, value: 0},
-        fours: {scored: false, value: 0},
-        fives: {scored: false, value: 0},
-        sixes: {scored: false, value: 0},
-        total: {print: false, value: 0},
-        bonus: {print: false, value: 0},
-        upperTotal: {print: false, value: 0},
-        threeOfKind: {scored: false, value: 0},
-        fourOfKind: {scored: false, value: 0},
-        fullHouse: {scored: false, value: 0},
-        smStraight: {scored: false, value: 0},
-        lgStraight: {scored: false, value: 0},
-        yahtzee: {scored: false, value: 0},
-        chance: {scored: false, value: 0},
-        bonusYahtzee: {print: false, value: 0},
-        lowerTotal: {print: false, value: 0},
-        grandTotal: {print: false, value: 0}
-      }
-      // return initialState
+      // return {
+      //   ones: {scored: false, value: 0},
+      //   twos: {scored: false, value: 0},
+      //   threes: {scored: false, value: 0},
+      //   fours: {scored: false, value: 0},
+      //   fives: {scored: false, value: 0},
+      //   sixes: {scored: false, value: 0},
+      //   total: {print: false, value: 0},
+      //   bonus: {print: false, value: 0},
+      //   upperTotal: {print: false, value: 0},
+      //   threeOfKind: {scored: false, value: 0},
+      //   fourOfKind: {scored: false, value: 0},
+      //   fullHouse: {scored: false, value: 0},
+      //   smStraight: {scored: false, value: 0},
+      //   lgStraight: {scored: false, value: 0},
+      //   yahtzee: {scored: false, value: 0},
+      //   chance: {scored: false, value: 0},
+      //   bonusYahtzee: {print: false, value: 0},
+      //   lowerTotal: {print: false, value: 0},
+      //   grandTotal: {print: false, value: 0}
+      // }
+      return resetState
       
     default: 
       return state

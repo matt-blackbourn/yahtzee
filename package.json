@@ -14,10 +14,11 @@
     "start": "node server",
     "build": "run-p build:client build:server",
     "build:client": "npm run webpack -- --mode production",
-    "build:server": "npm run knex migrate:latest",
+    "build:server": "npm run knex -- migrate:latest",
     "server": "node server",
     "knex": "knex --knexfile ./server/db/knexfile.js",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "webpack": "webpack"
   },
   "babel": {
     "presets": [
