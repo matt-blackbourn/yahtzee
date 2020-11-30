@@ -7,7 +7,6 @@
   "author": "Matt Blackbourn",
   "license": "ISC",
   "scripts": {
-    "knex": "knex --knexfile ./server/db/knexfile.js",
     "client": "webpack-dev-server --hot --inline",
     "dev": "run-p dev:client dev:server",
     "dev:client": "webpack --watch",
@@ -17,6 +16,7 @@
     "build:client": "npm run webpack -- --mode production",
     "build:server": "npm run knex -- migrate:latest",
     "server": "node server",
+    "knex": "knex --knexfile ./server/db/knexfile.js",
     "test": "jest --watchAll"
   },
   "babel": {
