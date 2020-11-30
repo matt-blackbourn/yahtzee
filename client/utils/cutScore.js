@@ -1,6 +1,6 @@
 import { disallowCutScores, allowCutScores } from "../actions"
 
-const map = {
+export const map = {
   ones: 'Ones',
   twos: 'Twos',
   threes: 'Threes',

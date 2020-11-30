@@ -1,11 +1,12 @@
 import { buildHash, rollDice, scoringButtonsEnabled, scoreBonusYahtzee } from "../actions"
+import { map } from "./cutScore"
 
 export const rollAvailableDice = (props) => {
   let newDice = [...props.dice]
   for (let i = 0; i < props.dice.length; i++) {
     if (!props.dice[i].keep) {
       // newDice[i].value = (Math.floor(Math.random() * 6) + 1)
-      newDice[i].value = 4
+      newDice[i].value = 1
     }
   }
   props.dispatch(rollDice(newDice))
@@ -49,25 +50,20 @@ export const checkPossibleScores = (props, tempHash) => {
     }
   }
 
-  //check for runs and fullhouse
+  //check for runs 
   for (let value of Object.values(tempHash)) {
     if (value >= 3 && !props.scoreCard.threeOfKind.scored) availableScores.push('3 of kind')
     if (value >= 4 && !props.scoreCard.fourOfKind.scored) availableScores.push('4 of kind')
-    if (value === 5 ) {
-      if(!props.scoreCard.yahtzee.scored){
-        availableScores.push('Yahtzee')
-      } else {
-        handleBonusYahtzee(props)
-      }
-    }
-    if (value === 3 &&
-      Object.entries(tempHash).length === 2 &&
-      !props.scoreCard.fullHouse.scored) {
-      availableScores.push('Full House')
-    }
+
+    //check for full house
+    if (
+        value === 3 && 
+        Object.entries(tempHash).length === 2 &&
+        !props.scoreCard.fullHouse.scored
+    ) availableScores.push('Full House')
   }
 
-  //check for straights
+  //check for small straight
   let keys = Object.keys(tempHash)
   if (keys.length >= 4) {
     if (
@@ -79,6 +75,8 @@ export const checkPossibleScores = (props, tempHash) => {
       if (!props.scoreCard.smStraight.scored) availableScores.push('Small Straight')
     }
   }
+
+  //check for large straight
   if (keys.length === 5) {
     if (
       (keys[0] === '1' && keys[4] === '5') ||
@@ -87,23 +85,37 @@ export const checkPossibleScores = (props, tempHash) => {
       if (!props.scoreCard.lgStraight.scored) availableScores.push('Large Straight')
     }
   }
+
   //check for chance
   if (!props.scoreCard.chance.scored) availableScores.push('Chance')
 
+  //check for yahtzee - last due to modifying availableScores for bonus yahtzees
+  for (let value of Object.values(tempHash)) {
+    if (value === 5 ) {
+      if(!props.scoreCard.yahtzee.scored){
+        availableScores.push('Yahtzee')
+      } else {
+        props.dispatch(scoreBonusYahtzee())
+        if(numberIsAvailable(availableScores)){
+          let number = availableScores[0]
+          availableScores = []
+          availableScores.push(number)
+        } else {
+          const arr = Object.entries(props.scoreCard)
+          for(let i = 9; i <= 15; i++){
+            if(!arr[i][1].scored){
+              availableScores.push(map[arr[i][0]])
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //dispatch final available scoreing options
   props.dispatch(scoringButtonsEnabled(availableScores))
 }
 
-
-function handleBonusYahtzee(props){
-
-  //if yahtzee scored, add another yahtzee
-    //if upper score available, must take it (disable lower buttons), otherwise, enable all available lower scoreing buttons (same as from cut score logic)
-  
-  if(props.scoreCard.yahtzee.scored){
-    console.log('hit')
-    props.dispatch(scoreBonusYahtzee())
-    
-  } else {
-    
-  }
+const numberIsAvailable = availableScores => {
+  return availableScores.some(score => ['Ones', 'Twos', 'Threes', 'Fours', 'Fives', 'Sixes'].includes(score))
 }
