@@ -8,7 +8,6 @@ import tempDiceHash from './tempDiceHash'
 import availableScores from './availableScores'
 import rollScore from './rollScore'
 import scoreCard from './scoreCard'
-import confirmButtonDisabled from './confirmButtonDisabled'
 import cutScoreButtonDisabled from './cutScoreButtonDisabled'
 import scoresAvailableToCut from './scoresAvailableToCut'
 import cutScoresAllowed from './cutScoresAllowed'
@@ -19,7 +18,6 @@ export default combineReducers({
   availableScores,
   cutScoresAllowed,
   scoresAvailableToCut,
-  confirmButtonDisabled,
   cutScoreButtonDisabled,
   dice,
   tempDiceHash,

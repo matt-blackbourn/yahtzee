@@ -1,11 +1,11 @@
-import { CUT_ENABLED, CUT_DISABLED } from "../actions"
+import { CUT_SCORE_BUTTON_ENABLED, CUT_SCORE_BUTTON_DISABLED } from "../actions"
 
 
 function reducer(state = true, action) {
   switch (action.type) {
-    case CUT_ENABLED:
+    case CUT_SCORE_BUTTON_ENABLED:
       return false
-    case CUT_DISABLED:
+    case CUT_SCORE_BUTTON_DISABLED:
       return true
     default:
       return state

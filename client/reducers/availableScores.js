@@ -1,10 +1,10 @@
-import { SCORING_BUTTONS_ENABLED, TURN_ENDED } from '../actions'
+import { SCORING_BUTTONS_ENABLED, RESET } from '../actions'
 
 function reducer(state = [], action){
    switch(action.type){
       case SCORING_BUTTONS_ENABLED:
         return action.buttons
-      case TURN_ENDED:
+      case RESET:
         return []
       default:
          return state

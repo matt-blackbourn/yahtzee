@@ -1,4 +1,4 @@
-import { disallowCutScores, allowCutScores, availableToCut } from "../actions"
+import { disallowCutScores, allowCutScores, availableToCut, resetRollScore } from "../actions"
 
 const map = {
   ones: 'Ones',
@@ -17,6 +17,7 @@ const map = {
 }
 
 export const cutScore = props => {
+  props.dispatch(resetRollScore())
   if(props.cutScoresAllowed){
     props.dispatch(disallowCutScores())
   } else {

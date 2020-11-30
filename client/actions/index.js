@@ -1,5 +1,5 @@
 
-export const TURN_ENDED = 'TURN_ENDED'
+export const RESET = 'RESET'
 export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const GET_HIGHSCORES = 'GET_HIGHSCORES'
 export const DICE_HELD = 'DICE_HELD'
@@ -9,15 +9,14 @@ export const TEMP_DICE_HASH_BUILT = 'TEMP_DICE_HASH_BUILT'
 export const SCORING_BUTTONS_ENABLED = 'SCORING_BUTTONS_ENABLED'
 export const SCORE_CALCULATED = 'SCORE_CALCULATED'
 export const SCORECARD_UPDATED = 'SCORECARD_UPDATED'
-export const CONFIRM_ENABLED = 'CONFIRM_ENABLED'
-export const CONFIRM_DISABLED = 'CONFIRM_DISABLED'
-export const CUT_ENABLED = 'CUT_ENABLED'
-export const CUT_DISABLED = 'CUT_DISABLED'
+export const CUT_SCORE_BUTTON_ENABLED = 'CUT_SCORE_BUTTON_ENABLED'
+export const CUT_SCORE_BUTTON_DISABLED = 'CUT_SCORE_BUTTON_DISABLED'
 export const UPPER_TOTAL_UPDATED = 'UPPER_TOTAL_UPDATED'
 export const LOWER_TOTAL_UPDATED = 'LOWER_TOTAL_UPDATED'
 export const POSSIBLE_CUT_SCORES_ADDED = 'POSSIBLE_CUT_SCORES_ADDED'
 export const CUT_SCORES_ALLOWED = 'CUT_SCORES_ALLOWED'
 export const CUT_SCORES_DISALLOWED = 'CUT_SCORES_DISALLOWED'
+export const RESET_ROLL_SCORE = 'RESET_ROLL_SCORE'
 
 //dice actions
 
@@ -25,6 +24,12 @@ export const holdDice = dice => {
    return {
       type: DICE_HELD,
       dice
+   }
+}
+
+export const resetRollScore = () => {
+   return {
+      type: RESET_ROLL_SCORE
    }
 }
 
@@ -83,33 +88,21 @@ export const updateScoreCard = (key, value) => {
   }
 }
 
-export const confirmEnabled = () => {
-  return {
-    type: CONFIRM_ENABLED
-  }
-}
-
-export const confirmDisabled = () => {
-  return {
-    type: CONFIRM_DISABLED
-  }
-}
-
 export const endTurn = () => {
   return {
-    type: TURN_ENDED
+    type: RESET
   }
 }
 
-export const cutEnabled = () => {
+export const enableCutScoreButton = () => {
   return {
-    type: CUT_ENABLED
+    type: CUT_SCORE_BUTTON_ENABLED
   }
 }
 
-export const cutDisabled = () => {
+export const disableCutScoreButton = () => {
   return {
-    type: CUT_DISABLED
+    type: CUT_SCORE_BUTTON_DISABLED
   }
 }
 

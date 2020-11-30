@@ -1,11 +1,11 @@
-import { TEMP_DICE_HASH_BUILT, TURN_ENDED } from "../actions"
+import { TEMP_DICE_HASH_BUILT, RESET } from "../actions"
 
 
 function reducer(state = {}, action){
    switch(action.type){
       case TEMP_DICE_HASH_BUILT:
          return action.hash
-      case TURN_ENDED:
+      case RESET:
         return {}
       default:
          return state

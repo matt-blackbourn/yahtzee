@@ -1,9 +1,8 @@
-import { rollScored, confirmEnabled, updateUpperTotal, updateLowerTotal } from "../actions"
+import { rollScored, updateUpperTotal, updateLowerTotal } from "../actions"
 
 export const calculateScore = (event, props) => {
   let score = 0
   let button = ''
-  props.dispatch(confirmEnabled())
   switch(event.target.id){
     case 'Ones':
       score = props.tempHash['1']
@@ -92,3 +91,9 @@ export const scoreBottomSection = props => {
   }
   props.dispatch(updateLowerTotal(total, allScoresFilled))
 }
+
+
+//ctrl + r = most recent search
+//.zshrc for aliases
+//tmux
+//autojump - j hihi
