@@ -46,8 +46,8 @@ h1{
 }
 
 .cutScore{
-   background-color: red;
-   color: white;
+   border: red 2px solid;
+
 }
 
 table{

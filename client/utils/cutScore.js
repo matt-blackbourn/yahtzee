@@ -1,4 +1,4 @@
-import { disallowCutScores, allowCutScores, availableToCut, resetRollScore } from "../actions"
+import { disallowCutScores, allowCutScores } from "../actions"
 
 const map = {
   ones: 'Ones',
@@ -16,15 +16,17 @@ const map = {
   chance: 'Chance',
 }
 
-export const cutScore = props => {
-  props.dispatch(resetRollScore())
+export const toggleCutScore = props => {
   if(props.cutScoresAllowed){
     props.dispatch(disallowCutScores())
   } else {
     props.dispatch(allowCutScores())
   }
-  let arr = Object.entries(props.scoreCard)
+}
+
+export const buildCutScoresArray = props => {
   let scores = []
+  let arr = Object.entries(props.scoreCard)
   for(let i = 0; i < 6; i++){
     if(!arr[i][1].scored){
       scores.push(map[arr[i][0]])
@@ -35,8 +37,10 @@ export const cutScore = props => {
       scores.push(map[arr[i][0]])
     }
   }
-  props.dispatch(availableToCut(scores))
+  return scores
 }
+
+
 
 export const getClass = (props, name, section) => {
   if(props.cutScoresAllowed && props.scoresAvailableToCut.includes(name)){

@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updateScoreCard, endTurn, disableCutScoreButton, disallowCutScores, resetRollScore } from '../actions'
+import { updateScoreCard, endTurn, disableCutScoreButton, disallowCutScores, resetRollScore, availableToCut } from '../actions'
 import { scoreTopSection, scoreBottomSection } from '../utils/scoringLogic'
-import { cutScore } from '../utils/cutScore'
+import { buildCutScoresArray, toggleCutScore } from '../utils/cutScore'
 
 
-function confirmScore(props) {
+const confirmScore = props => {
   props.dispatch(endTurn())
   props.dispatch(disableCutScoreButton())
   props.dispatch(disallowCutScores())
@@ -13,7 +13,12 @@ function confirmScore(props) {
   props.dispatch(updateScoreCard(props.rollScore.button, props.rollScore.score))
   scoreTopSection(props)
   scoreBottomSection(props)
+}
 
+const cutScore = props => {
+  toggleCutScore(props)
+  props.dispatch(resetRollScore())
+  props.dispatch(availableToCut(buildCutScoresArray(props)))
 }
 
 function OtherButtons(props) {
