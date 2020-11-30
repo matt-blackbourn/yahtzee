@@ -18,6 +18,7 @@ export const CUT_SCORES_ALLOWED = 'CUT_SCORES_ALLOWED'
 export const CUT_SCORES_DISALLOWED = 'CUT_SCORES_DISALLOWED'
 export const RESET_ROLL_SCORE = 'RESET_ROLL_SCORE'
 export const BONUS_YAHTZEE_SCORED = 'BONUS_YAHTZEE_SCORED'
+export const GAME_RESTARTED = 'GAME_RESTARTED'
 
 //dice actions
 
@@ -92,6 +93,12 @@ export const updateScoreCard = (key, value) => {
 export const endTurn = () => {
   return {
     type: RESET
+  }
+}
+
+export const restartGame = () => {
+  return {
+    type: GAME_RESTARTED
   }
 }
 

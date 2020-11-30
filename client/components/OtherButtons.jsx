@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updateScoreCard, endTurn, disableCutScoreButton, disallowCutScores, resetRollScore, availableToCut } from '../actions'
+import { updateScoreCard, endTurn, disableCutScoreButton, disallowCutScores, resetRollScore, availableToCut, changePage } from '../actions'
 import { scoreTopSection, scoreBottomSection } from '../utils/scoringLogic'
 import { buildCutScoresArray, toggleCutScore } from '../utils/cutScore'
 
@@ -21,9 +21,14 @@ const cutScore = props => {
   toggleCutScore(props)
 }
 
+const toggleHighScores = (props, event) => {
+  event.preventDefault()
+  props.dispatch(changePage(false))
+}
+
 function OtherButtons(props) {
   return (
-    <div>
+    <div className='container flexCenter'>
       <button
         disabled={props.rollScore.button === ''}
         onClick={() => confirmScore(props)}
@@ -32,6 +37,7 @@ function OtherButtons(props) {
         disabled={props.cutScoreButtonDisabled}
         onClick={() => cutScore(props)}
       >Cut a Score</button>
+      <a href='' onClick={(event) => toggleHighScores(props, event)}><h4>High Scores!</h4></a>
     </div>
   )
 }

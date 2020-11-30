@@ -1,4 +1,4 @@
-import { SCORE_CALCULATED, RESET_ROLL_SCORE } from "../actions"
+import { SCORE_CALCULATED, RESET_ROLL_SCORE, GAME_RESTARTED } from "../actions"
 
 const initialState = {
   button: '',
@@ -12,8 +12,13 @@ function reducer(state = initialState, action){
         button: action.button,
         score: action.score
       }
+
     case RESET_ROLL_SCORE:
       return initialState
+
+    case GAME_RESTARTED:
+      return initialState
+      
     default:
       return state
   }

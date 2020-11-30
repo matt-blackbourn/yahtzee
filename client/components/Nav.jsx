@@ -1,14 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { changePage, reduceRollsRemaining, enableCutScoreButton } from '../actions'
+import { reduceRollsRemaining, enableCutScoreButton, restartGame } from '../actions'
 import { rollAvailableDice } from '../utils/rollDiceLogic'
-
-
-
-const toggleHighScores = (props, event) => {
-   event.preventDefault()
-   props.dispatch(changePage(false))
-}
 
 const rollDice = props => {
    if(props.rollsRemaining > 0){
@@ -18,13 +11,19 @@ const rollDice = props => {
    }
 }
 
+const restart = props => {
+  if(window.confirm('Are you sure you want to restart your game?')) { 
+    props.dispatch(restartGame())
+  }
+}
+
 const Nav = props => {
    return (
-      <div className="container">
+      <div className="container flexCenter">
          <button id="roll" onClick={() => rollDice(props)}>Roll</button>
         <h4>You will score: <span>{props.rollScore.score}</span></h4>
          <h4>Rolls remaining: <span>{props.rollsRemaining}</span></h4>
-         <a href='' onClick={(event) => toggleHighScores(props, event)}><h4>High Scores!</h4></a>
+         <button onClick={() => restart(props)}>Restart Game</button>
       </div>
    )
 }

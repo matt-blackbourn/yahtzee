@@ -1,4 +1,4 @@
-import { CUT_SCORES_ALLOWED, CUT_SCORES_DISALLOWED } from "../actions"
+import { CUT_SCORES_ALLOWED, CUT_SCORES_DISALLOWED, GAME_RESTARTED } from "../actions"
 
 
 function reducer(state = false, action){
@@ -7,6 +7,9 @@ function reducer(state = false, action){
       return true
 
     case CUT_SCORES_DISALLOWED:
+      return false
+      
+    case GAME_RESTARTED:
       return false
       
     default: return state
