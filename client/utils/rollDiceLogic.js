@@ -5,8 +5,7 @@ export const rollAvailableDice = (props) => {
   let newDice = [...props.dice]
   for (let i = 0; i < props.dice.length; i++) {
     if (!props.dice[i].keep) {
-      // newDice[i].value = (Math.floor(Math.random() * 6) + 1)
-      newDice[i].value = 1
+      newDice[i].value = (Math.floor(Math.random() * 6) + 1)
     }
   }
   props.dispatch(rollDice(newDice))

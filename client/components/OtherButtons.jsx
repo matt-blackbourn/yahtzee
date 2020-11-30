@@ -13,6 +13,13 @@ const confirmScore = props => {
   props.dispatch(updateScoreCard(props.rollScore.button, props.rollScore.score))
   scoreTopSection(props)
   scoreBottomSection(props)
+  checkForFinishedGame(props)
+}
+
+const checkForFinishedGame = props => {
+  if(props.scoreCard.grandTotal.print){
+    alert('Game over! Your score was ' + props.scoreCard.grandTotal.value + '. Click restart game to play again!')
+  }
 }
 
 const cutScore = props => {

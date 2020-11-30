@@ -49,6 +49,7 @@ function reducer(state = initialState, action){
       newState.lowerTotal.value = action.value + state.bonusYahtzee.value
       if(state.upperTotal.print && newState.lowerTotal.print){
         newState.grandTotal.value = state.upperTotal.value + newState.lowerTotal.value
+        newState.bonusYahtzee.print = true
         newState.grandTotal.print = true
       }
       return newState
