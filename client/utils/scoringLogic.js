@@ -59,6 +59,7 @@ export const calculateScore = (event, props) => {
       button = 'chance'
       break
   }
+  if(props.cutScoresAllowed) score = 0
   props.dispatch(rollScored(button, score))
 }
 

@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { calculateScore } from '../utils/scoringLogic'
-import { getClass } from '../utils/cutScore'
+import { getClass, enableButton } from '../utils/cutScore'
 
 
 const buttonNames = ['Ones', 'Twos', 'Threes', 'Fours', 'Fives', 'Sixes']
+
 
 const UpperButtons = props => {
    return (
@@ -13,7 +14,7 @@ const UpperButtons = props => {
             return <button 
                key={index} 
                className={getClass(props, name, 'upper')}
-               disabled={!props.availableScores.includes(name) && name}
+               disabled={enableButton(props, name)}
                id={name}
                onClick={(event) => calculateScore(event, props)}>
                {name}

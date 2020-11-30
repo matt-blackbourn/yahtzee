@@ -49,3 +49,19 @@ export const getClass = (props, name, section) => {
   }
 }
 
+export const enableButton = (props, name) => {
+  if(props.cutScoresAllowed){
+    if(props.scoresAvailableToCut.includes(name)){
+      return false
+    } else {
+      return true
+    }
+  } else {
+    if(props.availableScores.includes(name)){
+      return false
+    } else {
+      return true
+    }
+  }
+}
+
