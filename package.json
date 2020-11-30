@@ -13,7 +13,9 @@
     "dev:client": "webpack --watch",
     "dev:server": "nodemon server",
     "start": "node server",
-    "build": "webpack && knex migrate:latest",
+    "build": "run-p build:client build:server",
+    "build:client": "npm run webpack -- --mode production",
+    "build:server": "npm run knex -- migrate:latest",
     "server": "node server",
     "test": "jest --watchAll"
   },
@@ -31,13 +33,13 @@
     "express": "^4.17.1",
     "knex": "^0.21.12",
     "pg": "^8.5.0",
-    "react-redux": "^7.2.2",
-    "react-router-dom": "^5.2.0",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
     "superagent": "^5.2.2"
   },
   "devDependencies": {
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "react-router-dom": "^5.2.0",
     "sqlite3": "^5.0.0",
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
