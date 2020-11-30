@@ -16,9 +16,9 @@ const confirmScore = props => {
 }
 
 const cutScore = props => {
-  toggleCutScore(props)
   props.dispatch(resetRollScore())
   props.dispatch(availableToCut(buildCutScoresArray(props)))
+  toggleCutScore(props)
 }
 
 function OtherButtons(props) {

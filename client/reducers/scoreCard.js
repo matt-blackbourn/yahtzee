@@ -1,4 +1,4 @@
-import { SCORECARD_UPDATED, UPPER_TOTAL_UPDATED, LOWER_TOTAL_UPDATED } from "../actions"
+import { SCORECARD_UPDATED, UPPER_TOTAL_UPDATED, LOWER_TOTAL_UPDATED, BONUS_YAHTZEE_SCORED } from "../actions"
 
 const initialState = {
   ones: {scored: false, value: 0},
@@ -55,6 +55,14 @@ function reducer(state = initialState, action){
       }
       return newState
 
+    case BONUS_YAHTZEE_SCORED:
+      newState = {...state}
+      let bonusYahtzeeCount = state.bonusYahtzee.value / 100
+      bonusYahtzeeCount ++
+      newState.bonusYahtzee.value = bonusYahtzeeCount * 100
+      newState.bonusYahtzee.print = true
+      return newState
+      
     default: 
       return state
   }

@@ -17,6 +17,7 @@ export const POSSIBLE_CUT_SCORES_ADDED = 'POSSIBLE_CUT_SCORES_ADDED'
 export const CUT_SCORES_ALLOWED = 'CUT_SCORES_ALLOWED'
 export const CUT_SCORES_DISALLOWED = 'CUT_SCORES_DISALLOWED'
 export const RESET_ROLL_SCORE = 'RESET_ROLL_SCORE'
+export const BONUS_YAHTZEE_SCORED = 'BONUS_YAHTZEE_SCORED'
 
 //dice actions
 
@@ -109,6 +110,12 @@ export const disableCutScoreButton = () => {
 export const reduceRollsRemaining = () => {
    return {
       type: ROLL_COUNT_REDUCED
+   }
+}
+
+export const scoreBonusYahtzee = () => {
+   return {
+      type: BONUS_YAHTZEE_SCORED
    }
 }
 

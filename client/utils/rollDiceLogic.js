@@ -1,10 +1,11 @@
-import { buildHash, rollDice, scoringButtonsEnabled } from "../actions"
+import { buildHash, rollDice, scoringButtonsEnabled, scoreBonusYahtzee } from "../actions"
 
 export const rollAvailableDice = (props) => {
   let newDice = [...props.dice]
   for (let i = 0; i < props.dice.length; i++) {
     if (!props.dice[i].keep) {
-      newDice[i].value = (Math.floor(Math.random() * 6) + 1)
+      // newDice[i].value = (Math.floor(Math.random() * 6) + 1)
+      newDice[i].value = 4
     }
   }
   props.dispatch(rollDice(newDice))
@@ -52,9 +53,12 @@ export const checkPossibleScores = (props, tempHash) => {
   for (let value of Object.values(tempHash)) {
     if (value >= 3 && !props.scoreCard.threeOfKind.scored) availableScores.push('3 of kind')
     if (value >= 4 && !props.scoreCard.fourOfKind.scored) availableScores.push('4 of kind')
-    if (value === 5 && !props.scoreCard.yahtzee.scored) {
-      availableScores.push('Yahtzee')
-      // handleBonusYahtzee()
+    if (value === 5 ) {
+      if(!props.scoreCard.yahtzee.scored){
+        availableScores.push('Yahtzee')
+      } else {
+        handleBonusYahtzee(props)
+      }
     }
     if (value === 3 &&
       Object.entries(tempHash).length === 2 &&
@@ -87,4 +91,19 @@ export const checkPossibleScores = (props, tempHash) => {
   if (!props.scoreCard.chance.scored) availableScores.push('Chance')
 
   props.dispatch(scoringButtonsEnabled(availableScores))
+}
+
+
+function handleBonusYahtzee(props){
+
+  //if yahtzee scored, add another yahtzee
+    //if upper score available, must take it (disable lower buttons), otherwise, enable all available lower scoreing buttons (same as from cut score logic)
+  
+  if(props.scoreCard.yahtzee.scored){
+    console.log('hit')
+    props.dispatch(scoreBonusYahtzee())
+    
+  } else {
+    
+  }
 }
