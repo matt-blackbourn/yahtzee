@@ -36,15 +36,21 @@ const toggleHighScores = (props, event) => {
 function OtherButtons(props) {
   return (
     <div className='container flexCenter'>
+
       <button
         disabled={props.rollScore.button === ''}
         onClick={() => confirmScore(props)}
       >Confirm</button>
+
       <button
         disabled={props.cutScoreButtonDisabled}
         onClick={() => cutScore(props)}
       >Cut a Score</button>
+
       <a href='' onClick={(event) => toggleHighScores(props, event)}><h4>High Scores!</h4></a>
+
+      {props.scoreCard.grandTotal.print && <button>Save Score</button>}
+      
     </div>
   )
 }
