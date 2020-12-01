@@ -19,7 +19,7 @@ const confirmScore = props => {
 
 const checkForFinishedGame = props => {
   if(props.scoreCard.grandTotal.print){
-    alert('Game over! Your score was ' + props.scoreCard.grandTotal.value + '. If you want to save your score, click the Save, otherwise click Restart to play again!')
+    alert('Game over! Your score was ' + props.scoreCard.grandTotal.value + '. If you want to save your score, click Save, otherwise click Restart to play again!')
   }
 }
 
