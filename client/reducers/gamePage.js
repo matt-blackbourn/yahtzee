@@ -1,6 +1,6 @@
 import { CHANGE_PAGE, GAME_RESTARTED } from '../actions'
 
-function reducer(state = true, action) {
+function reducer(state = false, action) {
   switch (action.type) {
     case CHANGE_PAGE:
       return action.gamePageShowing

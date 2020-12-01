@@ -1,7 +1,7 @@
 
 export const RESET = 'RESET'
 export const CHANGE_PAGE = 'CHANGE_PAGE'
-export const GET_HIGHSCORES = 'GET_HIGHSCORES'
+
 export const DICE_HELD = 'DICE_HELD'
 export const ROLLED_DICE = 'ROLLED_DICE'
 export const ROLL_COUNT_REDUCED = 'ROLL_COUNT_REDUCED'
@@ -133,12 +133,6 @@ export const changePage = change => {
    }
 }
 
-export const getHighScores = scores => {
-   return {
-      type: GET_HIGHSCORES,
-      scores
-   }
-}
 
 export const availableToCut = scores => {
    return {

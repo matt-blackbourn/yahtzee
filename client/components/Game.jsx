@@ -12,7 +12,6 @@ function Game(props) {
          <Nav />
          <Dice />
          <Buttons />
-
          <OtherButtons />
          <ScorecardSingle />
       </>
