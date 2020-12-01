@@ -49,7 +49,7 @@ function OtherButtons(props) {
 
       <a href='' onClick={(event) => toggleHighScores(props, event)}><h4>High Scores!</h4></a>
 
-      {props.scoreCard.grandTotal.print && <button>Save Score</button>}
+      {props.scoreCard.grandTotal.print && <button onClick={() => alert('This feature coming soon!')}>Save Score</button>}
       
     </div>
   )

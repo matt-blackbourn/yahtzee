@@ -19,7 +19,7 @@ const initialState = {
   chance: {scored: false, value: 0},
   bonusYahtzee: {print: false, value: 0},
   lowerTotal: {print: false, value: 0},
-  grandTotal: {print: true, value: 0} 
+  grandTotal: {print: false, value: 0} 
 }
 
 // const deepCloneInitialState = JSON.parse(JSON.stringify(initialState))
