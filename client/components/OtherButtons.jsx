@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { updateScoreCard, endTurn, disableCutScoreButton, disallowCutScores, resetRollScore, availableToCut, changePage } from '../actions'
 import { scoreTopSection, scoreBottomSection } from '../utils/scoringLogic'
 import { buildCutScoresArray, toggleCutScore } from '../utils/cutScore'
+import { showForm } from '../actions/highScores'
 
 
 const confirmScore = props => {
@@ -18,7 +19,7 @@ const confirmScore = props => {
 
 const checkForFinishedGame = props => {
   if(props.scoreCard.grandTotal.print){
-    alert('Game over! Your score was ' + props.scoreCard.grandTotal.value + '. Click restart game to play again!')
+    alert('Game over! Your score was ' + props.scoreCard.grandTotal.value + '. If you want to save your score, click the Save, otherwise click Restart to play again!')
   }
 }
 
@@ -49,7 +50,8 @@ function OtherButtons(props) {
 
       <a href='' onClick={(event) => toggleHighScores(props, event)}><h4>High Scores!</h4></a>
 
-      {props.scoreCard.grandTotal.print && <button onClick={() => alert('This feature coming soon!')}>Save</button>}
+      {(props.scoreCard.grandTotal.print && !props.showForm) && 
+        <button onClick={() => props.dispatch(showForm())}>Save</button>}
       
     </div>
   )
@@ -61,7 +63,8 @@ function ms2p(globalState) {
     rollScore: globalState.rollScore,
     scoreCard: globalState.scoreCard,
     cutScoreButtonDisabled: globalState.cutScoreButtonDisabled,
-    cutScoresAllowed: globalState.cutScoresAllowed
+    cutScoresAllowed: globalState.cutScoresAllowed,
+    showForm: globalState.showForm
   }
 }
 

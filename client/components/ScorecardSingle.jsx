@@ -92,7 +92,7 @@ function ScoreCardSingle(props) {
           </tbody>
         </table>
       </div>
-      <SaveScoreForm/>
+      {props.showForm && <SaveScoreForm/>}
     </div>
   )
 }
@@ -100,6 +100,7 @@ function ScoreCardSingle(props) {
 function ms2p(globalState) {
   return {
     scoreCard: globalState.scoreCard,
+    showForm: globalState.showForm
   }
 }
 

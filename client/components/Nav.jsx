@@ -22,7 +22,7 @@ const Nav = props => {
     <div className="container flexCenter">
       <button
         id="roll"
-        disabled={props.rollsRemaining === 0}
+        disabled={(props.rollsRemaining === 0 || props.scoreCard.grandTotal.print)}
         onClick={() => rollDice(props)}>
         Roll</button>
       <h4>Score: <span>{props.rollScore.score}</span></h4>

@@ -31,7 +31,6 @@ class SaveScoreForm extends React.Component {
           <button onClick={this.handleClick}>Save Score</button>
         </form>
     )
-    
   }
 }
 

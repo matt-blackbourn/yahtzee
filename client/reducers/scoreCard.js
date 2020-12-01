@@ -1,7 +1,7 @@
 import { SCORECARD_UPDATED, UPPER_TOTAL_UPDATED, LOWER_TOTAL_UPDATED, BONUS_YAHTZEE_SCORED, GAME_RESTARTED } from "../actions"
 
 const initialState = {
-  ones: {scored: false, value: 1},
+  ones: {scored: false, value: 0},
   twos: {scored: false, value: 0},
   threes: {scored: false, value: 0},
   fours: {scored: false, value: 0},
@@ -19,7 +19,7 @@ const initialState = {
   chance: {scored: false, value: 0},
   bonusYahtzee: {print: false, value: 0},
   lowerTotal: {print: false, value: 0},
-  grandTotal: {print: true, value: 0} 
+  grandTotal: {print: false, value: 0} 
 }
 
 // const deepCloneInitialState = JSON.parse(JSON.stringify(initialState))

@@ -3,10 +3,6 @@ import { connect } from 'react-redux'
 import { changePage } from '../actions'
 import { changeActiveScore } from '../actions/highScores'
 
-function handleClick(props, event) {
-
-}
-
 function Highscores(props) {
   return (
     <div className='container'>
