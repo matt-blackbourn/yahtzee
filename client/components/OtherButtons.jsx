@@ -45,11 +45,11 @@ function OtherButtons(props) {
       <button
         disabled={props.cutScoreButtonDisabled}
         onClick={() => cutScore(props)}
-      >Cut a Score</button>
+      >Cut Score</button>
 
       <a href='' onClick={(event) => toggleHighScores(props, event)}><h4>High Scores!</h4></a>
 
-      {props.scoreCard.grandTotal.print && <button onClick={() => alert('This feature coming soon!')}>Save Score</button>}
+      {props.scoreCard.grandTotal.print && <button onClick={() => alert('This feature coming soon!')}>Save</button>}
       
     </div>
   )

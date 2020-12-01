@@ -1,4 +1,4 @@
-import { fetchHighScoresAPI } from "../api/highScores"
+import { fetchHighScoresAPI, postScoreAPI } from "../api/highScores"
 export const SET_HIGHSCORES = 'SET_HIGHSCORES'
 export const HIGHSCORE_UPDATED = 'HIGHSCORE_UPDATED'
 
@@ -21,5 +21,11 @@ export const changeActiveScore = score => {
   return {
     type: HIGHSCORE_UPDATED,
     score
+  }
+}
+
+export const postScore = newScore => {
+  return dispatch => {
+    postScoreAPI(newScore)
   }
 }

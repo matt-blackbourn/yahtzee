@@ -7,11 +7,11 @@ function getScores(db = connection) {
    return db('scores').select().orderBy('grandTotal', 'desc')
 }
 
-function getOneScore(id, db = connection) {
-   return db('scores').select().where('id', id).first()
+function addScore(score, db = connection) {
+   return db('scores').insert(score)
 }
 
 module.exports = {
    getScores,
-   getOneScore
+   addScore
 }
