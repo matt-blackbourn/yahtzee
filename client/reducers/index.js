@@ -11,6 +11,7 @@ import scoreCard from './scoreCard'
 import cutScoreButtonDisabled from './cutScoreButtonDisabled'
 import scoresAvailableToCut from './scoresAvailableToCut'
 import cutScoresAllowed from './cutScoresAllowed'
+import activeHighScore from './activeHighScore'
 
 export default combineReducers({
   scoreCard,
@@ -24,5 +25,5 @@ export default combineReducers({
   rollScore,
   highScores,
   gamePage,
-
+  activeHighScore,
 })

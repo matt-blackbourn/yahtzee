@@ -12,10 +12,6 @@
   align-items: center;
 }
 
-div{
-   margin: 10px;
-}
-
 .dice{
    width: 60px;
    height: 60px;
@@ -63,4 +59,10 @@ th{
 
 .blackout{
    background-color: black;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
