@@ -7,13 +7,24 @@ function handleClick(props, event){
    props.dispatch(changePage(true))
 }
 
-function Hightscores(props) {
+function Highscores(props) {
    return(
       <>
          <h1>Highscores page!</h1>
+         <ul>
+          {props.highScores.map(score => {
+            return <li>{score.name} - Total: {score.grandTotal}</li>
+          })}
+         </ul>
          <a href='' onClick={(event) => handleClick(props, event)}>Back to Yahtzee!</a>
       </>
    )
 }
 
-export default connect()(Hightscores)
+function ms2p(globalState){
+  return {
+    highScores: globalState.highScores
+  }
+}
+
+export default connect(ms2p)(Highscores)

@@ -1,21 +1,24 @@
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import Game from './Game'
 import Highscores from './Highscores'
 import { connect } from 'react-redux'
-import { fetchHighScores } from '../api.js'
+import { fetchHighScores } from '../actions/highScores'
 
-function App(props) {
-   useEffect(() => {
-      props.dispatch(fetchHighScores())
-   }, [])
 
-   return (
-      <div>
-         {props.gamePage ? <Game /> : <Highscores />}
-      </div>
-   )
-   
+class App extends React.Component {
+
+   componentDidMount(){
+     this.props.dispatch(fetchHighScores())
+   }
+
+   render(){
+     return (
+        <div>
+           {this.props.gamePage ? <Game /> : <Highscores />}
+        </div>
+     )
+   }
 }
 
 function mapState2Props(globalState){

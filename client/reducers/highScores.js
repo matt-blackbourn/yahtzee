@@ -1,8 +1,8 @@
-import { GET_HIGHSCORES } from '../actions'
+import { SET_HIGHSCORES } from '../actions/highScores'
 
 function reducer(state = [], action){
    switch(action.type){
-      case GET_HIGHSCORES:
+      case SET_HIGHSCORES:
          return action.scores
       default:
          return state
