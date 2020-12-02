@@ -1,5 +1,19 @@
-import { buildHash, rollDice, scoringButtonsEnabled, scoreBonusYahtzee } from "../actions"
+import { buildHash, rollDice, scoringButtonsEnabled, scoreBonusYahtzee, holdDice } from "../actions"
 import { map } from "./cutScore"
+
+export const keepDice = (index, props) => {
+  if(props.rollsRemaining < 3){
+    let newState = [...props.dice]
+    if(props.dice[index].keep){
+       newState[index].keep = false
+       newState[index].class = ''
+    } else {
+       newState[index].keep = true
+       newState[index].class = 'keep'
+    }
+    props.dispatch(holdDice(newState))
+  }
+}
 
 export const rollAvailableDice = (props) => {
   let newDice = [...props.dice]

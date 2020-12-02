@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { holdDice } from '../actions'
+import { keepDice } from '../utils/rollDiceLogic'
 
 function Dice(props) {
    return (
@@ -20,22 +20,10 @@ function Dice(props) {
    )
 }
 
-
-function keepDice(index, props){
-   let newState = [...props.dice]
-   if(props.dice[index].keep){
-      newState[index].keep = false
-      newState[index].class = ''
-   } else {
-      newState[index].keep = true
-      newState[index].class = 'keep'
-   }
-   props.dispatch(holdDice(newState))
-}
-
 function mapStateToProps(globalState){
    return {
-      dice: globalState.dice
+      dice: globalState.dice,
+      rollsRemaining: globalState.rollsRemaining
    }
 }
 
