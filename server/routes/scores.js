@@ -17,11 +17,12 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
    const score = req.body
    return db.addScore(score)
-      .then(() => res.json({}))
-      .catch(err => {
-         console.log(err)
-         res.status(500).json({message: 'something broke'})
-      })
+    .then(() => db.getScores())
+    .then((scores) => res.json(scores))
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({message: 'something broke'})
+    })
 })
 
 module.exports = router

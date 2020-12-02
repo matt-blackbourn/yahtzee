@@ -16,8 +16,8 @@ export const fetchHighScores = () => {
 export const postScore = newScore => {
   return dispatch => {
     postScoreAPI(newScore)
-      .then(() => {
-        dispatch(addToHighScores(newScore))
+      .then((scores) => {
+        dispatch(setHighScores(scores))
         dispatch(restartGame())
         dispatch(changeActiveScore(newScore))
         dispatch(changePage(false))
