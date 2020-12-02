@@ -5,7 +5,6 @@ import { scoreTopSection, scoreBottomSection } from '../utils/scoringLogic'
 import { buildCutScoresArray, toggleCutScore } from '../utils/cutScore'
 import { showForm } from '../actions/highScores'
 
-
 const confirmScore = props => {
   props.dispatch(endTurn())
   props.dispatch(disableCutScoreButton())

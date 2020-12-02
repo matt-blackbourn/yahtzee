@@ -15,13 +15,17 @@ class SaveScoreForm extends React.Component {
 
   handleClick = event => {
     event.preventDefault()
-    let newScore = {}
-    let scores = Object.entries(this.props.scoreCard)
-    for(let i = 0; i < scores.length; i++){
-      newScore[scores[i][0]] = scores[i][1].value
+    if(this.state.name === ''){
+      alert('Enter your name!')
+    } else {
+      let newScore = {}
+      let scores = Object.entries(this.props.scoreCard)
+      for(let i = 0; i < scores.length; i++){
+        newScore[scores[i][0]] = scores[i][1].value
+      }
+      newScore.name = this.state.name
+      this.props.dispatch(postScore(newScore))
     }
-    newScore.name = this.state.name
-    this.props.dispatch(postScore(newScore))
   }
 
   render(){
