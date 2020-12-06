@@ -9,4 +9,5 @@ server.use(express.static(path.join(__dirname, './public')))
 
 server.use('/api/scores', scoresRoutes)
 
+
 module.exports = server

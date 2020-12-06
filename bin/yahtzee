@@ -1,0 +1,21 @@
+
+#!/usr/bin/env node
+
+const commands = require('./commands')
+
+const cmd = process.argv[2]
+const id = process.argv[3]
+
+switch (cmd) {
+
+  case 'list':
+    commands.list()
+    break
+
+  case 'del':
+    commands.del(id)
+    break
+
+  default:
+    console.log(`I don't understand that command: ${cmd}`)
+}
