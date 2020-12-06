@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
-//run chmod +x todo 
-//gives this file executable permissions
+//run chmod +x yahtzee 
+// from root directory, gives this file executable permissions
 
-const commands = require('./commands')
+const commands = require('./bin/commands')
 
 const cmd = process.argv[2]
 const id = process.argv[3]
+const name = process.argv[4]
 
 switch (cmd) {
 
@@ -16,6 +17,10 @@ switch (cmd) {
 
   case 'del':
     commands.del(id)
+    break
+
+  case 'edit':
+    commands.editName(id, name)
     break
 
   default:

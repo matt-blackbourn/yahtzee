@@ -49,4 +49,15 @@ router.delete('/cli/:id', (req, res) => {
   })
 })
 
+router.patch('/cli/:id', (req, res) => {
+  return db.updateScoreCLI(req.params.id, req.body)
+     .then(() => {
+        res.json({message: `record ${req.params.id} deleted`})
+     })
+     .catch(err => {
+     console.log(err)
+     res.status(500).json({message: 'something broke'})
+  })
+})
+
 module.exports = router

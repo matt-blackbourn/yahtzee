@@ -19,9 +19,14 @@ function deleteScoreCLI(id, db = connection) {
   return db('scores').delete().where('id', id)
 }
 
+function updateScoreCLI(id, name, db = connection) {
+  return db('scores').update(name).where('id', id)
+}
+
 module.exports = {
    getScores,
    addScore,
    getScoresCLI,
-   deleteScoreCLI
+   deleteScoreCLI,
+   updateScoreCLI
 }

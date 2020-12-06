@@ -24,7 +24,18 @@ function del(id){
     .catch(err => console.error('Uh oh!', err.message))
 }
 
+function editName(id, name){
+  return request
+    .patch(URL + '/api/scores/cli/' + id)
+    .send({name: name})
+    .then(() => {
+        console.info(`${id}: Name updated to ${name}`)
+    })
+    .catch(err => console.error('Uh oh!', err.message))
+}
+
 module.exports = {
   list,
-  del
+  del,
+  editName
 }
