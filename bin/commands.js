@@ -1,24 +1,27 @@
 
 const request = require('superagent')
 
+// const URL = 'http://localhost:3000'
+const URL = 'https://yahtzee-play.herokuapp.com'
+
 function list(){
   return request
-    .get('/api/scores/cli')
+    .get(URL + '/api/scores/cli')
     .then(res => {
       res.body.forEach(score => {
         console.info(`${score.id}: ${score.name}, Total: ${score.grandTotal}`)
       })
     })
-    .catch(console.error('Uh oh!', err.message))
+    .catch(err => console.error('Uh oh!', err.message))
 }
 
 function del(id){
   return request
-    .delete('/api/scores/cli/' + id)
+    .delete(URL + '/api/scores/cli/' + id)
     .then(res => {
         console.info(res.body)
     })
-    .catch(console.error('Uh oh!', err.message))
+    .catch(err => console.error('Uh oh!', err.message))
 }
 
 module.exports = {
