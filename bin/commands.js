@@ -6,7 +6,7 @@ const URL = 'https://yahtzee-play.herokuapp.com'
 
 function list(){
   return request
-    .get(URL + '/api/scores/cli')
+    .get(URL + '/cli')
     .then(res => {
       res.body.forEach(score => {
         console.info(`${score.id}: ${score.name}, Total: ${score.grandTotal}`)
@@ -17,7 +17,7 @@ function list(){
 
 function del(id){
   return request
-    .delete(URL + '/api/scores/cli/' + id)
+    .delete(URL + '/cli/' + id)
     .then(res => {
         console.info(res.body)
     })
@@ -26,7 +26,7 @@ function del(id){
 
 function editName(id, name){
   return request
-    .patch(URL + '/api/scores/cli/' + id)
+    .patch(URL + '/cli/' + id)
     .send({name: name})
     .then(res => {
         console.info(res.body)
