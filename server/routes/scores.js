@@ -41,7 +41,7 @@ router.get('/cli', (req, res) => {
 router.delete('/cli/:id', (req, res) => {
   return db.deleteScoreCLI(req.params.id)
      .then(() => {
-        res.json({message: `record ${req.params.id} deleted`})
+        res.json({message: `score ${req.params.id} deleted`})
      })
      .catch(err => {
      console.log(err)
@@ -52,7 +52,7 @@ router.delete('/cli/:id', (req, res) => {
 router.patch('/cli/:id', (req, res) => {
   return db.updateScoreCLI(req.params.id, req.body)
      .then(() => {
-        res.json({message: `record ${req.params.id} deleted`})
+        res.json({message: `score ${req.params.id} name updated to ${req.body.name}`})
      })
      .catch(err => {
      console.log(err)

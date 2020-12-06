@@ -28,8 +28,8 @@ function editName(id, name){
   return request
     .patch(URL + '/api/scores/cli/' + id)
     .send({name: name})
-    .then(() => {
-        console.info(`${id}: Name updated to ${name}`)
+    .then(res => {
+        console.info(res.body)
     })
     .catch(err => console.error('Uh oh!', err.message))
 }
