@@ -4,12 +4,13 @@ import { postScore } from '../actions/highScores'
 
 class SaveScoreForm extends React.Component {
   state = {
-    name: ''
+    name: '',
+    password: ''
   }
 
   handleChange = event => {
     this.setState({
-      name: event.target.value
+      [event.target.name]: event.target.value
     })
   }
 
@@ -32,6 +33,7 @@ class SaveScoreForm extends React.Component {
     return(
       <form>
           <input type="text" name='name' placeholder='Enter Your Name' onChange={this.handleChange}/>
+          <input type="password" name='password' placeholder='Password' onChange={this.handleChange}/>
           <button onClick={this.handleClick}>Save Score</button>
         </form>
     )

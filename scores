@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-//run chmod +x yahtzee 
-// from root directory, gives this file executable permissions
+//run chmod +x yahtzee to give file executable permissions
 
 const commands = require('./bin/commands')
 
@@ -10,7 +9,6 @@ const id = process.argv[3]
 const name = process.argv[4]
 
 switch (cmd) {
-
   case 'list':
     commands.list()
     break
