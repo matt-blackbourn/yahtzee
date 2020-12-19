@@ -5,10 +5,16 @@ const db = require('../db/auth')
 router.post('/register', register)
 
 function register(req, res){
-  const {username, password} = req.body
   db.addUser(req.body)
     .then(ids => {
-      res.send(`${username} has been added with id: ${ids[0]}`)
+      res.status(201).json({ok: true})
+    })
+    .catch(error => {
+      if(error.errno == 19){
+        res.status(400).json({ok: false, message: 'username taken'})
+      } else {
+        res.status(500).json({ok: false, message: 'something went wrong'})
+      }
     })
 }
 
