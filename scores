@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-//run chmod +x yahtzee to give file executable permissions
+//run chmod +x scores to give file executable permissions
 
 const commands = require('./bin/commands')
 

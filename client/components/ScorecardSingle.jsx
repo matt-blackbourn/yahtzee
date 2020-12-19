@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SaveScoreForm from './SaveScoreForm'
+import Register from './Register'
 
 function ScoreCardSingle(props) {
   const card = props.scoreCard
@@ -93,6 +94,7 @@ function ScoreCardSingle(props) {
         </table>
       </div>
       {props.showForm && <SaveScoreForm/>}
+      {props.showForm && <Register/>}
     </div>
   )
 }

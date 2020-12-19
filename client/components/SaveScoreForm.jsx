@@ -31,18 +31,21 @@ class SaveScoreForm extends React.Component {
 
   render(){
     return(
+      <>
+      <h5>Enter your details to save your score</h5>
       <form>
           <input type="text" name='name' placeholder='Enter Your Name' onChange={this.handleChange}/>
           <input type="password" name='password' placeholder='Password' onChange={this.handleChange}/>
           <button onClick={this.handleClick}>Save Score</button>
         </form>
+      </> 
     )
   }
 }
 
 function ms2p(globalState){
   return {
-    scoreCard: globalState.scoreCard
+    scoreCard: globalState.scoreCard,
   }
 }
 
