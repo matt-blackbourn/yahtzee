@@ -8,22 +8,7 @@ function addScore(score, db = connection) {
    return db('scores').insert(score)
 }
 
-function getScoresCLI(db = connection) {
-  return db('scores').select('id', 'name', 'grandTotal').orderBy('grandTotal', 'desc')
-}
-
-function deleteScoreCLI(id, db = connection) {
-  return db('scores').delete().where('id', id)
-}
-
-function updateScoreCLI(id, name, db = connection) {
-  return db('scores').update(name).where('id', id)
-}
-
 module.exports = {
    getScores,
-   addScore,
-   getScoresCLI,
-   deleteScoreCLI,
-   updateScoreCLI
+   addScore
 }
