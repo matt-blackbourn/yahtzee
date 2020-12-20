@@ -1,13 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../db/auth')
+const token = require('../auth/token')
 
-router.post('/register', register)
+router.post('/register', register, token.issue)
 
-function register(req, res){
+function register(req, res, next){
   db.addUser(req.body)
-    .then(ids => {
-      res.status(201).json({ok: true})
+    .then(([id]) => {
+      res.locals.userId = id
+      next()
     })
     .catch(error => {
       if(error.errno == 19){
