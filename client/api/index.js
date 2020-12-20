@@ -12,3 +12,10 @@ export const postScoreAPI = newScore => {
     .send(newScore)
     .then(res => res.body)
 }
+
+export const registerUserAPI = user => {
+  return request
+    .post('/api/auth/register')
+    .send(user)
+    .then(res => res.body)
+}

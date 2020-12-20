@@ -1,4 +1,4 @@
-import { fetchHighScoresAPI, postScoreAPI } from "../api/highScores"
+import { fetchHighScoresAPI, postScoreAPI } from "../api"
 import { changePage, restartGame } from "."
 export const SET_HIGHSCORES = 'SET_HIGHSCORES'
 export const HIGHSCORE_UPDATED = 'HIGHSCORE_UPDATED'
