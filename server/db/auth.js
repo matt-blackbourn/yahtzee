@@ -8,6 +8,11 @@ function addUser({ username, password }, db = connection){
     })
 }
 
+function getUsername(id, db = connection){
+  return db('users').select('username').where('id', id)
+}
+
 module.exports = {
   addUser,
+  getUsername
 }

@@ -7,7 +7,7 @@ function createToken (id) {
 function issue (req, res) {
   res.json({
     ok: true,
-    message: 'Authentication successful.',
+    message: 'Authentication successful',
     token: createToken(res.locals.userId)
   })
 }
