@@ -2,7 +2,9 @@ const express = require('express')
 const router = express.Router()
 const db = require('../db/auth')
 const token = require('../auth/token')
-const verifyJwt = require('express-jwt') //creates middleware function to take JWT out of header, decode decode it and return a req.user object
+
+//creates middleware function to take JWT out of req header, decode it and return a req.user object with id
+const verifyJwt = require('express-jwt') 
 
 router.post('/register', register, token.issue)
 
@@ -21,9 +23,9 @@ function register(req, res, next){
   })
 }
 
-router.get('/user', verifyJwt({secret: process.env.JWT_SECRET, algorithms: ['HS256']}), getUserId)
+router.get('/user', verifyJwt({secret: process.env.JWT_SECRET, algorithms: ['HS256']}), getUser)
 
-function getUserId(req, res){
+function getUser(req, res){
   db.getUsername(req.user.id)
     .then(user => {
       res.json({ok: true, username: user[0].username})
