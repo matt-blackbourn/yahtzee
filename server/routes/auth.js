@@ -9,8 +9,10 @@ const verifyJwt = require('express-jwt')
 router.post('/register', register)
 
 function createToken (id) {
-  return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '1d'})
+  return jwt.sign({id}, process.env.JWT_SECRET)
 }
+
+// jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '1d'})
 
 function register(req, res){
   db.addUser(req.body)

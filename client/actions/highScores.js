@@ -16,11 +16,11 @@ export const fetchHighScores = () => {
 export const postScore = newScore => {
   return dispatch => {
     postScoreAPI(newScore)
-      .then(scores => {
-        dispatch(setHighScores(scores))
-        dispatch(restartGame())
-        dispatch(changeActiveScore(newScore))
-        dispatch(changePage(false))
+      .then(res => {
+          dispatch(setHighScores(res))
+          dispatch(restartGame())
+          dispatch(changeActiveScore(newScore))
+          dispatch(changePage(false))
       }) 
   }
 }
