@@ -1,18 +1,26 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../db/auth')
-const token = require('../auth/token')
+const jwt = require('jsonwebtoken')
 
 //creates middleware function to take JWT out of req header, decode it and return a req.user object with id
 const verifyJwt = require('express-jwt') 
 
-router.post('/register', register, token.issue)
+router.post('/register', register)
 
-function register(req, res, next){
+function createToken (id) {
+  return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '1d'})
+}
+
+function register(req, res){
   db.addUser(req.body)
   .then(([id]) => {
-    res.locals.userId = id
-    next()
+    res.json({
+      ok: true,
+      message: 'Authentication successful',
+      token: createToken(id),
+      username: req.body.username
+    })
   })
   .catch(error => {
     if(error.errno == 19){

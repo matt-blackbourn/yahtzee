@@ -2,7 +2,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('scores', table => {
    table.increments('id')
-   table.string('name')
+   table.string('username')
    table.integer('ones')
    table.integer('twos')
    table.integer('threes')

@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+  console.log(req.header('Authorization'))
    const score = req.body
    return db.addScore(score)
     .then(() => db.getScores())
@@ -26,3 +27,5 @@ router.post('/', (req, res) => {
 })
 
 module.exports = router
+
+// verifyJwt({secret: process.env.JWT_SECRET, algorithms: ['HS256']})

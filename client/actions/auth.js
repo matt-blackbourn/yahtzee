@@ -6,15 +6,12 @@ export const registerUser = user => {
     registerUserAPI(user)
       .then(res => {
         if(res.ok){
-          dispatch(setActiveUser(user.username))
+          dispatch(setActiveUser(res.username))
           window.localStorage.setItem('token', res.token)
-          //this needs to submit score, and save score form needs to be login
-          //once logged in, token will be in local storage, and active user will be in state and can be used for entering scores
-          //on initial page load, need to verify token
-          //if token valid, need to set active user
+        
 
         } else {
-          
+          alert(res.message)
         }
       })
   }

@@ -6,9 +6,15 @@ export const fetchHighScoresAPI = () => {
     .then(res => res.body)
 }
 
+function getToken(){
+  return window.localStorage.getItem('token')
+}
+
 export const postScoreAPI = newScore => {
   return request
     .post('/api/scores')
+    .set({ Accept: 'application/json' })
+    .set({ Authorization: `Bearer ${getToken()}` })
     .send(newScore)
     .then(res => res.body)
 }
