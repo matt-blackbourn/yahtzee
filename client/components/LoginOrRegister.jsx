@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { postScore } from '../actions/highScores'
+import Register from './Register'
 
 class SaveScoreForm extends React.Component {
   state = {
@@ -24,7 +25,7 @@ class SaveScoreForm extends React.Component {
       for(let i = 0; i < scores.length; i++){
         newScore[scores[i][0]] = scores[i][1].value
       }
-      newScore.name = this.state.name
+      newScore.name = this.state.name //this will be this.props.activeuser
       this.props.dispatch(postScore(newScore))
     }
   }
@@ -32,11 +33,17 @@ class SaveScoreForm extends React.Component {
   render(){
     return(
       <>
-      <h5>Enter your details to save your score</h5>
+      <h5>Log in to save your score</h5>
       <form>
-          <input type="text" name='name' placeholder='Enter Your Name' onChange={this.handleChange}/>
+          <input type="text" 
+            name='username' 
+            placeholder='username' 
+            onChange={this.handleChange} />
+
           <input type="password" name='password' placeholder='Password' onChange={this.handleChange}/>
+
           <button onClick={this.handleClick}>Save Score</button>
+          <Register />
         </form>
       </> 
     )
@@ -46,6 +53,7 @@ class SaveScoreForm extends React.Component {
 function ms2p(globalState){
   return {
     scoreCard: globalState.scoreCard,
+    activeUser: globalState.activeUser
   }
 }
 

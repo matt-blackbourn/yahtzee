@@ -1,19 +1,33 @@
 import { registerUserAPI } from "../api"
+export const ACTIVE_USER_SET = 'ACTIVE_USER_SET'
 
 export const registerUser = user => {
   return dispatch => {
     registerUserAPI(user)
       .then(res => {
         if(res.ok){
-          //set active user
-          window.localStorage.setItem(token, res.token)
-          alert('token set')
+          dispatch(setActiveUser(user.username))
+          window.localStorage.setItem('token', res.token)
+          //this needs to submit score, and save score form needs to be login
+          //once logged in, token will be in local storage, and active user will be in state and can be used for entering scores
+          //on initial page load, need to verify token
+          //if token valid, need to set active user
+
         } else {
           
         }
       })
   }
 }
+
+export const setActiveUser = name => {
+  return {
+    type: ACTIVE_USER_SET,
+    name
+  }
+}
+
+// window.localStorage.getItem(key)
 
 // {
 //   "ok": true,
