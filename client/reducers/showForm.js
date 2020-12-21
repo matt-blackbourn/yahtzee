@@ -1,7 +1,7 @@
 import { SHOW_FORM } from "../actions/highScores"
 import { GAME_RESTARTED } from "../actions"
 
-function reducer(state = true, action){
+function reducer(state = false, action){
   switch(action.type){
     case SHOW_FORM:
       return true

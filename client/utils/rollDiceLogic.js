@@ -125,7 +125,7 @@ export const checkPossibleScores = (props, tempHash) => {
     }
   }
 
-  //dispatch final available scoreing options
+  //dispatch final available scoring options
   props.dispatch(scoringButtonsEnabled(availableScores))
 }
 

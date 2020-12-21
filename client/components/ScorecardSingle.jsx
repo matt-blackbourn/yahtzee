@@ -97,7 +97,7 @@ function ScoreCardSingle(props) {
       </div>
       <div>
         {(props.showForm && !props.activeUser) && <LoginOrRegister/>}
-        {props.activeUser && <SaveScore />}
+        {(props.showForm && props.activeUser) && <SaveScore />}
       </div>
     </div>
   )
