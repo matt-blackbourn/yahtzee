@@ -11,7 +11,7 @@ function Highscores(props) {
         <ul>
           {props.highScores.map(score => {
             return (
-              <li key={score.id}>{score.name} :
+              <li key={score.id}>{score.username} :
                 <a href="" onClick={(event) => {
                   event.preventDefault()
                   props.dispatch(changeActiveScore(score))
