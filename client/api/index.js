@@ -25,3 +25,10 @@ export const registerUserAPI = user => {
     .send(user)
     .then(res => res.body)
 }
+
+export const loginAPI = user => {
+  return request
+    .post('/api/auth/login')
+    .send(user)
+    .then(res => res.body)
+}

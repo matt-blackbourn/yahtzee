@@ -1,4 +1,4 @@
-import { registerUserAPI } from "../api"
+import { registerUserAPI, loginAPI } from "../api"
 export const ACTIVE_USER_SET = 'ACTIVE_USER_SET'
 
 export const registerUser = user => {
@@ -8,8 +8,20 @@ export const registerUser = user => {
         if(res.ok){
           dispatch(setActiveUser(res.username))
           window.localStorage.setItem('token', res.token)
-        
+        } else {
+          alert(res.message)
+        }
+      })
+  }
+}
 
+export const login = user => {
+  return dispatch => {
+    loginAPI(user)
+      .then(res => {
+        if(res.ok){
+          dispatch(setActiveUser(res.username))
+          window.localStorage.setItem('token', res.token)
         } else {
           alert(res.message)
         }
