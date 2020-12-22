@@ -19,6 +19,7 @@ export const CUT_SCORES_DISALLOWED = 'CUT_SCORES_DISALLOWED'
 export const RESET_ROLL_SCORE = 'RESET_ROLL_SCORE'
 export const BONUS_YAHTZEE_SCORED = 'BONUS_YAHTZEE_SCORED'
 export const GAME_RESTARTED = 'GAME_RESTARTED'
+export const TOGGLED_REGISTER_FORM = 'TOGGLED_REGISTER_FORM'
 
 //dice actions
 
@@ -151,6 +152,12 @@ export const disallowCutScores = () => {
    return {
       type: CUT_SCORES_DISALLOWED
    }
+}
+
+export const showRegister = () => {
+  return {
+    type: TOGGLED_REGISTER_FORM
+  }
 }
 
 

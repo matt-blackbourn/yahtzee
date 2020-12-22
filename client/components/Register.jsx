@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { registerUser } from '../actions/auth'
+import { showRegister } from '../actions'
 
 class Register extends React.Component {
   state = {
@@ -26,7 +27,7 @@ class Register extends React.Component {
   render(){
     return (
       <>
-      <p>Please Register to save your score:</p>
+      <p>Enter a username and password below to register:</p>
       <form>
         <input type="text" 
           name='username' 
@@ -42,6 +43,7 @@ class Register extends React.Component {
           
         <input type="submit" value='Register' onClick={this.handleSubmit}/>
       </form>
+      <p>Already registered? Click <span onClick={() => this.props.dispatch(showRegister())}>here</span> to log in.</p>
       </>
     )
   }

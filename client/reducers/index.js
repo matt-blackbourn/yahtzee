@@ -14,6 +14,7 @@ import cutScoresAllowed from './cutScoresAllowed'
 import activeHighScore from './activeHighScore'
 import showForm from './showForm'
 import activeUser from './activeUser'
+import showRegister from './showRegister'
 
 export default combineReducers({
   scoreCard,
@@ -30,4 +31,5 @@ export default combineReducers({
   activeHighScore,
   showForm,
   activeUser,
+  showRegister,
 })

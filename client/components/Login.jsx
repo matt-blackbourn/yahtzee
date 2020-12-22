@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { login } from '../actions/auth'
 import Register from './Register'
+import { showRegister } from '../actions'
 
-class Login extends React.Component{
+class Login extends React.Component {
   state = {
     username: '',
     password: ''
@@ -23,24 +24,29 @@ class Login extends React.Component{
   render() {
     return (
       <>
-        <p>Please log in to save your score</p>
-        <form>
-          <input type="text"
-            name='username'
-            placeholder='username'
-            onChange={this.handleChange}
-            value={this.state.username} />
+        {this.props.showRegister ?
+          <Register />
+          :
+          <>
+            <p>Please log in to save your score</p>
+            <form>
+              <input type="text"
+                name='username'
+                placeholder='username'
+                onChange={this.handleChange}
+                value={this.state.username} />
 
-          <input type="password"
-            name='password'
-            placeholder='Password'
-            onChange={this.handleChange}
-            value={this.state.password} />
+              <input type="password"
+                name='password'
+                placeholder='Password'
+                onChange={this.handleChange}
+                value={this.state.password} />
 
-          <button onClick={this.handleClick}>Log In</button>
-        </form>
-        <p>Not registered? Click <a href=''>here</a> to register.</p>
-        <Register />
+              <button onClick={this.handleClick}>Log In</button>
+            </form>
+            <p>Not registered yet? Click <span onClick={() => this.props.dispatch(showRegister())}>here</span> to register.</p>
+          </>
+        }
       </>
     )
   }
@@ -49,7 +55,8 @@ class Login extends React.Component{
 function ms2p(globalState) {
   return {
     scoreCard: globalState.scoreCard,
-    activeUser: globalState.activeUser
+    activeUser: globalState.activeUser,
+    showRegister: globalState.showRegister
   }
 }
 
