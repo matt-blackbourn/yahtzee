@@ -18,6 +18,9 @@ class Login extends React.Component {
 
   handleClick = event => {
     event.preventDefault()
+    if(this.state.username == '' || this.state.password == ''){
+      return alert('Please enter a username and password')
+    }
     this.props.dispatch(login(this.state))
   }
 
@@ -28,7 +31,7 @@ class Login extends React.Component {
           <Register />
           :
           <>
-            <p>Please log in to save your score</p>
+            <p>Please log in to save your score:</p>
             <form>
               <input type="text"
                 name='username'
@@ -44,7 +47,14 @@ class Login extends React.Component {
 
               <button onClick={this.handleClick}>Log In</button>
             </form>
-            <p>Not registered yet? Click <span onClick={() => this.props.dispatch(showRegister())}>here</span> to register.</p>
+            <p>
+              Not registered yet? Click  
+                <a href='' onClick={() => {
+                  event.preventDefault()
+                  this.props.dispatch(showRegister())
+                }}> here
+                </a> to register.
+            </p>
           </>
         }
       </>

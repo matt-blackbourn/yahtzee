@@ -17,6 +17,9 @@ class Register extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    if(this.state.username == '' || this.state.password == ''){
+      return alert('Please enter a username and password')
+    }
     this.props.dispatch(registerUser(this.state))
     this.setState({
       username: '',
@@ -24,26 +27,33 @@ class Register extends React.Component {
     })
   }
 
-  render(){
+  render() {
     return (
       <>
-      <p>Enter a username and password below to register:</p>
-      <form>
-        <input type="text" 
-          name='username' 
-          onChange={this.handleChange} 
-          value={this.state.username}
-          placeholder='username' />
+        <p>Enter a username and password below to register:</p>
+        <form>
+          <input type="text"
+            name='username'
+            onChange={this.handleChange}
+            value={this.state.username}
+            placeholder='username' />
 
-        <input type="password" 
-          name='password' 
-          onChange={this.handleChange} 
-          value={this.state.password}
-          placeholder='password' />
-          
-        <input type="submit" value='Register' onClick={this.handleSubmit}/>
-      </form>
-      <p>Already registered? Click <span onClick={() => this.props.dispatch(showRegister())}>here</span> to log in.</p>
+          <input type="password"
+            name='password'
+            onChange={this.handleChange}
+            value={this.state.password}
+            placeholder='password' />
+
+          <input type="submit" value='Register' onClick={this.handleSubmit} />
+        </form>
+        <p>
+          Already registered? Click 
+          <a href='' onClick={() => {
+            event.preventDefault()
+            this.props.dispatch(showRegister())
+          }}> here
+          </a> to log in.
+        </p>
       </>
     )
   }
