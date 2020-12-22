@@ -12,7 +12,13 @@ function getUsername(id, db = connection){
   return db('users').select('username').where('id', id)
 }
 
+function checkUserExists(user, db = connection){
+  return db('users').count('username as count').where('username', user.username)
+    .then(res => res[0].count > 0)
+}
+
 module.exports = {
   addUser,
-  getUsername
+  getUsername,
+  checkUserExists
 }

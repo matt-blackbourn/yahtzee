@@ -2,17 +2,33 @@ const express = require('express')
 const router = express.Router()
 const db = require('../db/auth')
 const jwt = require('jsonwebtoken')
-
-//creates middleware function to take JWT out of req header, decode it and return a req.user object with id
-const verifyJwt = require('express-jwt') 
+const verifyJwt = require('express-jwt') //creates middleware function to take JWT out of req header, decode it and return a req.user object with id
 
 router.post('/register', register)
+router.get('/user', verifyJwt({secret: process.env.JWT_SECRET, algorithms: ['HS256']}), getUser)
+router.post('/login', login)
+
+function login (req, res) {
+  db.checkUserExists(req.body)
+    .then(count => res.json(count))
+    // .then(([count]) => {
+    //   if(count['count(*)']){
+    //     return db.checkPassword(req.body.password)
+    //       .then(([exists]) => {
+    //         if(exists['count(*)']){
+
+    //         }
+    //       })
+    //   } else {
+    //     return res.json({ ok: false, message: 'username does not exist' })
+    //   }
+    // })
+    .catch(error => res.status(500).json(error))
+}
 
 function createToken (id) {
   return jwt.sign({id}, process.env.JWT_SECRET)
 }
-
-// jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '1d'})
 
 function register(req, res){
   db.addUser(req.body)
@@ -33,7 +49,6 @@ function register(req, res){
   })
 }
 
-router.get('/user', verifyJwt({secret: process.env.JWT_SECRET, algorithms: ['HS256']}), getUser)
 
 function getUser(req, res){
   db.getUsername(req.user.id)
