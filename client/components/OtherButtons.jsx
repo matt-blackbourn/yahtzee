@@ -18,7 +18,8 @@ const confirmScore = props => {
 
 const checkForFinishedGame = props => {
   if(props.scoreCard.grandTotal.print){
-    alert('Game over! Your score was ' + props.scoreCard.grandTotal.value + '. If you want to save your score, click Save, otherwise click Restart to play again!')
+    alert('Game over! Your score was ' + props.scoreCard.grandTotal.value + '. You can now save your score, or click Restart to play again!')
+    props.dispatch(showForm())
   }
 }
 
@@ -48,9 +49,6 @@ function OtherButtons(props) {
       >Cut Score</button>
 
       <a href='' onClick={(event) => toggleHighScores(props, event)}><h4>High Scores!</h4></a>
-
-      {(props.scoreCard.grandTotal.print && !props.showForm) && 
-        <button onClick={() => props.dispatch(showForm())}>Save</button>}
       
     </div>
   )
