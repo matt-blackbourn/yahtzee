@@ -5,8 +5,12 @@ const jwt = require('jsonwebtoken')
 const verifyJwt = require('express-jwt') //creates middleware function to take JWT out of req header, decode it and return a req.user object with id
 
 router.post('/register', register)
-router.get('/user', verifyJwt({secret: process.env.JWT_SECRET, algorithms: ['HS256']}), getUser)
 router.post('/login', login)
+router.get('/user', verifyJwt({secret: process.env.JWT_SECRET, algorithms: ['HS256']}), getUser)
+
+function createToken (id) {
+  return jwt.sign({id}, process.env.JWT_SECRET)
+}
 
 function login (req, res) {
   return db.checkUserExists(req.body)
@@ -32,14 +36,9 @@ function login (req, res) {
     .catch(error => res.status(500).json(error))
 }
 
-function createToken (id) {
-  return jwt.sign({id}, process.env.JWT_SECRET)
-}
-
 function register(req, res){
   return db.addUser(req.body)
     .then(([id]) => {
-    
     res.json({
       ok: true,
       message: 'Authentication successful',

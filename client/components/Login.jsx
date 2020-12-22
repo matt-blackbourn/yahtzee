@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { login } from '../actions/auth'
+import Register from './Register'
 
 class Login extends React.Component{
   state = {
@@ -16,30 +18,29 @@ class Login extends React.Component{
   handleClick = event => {
     event.preventDefault()
     this.props.dispatch(login(this.state))
-
-    this.setState({
-      username: '',
-      password: ''
-    })
   }
 
   render() {
     return (
       <>
-        <h5>Please log in to save your score</h5>
+        <p>Please log in to save your score</p>
         <form>
           <input type="text"
             name='username'
             placeholder='username'
-            onChange={this.handleChange} />
+            onChange={this.handleChange}
+            value={this.state.username} />
 
           <input type="password"
             name='password'
             placeholder='Password'
-            onChange={this.handleChange} />
+            onChange={this.handleChange}
+            value={this.state.password} />
 
           <button onClick={this.handleClick}>Log In</button>
         </form>
+        <p>Not registered? Click <a href=''>here</a> to register.</p>
+        <Register />
       </>
     )
   }

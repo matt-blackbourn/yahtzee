@@ -26,7 +26,7 @@ class Register extends React.Component {
   render(){
     return (
       <>
-      <h5>Please Register to save your score:</h5>
+      <p>Please Register to save your score:</p>
       <form>
         <input type="text" 
           name='username' 
@@ -40,7 +40,7 @@ class Register extends React.Component {
           value={this.state.password}
           placeholder='password' />
           
-        <input type="submit" value='register' onClick={this.handleSubmit}/>
+        <input type="submit" value='Register' onClick={this.handleSubmit}/>
       </form>
       </>
     )

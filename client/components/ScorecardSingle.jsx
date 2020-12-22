@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SaveScore from './SaveScore'
-import SaveScoreOptions from './SaveScoreOptions'
+import Login from './Login'
 
 function ScoreCardSingle(props) {
   const card = props.scoreCard
@@ -94,7 +94,7 @@ function ScoreCardSingle(props) {
         </table>
       </div>
       <div>
-        {(props.showForm && !props.activeUser) && <SaveScoreOptions />}
+        {(props.showForm && !props.activeUser) && <Login />}
         {(props.showForm && props.activeUser) && <SaveScore />}
       </div>
     </div>
