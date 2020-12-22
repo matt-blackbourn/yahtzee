@@ -5,7 +5,6 @@ export const HIGHSCORE_UPDATED = 'HIGHSCORE_UPDATED'
 export const ADDED_SCORE_TO_HIGHSCORES = 'ADDED_SCORE_TO_HIGHSCORES'
 export const SHOW_FORM = 'SHOW_FORM'
 
-
 export const fetchHighScores = () => {
   return dispatch => {
     fetchHighScoresAPI()

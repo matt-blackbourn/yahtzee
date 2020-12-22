@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { postScore } from '../actions/highScores'
-import Register from './Register'
 
-class SaveScoreForm extends React.Component {
+class Login extends React.Component{
   state = {
     username: '',
     password: ''
@@ -45,9 +43,8 @@ class SaveScoreForm extends React.Component {
             placeholder='Password'
             onChange={this.handleChange} />
 
-          <button onClick={this.handleClick}>Save Score</button>
+          <button onClick={this.handleClick}>Log In</button>
         </form>
-        <Register />
       </>
     )
   }
@@ -60,4 +57,4 @@ function ms2p(globalState) {
   }
 }
 
-export default connect(ms2p)(SaveScoreForm)
+export default connect(ms2p)(Login)
