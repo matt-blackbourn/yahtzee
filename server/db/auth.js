@@ -17,8 +17,21 @@ function checkUserExists(user, db = connection){
     .then(res => res[0].count > 0)
 }
 
+function checkPassword(user, db = connection){
+  return generateHash(user.password)
+    .then(hash => {
+      console.log(hash) //this hash is not the same? test again.
+      return db('users')
+        .select()
+        .where('username', user.username)
+        .where('hash', hash)
+        .first()
+    })
+}
+
 module.exports = {
   addUser,
   getUsername,
-  checkUserExists
+  checkUserExists,
+  checkPassword
 }

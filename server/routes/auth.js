@@ -10,19 +10,16 @@ router.post('/login', login)
 
 function login (req, res) {
   db.checkUserExists(req.body)
-    .then(count => res.json(count))
-    // .then(([count]) => {
-    //   if(count['count(*)']){
-    //     return db.checkPassword(req.body.password)
-    //       .then(([exists]) => {
-    //         if(exists['count(*)']){
-
-    //         }
-    //       })
+    // .then(exists => {
+    //   if(exists){
+    //     return db.checkPassword(req.body)
+    //       .then(username => res.json(username))
     //   } else {
     //     return res.json({ ok: false, message: 'username does not exist' })
     //   }
     // })
+    .then(() => db.checkPassword(req.body))
+    .then((user) => res.json(user))
     .catch(error => res.status(500).json(error))
 }
 
