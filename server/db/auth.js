@@ -1,10 +1,11 @@
 const connection = require('./connection')
-const { generateHash } = require('../auth/hash')
+const bcrypt = require('bcrypt')
+const saltRounds = 6
 
 function addUser({ username, password }, db = connection){
-  return generateHash(password)
+  bcrypt.hash(password, saltRounds)
     .then(hash => {
-      return db('users').insert({username, hash})
+      return db('users').insert({ username, hash })
     })
 }
 
@@ -18,16 +19,21 @@ function checkUserExists(user, db = connection){
 }
 
 function checkPassword(user, db = connection){
-  return generateHash(user.password)
-    .then(hash => {
-      console.log(hash) //this hash is not the same? test again.
-      return db('users')
-        .select()
-        .where('username', user.username)
-        .where('hash', hash)
-        .first()
+  let id
+  return db('users').select('hash', 'id').where('username', user.username).first()
+    .then(res => {
+      id = res.id
+      return bcrypt.compare(user.password, res.hash)
+    })
+    .then(passwordMatch => {
+      if(passwordMatch){
+        return id
+      } else {
+        return false
+      }
     })
 }
+
 
 module.exports = {
   addUser,

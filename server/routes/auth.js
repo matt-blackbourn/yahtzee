@@ -10,16 +10,25 @@ router.post('/login', login)
 
 function login (req, res) {
   db.checkUserExists(req.body)
-    // .then(exists => {
-    //   if(exists){
-    //     return db.checkPassword(req.body)
-    //       .then(username => res.json(username))
-    //   } else {
-    //     return res.json({ ok: false, message: 'username does not exist' })
-    //   }
-    // })
-    .then(() => db.checkPassword(req.body))
-    .then((user) => res.json(user))
+    .then(userExists => {
+      if(userExists){
+        return db.checkPassword(req.body)
+      } else {
+        return false
+      }
+    })
+    .then(id => {
+      if(id){
+        res.json({
+          ok: true,
+          message: 'User logged in',
+          token: createToken(id),
+          username: req.body.username
+        })
+      } else {
+        res.json({ ok: false, message: 'invalid user credentials' })
+      }
+    })
     .catch(error => res.status(500).json(error))
 }
 
