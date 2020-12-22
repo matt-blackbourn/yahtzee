@@ -9,7 +9,7 @@ router.get('/user', verifyJwt({secret: process.env.JWT_SECRET, algorithms: ['HS2
 router.post('/login', login)
 
 function login (req, res) {
-  db.checkUserExists(req.body)
+  return db.checkUserExists(req.body)
     .then(userExists => {
       if(userExists){
         return db.checkPassword(req.body)
@@ -37,8 +37,9 @@ function createToken (id) {
 }
 
 function register(req, res){
-  db.addUser(req.body)
-  .then(([id]) => {
+  return db.addUser(req.body)
+    .then(([id]) => {
+    
     res.json({
       ok: true,
       message: 'Authentication successful',
@@ -57,7 +58,7 @@ function register(req, res){
 
 
 function getUser(req, res){
-  db.getUsername(req.user.id)
+  return db.getUsername(req.user.id)
     .then(user => {
       res.json({ok: true, username: user[0].username})
     })

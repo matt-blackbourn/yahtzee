@@ -1,9 +1,9 @@
 const connection = require('./connection')
 const bcrypt = require('bcrypt')
-const saltRounds = 6
+const saltRounds = 10
 
 function addUser({ username, password }, db = connection){
-  bcrypt.hash(password, saltRounds)
+  return bcrypt.hash(password, saltRounds)
     .then(hash => {
       return db('users').insert({ username, hash })
     })
