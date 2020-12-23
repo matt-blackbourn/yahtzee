@@ -9,7 +9,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchHighScores())
-
     const token = window.localStorage.getItem('token')
     if (token) {
       this.props.dispatch(verifyUser(token))
