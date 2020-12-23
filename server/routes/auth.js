@@ -13,7 +13,10 @@ function getUser(req, res){
     .then(user => {
       res.json({ ok: true, username: user.username })
     })
-    .catch(error => res.status(500).json(error))
+    .catch(error => {
+      console.log(error)
+      res.status(500).json(error)
+    })
 }
 
 function createToken (id) {
@@ -41,7 +44,10 @@ function login (req, res) {
         res.json({ ok: false, message: 'invalid user credentials' })
       }
     })
-    .catch(error => res.status(500).json(error))
+    .catch(error => {
+      console.log(error)
+      res.status(500).json(error)
+    })
 }
 
 function register(req, res){
@@ -58,6 +64,7 @@ function register(req, res){
     if(error.errno == 19){
       res.status(400).json({ok: false, message: 'username already exists'})
     } else {
+      console.log(error)
       res.status(500).json({ok: false, message: 'something went wrong'})
     }
   })
