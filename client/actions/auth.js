@@ -1,5 +1,6 @@
 import { registerUserAPI, loginAPI, verifyUserAPI } from "../api"
 export const ACTIVE_USER_SET = 'ACTIVE_USER_SET'
+export const ACTIVE_USER_REMOVED = 'ACTIVE_USER_REMOVED'
 
 export const registerUser = user => {
   return dispatch => {
@@ -49,10 +50,8 @@ export const setActiveUser = name => {
   }
 }
 
-// window.localStorage.getItem(key)
-
-// {
-//   "ok": true,
-//   "message": "Authentication successful",
-//   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjA4NDM0MjY3LCJleHAiOjE2MDg1MjA2Njd9.VSgb8FV8lJ2pyUY9kPdtSZ1NDcxrMPDfPpLPGUdrjfg"
-// }
+export const logOut = () => {
+  return {
+    type: ACTIVE_USER_REMOVED,
+  }
+}
