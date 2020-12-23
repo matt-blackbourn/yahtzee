@@ -10,7 +10,7 @@ function addUser({ username, password }, db = connection){
 }
 
 function getUsername(id, db = connection){
-  return db('users').select('username').where('id', id)
+  return db('users').select('username').where('id', id).first()
 }
 
 function checkUserExists(user, db = connection){

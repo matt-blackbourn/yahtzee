@@ -1,9 +1,9 @@
-import { registerUserAPI, loginAPI } from "../api"
+import { registerUserAPI, loginAPI, verifyUserAPI } from "../api"
 export const ACTIVE_USER_SET = 'ACTIVE_USER_SET'
 
 export const registerUser = user => {
   return dispatch => {
-    registerUserAPI(user)
+    return registerUserAPI(user)
       .then(res => {
         if(res.ok){
           dispatch(setActiveUser(res.username))
@@ -17,11 +17,24 @@ export const registerUser = user => {
 
 export const login = user => {
   return dispatch => {
-    loginAPI(user)
+    return loginAPI(user)
       .then(res => {
         if(res.ok){
           dispatch(setActiveUser(res.username))
           window.localStorage.setItem('token', res.token)
+        } else {
+          alert(res.message)
+        }
+      })
+  }
+}
+
+export const verifyUser = token => {
+  return dispatch => {
+    return verifyUserAPI(token)
+      .then(res => {
+        if(res.ok){
+          dispatch(setActiveUser(res.username))
         } else {
           alert(res.message)
         }

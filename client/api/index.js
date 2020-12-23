@@ -32,3 +32,11 @@ export const loginAPI = user => {
     .send(user)
     .then(res => res.body)
 }
+
+export const verifyUserAPI = token => {
+  return request
+    .get('/api/auth/user')
+    .set({ Accept: 'application/json' })
+    .set({ Authorization: `Bearer ${token}` })
+    .then(res => res.body)
+}

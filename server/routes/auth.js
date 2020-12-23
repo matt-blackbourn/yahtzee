@@ -4,9 +4,17 @@ const db = require('../db/auth')
 const jwt = require('jsonwebtoken')
 const verifyJwt = require('express-jwt') //creates middleware function to take JWT out of req header, decode it and return a req.user object with id
 
-router.post('/register', register)
-router.post('/login', login)
 router.get('/user', verifyJwt({secret: process.env.JWT_SECRET, algorithms: ['HS256']}), getUser)
+router.post('/login', login)
+router.post('/register', register)
+
+function getUser(req, res){
+  return db.getUsername(req.user.id)
+    .then(user => {
+      res.json({ ok: true, username: user.username })
+    })
+    .catch(error => res.status(500).json(error))
+}
 
 function createToken (id) {
   return jwt.sign({id}, process.env.JWT_SECRET)
@@ -53,15 +61,6 @@ function register(req, res){
       res.status(500).json({ok: false, message: 'something went wrong'})
     }
   })
-}
-
-
-function getUser(req, res){
-  return db.getUsername(req.user.id)
-    .then(user => {
-      res.json({ok: true, username: user[0].username})
-    })
-    .catch(error => res.status(500).json(error))
 }
 
 module.exports = router
