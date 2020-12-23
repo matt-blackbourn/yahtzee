@@ -15,7 +15,7 @@ const handleClick = props => {
 function SaveScore(props) {
   return (
     <div>
-      <p>Are you sure you want to save your score, {props.activeUser}?</p>
+      <p>Do you want to save your score, {props.activeUser}?</p>
       <button onClick={() => handleClick(props)}>Save Score</button>
     </div>
   )
